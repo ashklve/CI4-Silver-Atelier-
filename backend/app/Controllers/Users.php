@@ -26,5 +26,10 @@ public function moodBoard(): string
     return view('user/moodBoard');
 }
 
+public function roadMapPage(): string
+{
+    return view('user/roadMapPage');
+}
+
 
 }
