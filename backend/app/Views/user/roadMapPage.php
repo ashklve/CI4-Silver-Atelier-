@@ -1,55 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Road Map - Silver Atelier</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'warm-brown': '#57564F',
-                        'sage-green': '#7A7A73',
-                        'cream-beige': '#DDDAD0',
-                        'light-cream': '#F8F3CE'
-                    },
-                    fontFamily: {
-                        'serif': ['Playfair Display', 'Georgia', 'serif'],
-                        'sans': ['Inter', 'system-ui', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
-</head>
+<?php
+// backend/app/views/roadmap.php
+?>
+<?= view('components/head', ['title' => 'Road Map - Silver Atelier']) ?>
+
 <body class="font-sans bg-light-cream min-h-screen">
-    <!-- Header -->
-    <nav class="bg-light-cream/90 backdrop-blur-md border-b border-cream-beige/50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex-shrink-0">
-                    <a href="#" class="flex items-center space-x-2">
-                        <div class="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
-                            <img src="/images/salogo.png" alt="Silver Atelier Logo" class="w-full h-full object-cover">
-                        </div>
-                        <span class="font-serif text-2xl font-bold text-warm-brown">Silver Atelier</span>
-                    </a>
-                </div>
-                <div class="flex items-center gap-4">
-                    <button onclick="openAddModal()" class="bg-warm-brown text-light-cream px-4 py-2 rounded-lg hover:bg-sage-green transition-colors duration-300 font-medium">
-                        <i class="fas fa-plus mr-2"></i>Add Item
-                    </button>
-                    <a href="<?= base_url('/') ?>" class="text-warm-brown hover:text-sage-green transition-colors duration-300 font-medium">
-                        <i class="fas fa-arrow-left mr-2"></i>Back to Home
-                    </a>
-                </div>
-            </div>
-        </div>
-    </nav>
+    <?= view('components/header') ?>
 
     <!-- Main Content -->
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -165,12 +120,7 @@
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="bg-warm-brown text-light-cream py-8 mt-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p>&copy; 2025 Silver Atelier. All rights reserved.</p>
-        </div>
-    </footer>
+    <?= view('components/footer') ?>
 
     <script>
         let roadmapItems = [
@@ -383,14 +333,12 @@
             renderRoadmap();
         });
 
-        // close modal on outside click
         document.getElementById('modal').addEventListener('click', function(e) {
             if (e.target === this) {
                 closeModal();
             }
         });
 
-        // initial render
         renderRoadmap();
     </script>
 </body>
