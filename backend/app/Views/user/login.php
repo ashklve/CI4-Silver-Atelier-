@@ -182,5 +182,17 @@
             </div>
         </div>
     </div>
+    
+    <script>
+        document.getElementById('togglePassword').addEventListener('click', () => {
+            const password = document.getElementById('password');
+            const eyeIcon = document.getElementById('eyeIcon');
+            const isHidden = password.type === 'password';
+            password.type = isHidden ? 'text' : 'password';
+            eyeIcon.classList.toggle('fa-eye');
+            eyeIcon.classList.toggle('fa-eye-slash');
+        });
+</script>
+
 </body>
 </html>
