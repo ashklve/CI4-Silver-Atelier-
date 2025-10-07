@@ -46,9 +46,10 @@
                     <div class="ml-10 flex items-baseline space-x-8">
                         <a href="#home" class="nav-link text-warm-brown hover:text-sage-green transition-colors duration-300 font-medium">Home</a>
                         <a href="#collections" class="nav-link text-warm-brown hover:text-sage-green transition-colors duration-300 font-medium">Collections</a>
+                        <a href="#catalog" class="nav-link text-warm-brown hover:text-sage-green transition-colors duration-300 font-medium"> Look Catalog</a>
                         <a href="#about" class="nav-link text-warm-brown hover:text-sage-green transition-colors duration-300 font-medium">About</a>
-                        <a href="#blog" class="nav-link text-warm-brown hover:text-sage-green transition-colors duration-300 font-medium">Blog</a>
-                        <a href="#contact" class="nav-link text-warm-brown hover:text-sage-green transition-colors duration-300 font-medium">Contact</a>
+                        <a href="#moodboard" class="nav-link text-warm-brown hover:text-sage-green transition-colors duration-300 font-medium">Mood Board</a>
+                        <a href="#roadmap" class="nav-link text-warm-brown hover:text-sage-green transition-colors duration-300 font-medium">Roadmap</a>
                     </div>
                 </div>
 
@@ -76,9 +77,10 @@
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 <a href="#home" class="block px-3 py-2 text-warm-brown hover:text-sage-green transition-colors duration-300">Home</a>
                 <a href="#collections" class="block px-3 py-2 text-warm-brown hover:text-sage-green transition-colors duration-300">Collections</a>
+                <a href="#catalog" class="block px-3 py-2 text-warm-brown hover:text-sage-green transition-colors duration-300">Look Catalog</a>
                 <a href="#about" class="block px-3 py-2 text-warm-brown hover:text-sage-green transition-colors duration-300">About</a>
-                <a href="#blog" class="block px-3 py-2 text-warm-brown hover:text-sage-green transition-colors duration-300">Blog</a>
-                <a href="#contact" class="block px-3 py-2 text-warm-brown hover:text-sage-green transition-colors duration-300">Contact</a>
+                <a href="#moodboard" class="block px-3 py-2 text-warm-brown hover:text-sage-green transition-colors duration-300">Mood Board</a>
+                <a href="#roadmap" class="block px-3 py-2 text-warm-brown hover:text-sage-green transition-colors duration-300">Road Map</a>
                 <a href="<?= site_url('login') ?>" 
                 class="block w-full mt-4 bg-warm-brown text-light-cream px-6 py-2 rounded-full hover:bg-sage-green transition-all duration-300 text-center font-medium">
                 Login
@@ -108,8 +110,8 @@
                         Explore Collection
                     </a>
                     
-                    <a href="/Blog" class="border-2 border-warm-brown text-warm-brown px-8 py-4 rounded-full text-lg font-semibold hover:bg-warm-brown hover:text-light-cream transition-all duration-300 text-center">
-                        View Blogs
+                    <a href="/catalog" class="border-2 border-warm-brown text-warm-brown px-8 py-4 rounded-full text-lg font-semibold hover:bg-warm-brown hover:text-light-cream transition-all duration-300 text-center">
+                        Look Catalog
                     </a>
                     </div>
 
@@ -326,7 +328,9 @@
                     <ul class="space-y-3">
                         <li><a href="#home" class="text-cream-beige hover:text-light-cream transition-colors duration-300">Home</a></li>
                         <li><a href="#collections" class="text-cream-beige hover:text-light-cream transition-colors duration-300">Collections</a></li>
+                        <li><a href="#catalog" class="text-cream-beige hover:text-light-cream transition-colors duration-300">Look Catalog</a></li>
                         <li><a href="#about" class="text-cream-beige hover:text-light-cream transition-colors duration-300">About Us</a></li>
+                        <li><a href="#moodboard" class="text-cream-beige hover:text-light-cream transition-colors duration-300">Mood Board</a></li>
                         <li><a href="#roadmap" class="text-cream-beige hover:text-light-cream transition-colors duration-300">Road Map</a></li>
                     </ul>
                 </div>
