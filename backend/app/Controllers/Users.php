@@ -21,5 +21,10 @@ public function signup(): string
     return view('user/signup');
 }
 
+public function moodBoard(): string
+{
+    return view('user/moodBoard');
+}
+
 
 }
