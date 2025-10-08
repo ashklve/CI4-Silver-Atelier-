@@ -1,31 +1,10 @@
+<?php
+// app/Views/user/login.php
+?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Silver Atelier</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'warm-brown': '#57564F',
-                        'sage-green': '#7A7A73',
-                        'cream-beige': '#DDDAD0',
-                        'light-cream': '#F8F3CE'
-                    },
-                    fontFamily: {
-                        'serif': ['Playfair Display', 'Georgia', 'serif'],
-                        'sans': ['Inter', 'system-ui', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-</head>
+<?= view('components/head') ?>
+
 <body class="font-sans bg-light-cream min-h-screen">
     <!-- Header -->
     <nav class="bg-light-cream/90 backdrop-blur-md border-b border-cream-beige/50">
@@ -192,7 +171,7 @@
             eyeIcon.classList.toggle('fa-eye');
             eyeIcon.classList.toggle('fa-eye-slash');
         });
-</script>
+    </script>
 
 </body>
 </html>
