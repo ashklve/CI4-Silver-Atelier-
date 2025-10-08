@@ -1,31 +1,9 @@
+<?php
+?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up - Silver Atelier</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'warm-brown': '#57564F',
-                        'sage-green': '#7A7A73',
-                        'cream-beige': '#DDDAD0',
-                        'light-cream': '#F8F3CE'
-                    },
-                    fontFamily: {
-                        'serif': ['Playfair Display', 'Georgia', 'serif'],
-                        'sans': ['Inter', 'system-ui', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-</head>
+<?= view('components/head') ?>
+
 <body class="font-sans bg-light-cream min-h-screen">
     <!-- Header -->
     <nav class="bg-light-cream/90 backdrop-blur-md border-b border-cream-beige/50">
@@ -33,9 +11,9 @@
             <div class="flex justify-between items-center h-16">
                 <!-- Logo -->
                 <div class="flex-shrink-0">
-                    <a href="#" class="flex items-center space-x-2">
-                        <div class="w-8 h-8 rounded-full overflow-hidden flex-shrink-0 bg-warm-brown flex items-center justify-center">
-                            <i class="fas fa-gem text-light-cream text-sm"></i>
+                    <a href="<?= base_url('/') ?>" class="flex items-center space-x-2">
+                        <div class="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
+                            <img src="/images/salogo.png" alt="Silver Atelier Logo" class="w-full h-full object-cover">
                         </div>
                         <span class="font-serif text-2xl font-bold text-warm-brown">Silver Atelier</span>
                     </a>
@@ -43,7 +21,7 @@
                 
                 <!-- Back to Home -->
                 <div>
-                    <a href="#" class="text-warm-brown hover:text-sage-green transition-colors duration-300 font-medium">
+                    <a href="<?= base_url('/') ?>" class="text-warm-brown hover:text-sage-green transition-colors duration-300 font-medium">
                         <i class="fas fa-arrow-left mr-2"></i>Back to Home
                     </a>
                 </div>
@@ -65,7 +43,8 @@
 
             <!-- Signup Form -->
             <div class="bg-cream-beige rounded-3xl shadow-xl p-8">
-                <form class="space-y-6" id="signupForm">
+                <form class="space-y-6" id="signupForm" action="<?= base_url('auth/register') ?>" method="POST">
+                    <?= csrf_field() ?>
                     
                     <!-- Full Name Field -->
                     <div>
@@ -267,7 +246,7 @@
                 <div class="text-center mt-8 pt-6 border-t border-light-cream">
                     <p class="text-sage-green">
                         Already have an account? 
-                        <a href="#" class="text-warm-brown hover:text-sage-green font-semibold transition-colors duration-300">
+                        <a href="<?= base_url('login') ?>" class="text-warm-brown hover:text-sage-green font-semibold transition-colors duration-300">
                             Sign in here
                         </a>
                     </p>
@@ -379,6 +358,22 @@
             }
             validateForm();
         });
+
+        // Form validation
+        function validateForm() {
+            const registerBtn = document.getElementById('registerBtn');
+            const isPasswordValid = lengthCheck.classList.contains('text-green-500') &&
+                                   uppercaseCheck.classList.contains('text-green-500') &&
+                                   lowercaseCheck.classList.contains('text-green-500') &&
+                                   numberCheck.classList.contains('text-green-500');
+            const isPasswordMatch = passwordInput.value === confirmPassword.value && confirmPassword.value !== '';
+            const termsChecked = document.getElementById('terms').checked;
+            
+            registerBtn.disabled = !(isPasswordValid && isPasswordMatch && termsChecked);
+        }
+
+        // Add event listener to terms checkbox
+        document.getElementById('terms').addEventListener('change', validateForm);
     </script>
 </body>
 </html>
