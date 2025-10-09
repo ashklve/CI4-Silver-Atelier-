@@ -3,10 +3,8 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
             <!-- Brand -->
             <div class="lg:col-span-2">
-                <div class="flex items-center space-x-2 mb-6">
-                    <div class="w-8 h-8 bg-light-cream rounded-full flex items-center justify-center">
-                        <i class="fas fa-gem text-warm-brown text-sm"></i>
-                    </div>
+                <div class="flex items-center space-x-3 mb-6">
+                    <img src="<?= base_url('images/salogo.png') ?>" alt="Silver Atelier Logo" class="w-10 h-10 object-cover rounded-full">
                     <span class="font-serif text-2xl font-bold">Silver Atelier</span>
                 </div>
                 <p class="text-cream-beige leading-relaxed mb-6 max-w-md">
