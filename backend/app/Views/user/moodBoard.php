@@ -255,18 +255,6 @@
             </div>
         </section>
 
-        <!-- Footer Note -->
-        <div class="text-center mt-16 pt-8 border-t border-cream-beige">
-            <div class="flex items-center justify-center space-x-2 mb-4">
-                <div class="w-8 h-8 bg-warm-brown rounded-full flex items-center justify-center">
-                    <i class="fas fa-gem text-light-cream text-sm"></i>
-                </div>
-                <span class="font-serif text-2xl font-bold text-warm-brown">Silver Atelier</span>
-            </div>
-            <p class="text-sage-green">Brand Identity Guidelines • 2025</p>
-        </div>
-    </div>
-
     <!-- Footer -->
     <?= view('components/footer') ?>
 </body>
