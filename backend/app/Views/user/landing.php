@@ -23,7 +23,14 @@
                         </p>
                     </div>
                     
-                    <?= view('components/buttons') ?>
+                    <div class="flex flex-wrap gap-4">
+                    <a href="<?= site_url('/') ?>#collections" class="bg-warm-brown text-light-cream px-8 py-4 rounded-full text-lg font-semibold hover:bg-sage-green transform hover:scale-105 transition-all duration-300 shadow-lg inline-block">
+                        Collections
+                    </a>
+                    <a href="<?= site_url('catalog') ?>" class="bg-sage-green text-light-cream px-8 py-4 rounded-full text-lg font-semibold hover:bg-warm-brown transform hover:scale-105 transition-all duration-300 shadow-lg inline-block">
+                        Explore Catalog
+                    </a>
+                </div>
                     
                     <!-- Stats -->
                     <div class="flex space-x-8 pt-8">
@@ -60,15 +67,57 @@
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section class="py-20 bg-cream-beige">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="font-serif text-4xl sm:text-5xl font-bold text-warm-brown mb-6">Why Choose Silver Atelier?</h2>
-                <p class="text-xl text-sage-green max-w-3xl mx-auto">Experience fashion excellence with our commitment to quality, style, and customer satisfaction.</p>
-            </div>
+   <!-- Features Section -->
+<section class="py-20 bg-cream-beige">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="font-serif text-4xl sm:text-5xl font-bold text-warm-brown mb-6">Why Choose Silver Atelier?</h2>
+            <p class="text-xl text-sage-green max-w-3xl mx-auto">Experience fashion excellence with our commitment to quality, style, and customer satisfaction.</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <?= view('components/cards', [
+                'icon' => 'gem',
+                'iconBg' => 'warm-brown',
+                'title' => 'Premium Quality',
+                'description' => 'Handpicked materials and expert craftsmanship ensure every piece meets the highest standards of luxury fashion.'
+            ]) ?>
             
-            <?= view('components/cards') ?>
+            <?= view('components/cards', [
+                'icon' => 'truck',
+                'iconBg' => 'sage-green',
+                'title' => 'Fast Delivery',
+                'description' => 'Swift and secure shipping across Metro Manila and nationwide. Your style arrives at your doorstep on time.'
+            ]) ?>
+            
+            <?= view('components/cards', [
+                'icon' => 'shield-alt',
+                'iconBg' => 'warm-brown',
+                'title' => 'Secure Shopping',
+                'description' => 'Shop with confidence knowing your transactions are protected with industry-leading security measures.'
+            ]) ?>
+            
+            <?= view('components/cards', [
+                'icon' => 'heart',
+                'iconBg' => 'sage-green',
+                'title' => 'Curated Collections',
+                'description' => 'Carefully selected pieces that blend timeless elegance with contemporary trends for the modern fashionista.'
+            ]) ?>
+            
+            <?= view('components/cards', [
+                'icon' => 'headset',
+                'iconBg' => 'warm-brown',
+                'title' => '24/7 Support',
+                'description' => 'Our dedicated team is always ready to assist you with styling advice, orders, and any questions you may have.'
+            ]) ?>
+            
+            <?= view('components/cards', [
+                'icon' => 'undo',
+                'iconBg' => 'sage-green',
+                'title' => 'Easy Returns',
+                'description' => 'Not satisfied? No worries. Hassle-free returns within 30 days to ensure you love every purchase.'
+            ]) ?>
+        </div>
         </div>
     </section>
 
@@ -81,63 +130,42 @@
             </div>
             
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Collection 1 -->
-                <div class="group bg-cream-beige rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
-                    <div class="aspect-square bg-gradient-to-br from-warm-brown to-sage-green flex items-center justify-center relative overflow-hidden">
-                        <i class="fas fa-female text-6xl text-light-cream group-hover:scale-110 transition-transform duration-300"></i>
-                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
-                    </div>
-                    <div class="p-6">
-                        <h4 class="text-xl font-serif font-bold text-warm-brown mb-2">Women's Wear</h4>
-                        <p class="text-sage-green mb-4">Elegant and sophisticated styles</p>
-                        <div class="text-2xl font-bold text-warm-brown">From ₱2,999</div>
-                    </div>
-                </div>
+                <?= view('components/collections', [
+                    'image' => 'images/womens-wear.jpg',
+                    'title' => "Women's Wear",
+                    'description' => 'Elegant and sophisticated styles',
+                    'price' => 'From ₱2,999',
+                    'badge' => 'New'
+                ]) ?>
                 
-                <!-- Collection 2 -->
-                <div class="group bg-cream-beige rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
-                    <div class="aspect-square bg-gradient-to-br from-sage-green to-warm-brown flex items-center justify-center relative overflow-hidden">
-                        <i class="fas fa-male text-6xl text-light-cream group-hover:scale-110 transition-transform duration-300"></i>
-                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
-                    </div>
-                    <div class="p-6">
-                        <h4 class="text-xl font-serif font-bold text-warm-brown mb-2">Men's Collection</h4>
-                        <p class="text-sage-green mb-4">Contemporary and classic designs</p>
-                        <div class="text-2xl font-bold text-warm-brown">From ₱3,499</div>
-                    </div>
-                </div>
+                <?= view('components/collections', [
+                    'image' => 'images/mens-collection.jpg',
+                    'title' => "Men's Collection",
+                    'description' => 'Contemporary and classic designs',
+                    'price' => 'From ₱3,499',
+                    'badge' => 'Trending'
+                ]) ?>
                 
-                <!-- Collection 3 -->
-                <div class="group bg-cream-beige rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
-                    <div class="aspect-square bg-gradient-to-br from-warm-brown via-sage-green to-warm-brown flex items-center justify-center relative overflow-hidden">
-                        <i class="fas fa-ring text-6xl text-light-cream group-hover:scale-110 transition-transform duration-300"></i>
-                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
-                    </div>
-                    <div class="p-6">
-                        <h4 class="text-xl font-serif font-bold text-warm-brown mb-2">Accessories</h4>
-                        <p class="text-sage-green mb-4">Perfect finishing touches</p>
-                        <div class="text-2xl font-bold text-warm-brown">From ₱899</div>
-                    </div>
-                </div>  
+                <?= view('components/collections', [
+                    'image' => 'images/accessories.jpg',
+                    'title' => 'Accessories',
+                    'description' => 'Perfect finishing touches',
+                    'price' => 'From ₱899'
+                ]) ?>
                 
-                <!-- Collection 4 -->
-                <div class="group bg-cream-beige rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
-                    <div class="aspect-square bg-gradient-to-br from-sage-green via-warm-brown to-sage-green flex items-center justify-center relative overflow-hidden">
-                        <i class="fas fa-shopping-bag text-6xl text-light-cream group-hover:scale-110 transition-transform duration-300"></i>
-                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
-                    </div>
-                    <div class="p-6">
-                        <h4 class="text-xl font-serif font-bold text-warm-brown mb-2">Premium Bags</h4>
-                        <p class="text-sage-green mb-4">Luxury meets functionality</p>
-                        <div class="text-2xl font-bold text-warm-brown">From ₱4,999</div>
-                    </div>
-                </div>
+                <?= view('components/collections', [
+                    'image' => 'images/premium-bags.jpg',
+                    'title' => 'Premium Bags',
+                    'description' => 'Luxury meets functionality',
+                    'price' => 'From ₱4,999',
+                    'badge' => 'Best Seller'
+                ]) ?>
             </div>
             
             <div class="text-center mt-12">
-                <button class="bg-warm-brown text-light-cream px-8 py-4 rounded-full text-lg font-semibold hover:bg-sage-green transform hover:scale-105 transition-all duration-300 shadow-lg">
+                <a href="<?= site_url('catalog') ?>" class="bg-warm-brown text-light-cream px-8 py-4 rounded-full text-lg font-semibold hover:bg-sage-green transform hover:scale-105 transition-all duration-300 shadow-lg inline-block">
                     View All Collections
-                </button>
+                </a>
             </div>
         </div>
     </section>
