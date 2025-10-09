@@ -19,7 +19,7 @@ It focuses on trendy clothes and stylish accessories, providing a clean shopping
 
 <br/>
 
-![](https://visit-counter.vercel.app/counter.png?page=ashklve/CI4-Silver-Merchandise)
+![](https://visit-counter.vercel.app/counter.png?page=ashklve/CI4-Silver-Atelier-)
 
 <!-- ! Make sure it was similar to your github -->
 
