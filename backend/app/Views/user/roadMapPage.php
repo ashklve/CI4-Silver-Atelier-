@@ -10,12 +10,14 @@
     <!-- Main Content -->
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12">
         <!-- Page Header -->
-        <div class="mb-12">
+        <div class="mb-8">
             <h1 class="font-serif text-5xl font-black text-warm-brown mb-4">Road Map</h1>
-            <p class="text-xl text-sage-green mb-6">Development plan and upcoming features for Silver Atelier</p>
-            
-            <!-- Filter Buttons -->
-            <div class="flex flex-wrap gap-3 mt-6">
+            <p class="text-xl text-sage-green">Development plan and upcoming features for Silver Atelier</p>
+        </div>
+        
+        <!-- Filter Buttons and Add Button -->
+        <div class="flex flex-wrap items-center justify-between gap-4 mb-8">
+            <div class="flex flex-wrap gap-3">
                 <button id="filter-all" onclick="filterStatus('all')" class="filter-btn px-4 py-2 rounded-full font-semibold transition-all duration-300 bg-warm-brown text-light-cream">
                     All
                 </button>
@@ -29,6 +31,10 @@
                     Backlog
                 </button>
             </div>
+            
+            <button onclick="openAddModal()" class="bg-warm-brown text-light-cream px-6 py-2 rounded-full hover:bg-sage-green transition-colors duration-300 font-semibold shadow-lg">
+                <i class="fas fa-plus mr-2"></i>Add Roadmap Item
+            </button>
         </div>
 
         <!-- Roadmap Items Container -->
