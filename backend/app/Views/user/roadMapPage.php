@@ -1,13 +1,14 @@
 <?php
-// backend/app/views/roadmap.php
 ?>
+<!DOCTYPE html>
+<html lang="en">
 <?= view('components/head', ['title' => 'Road Map - Silver Atelier']) ?>
 
 <body class="font-sans bg-light-cream min-h-screen">
     <?= view('components/header') ?>
 
     <!-- Main Content -->
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12">
         <!-- Page Header -->
         <div class="mb-12">
             <h1 class="font-serif text-5xl font-black text-warm-brown mb-4">Road Map</h1>
