@@ -8,7 +8,7 @@
     <img src="./assets/img/nyebe_white.png" alt="Nyebe" width="130" height="100">
   </a>
 <!-- * Title Section -->
-  <h3 align="center">AD - CI4 Silver Atelier</h3>
+  <h3 align="center">Silver Atelier</h3>
 </div>
 
 <!-- * Description Section -->
@@ -19,7 +19,7 @@ It focuses on trendy clothes and stylish accessories, providing a clean shopping
 
 <br/>
 
-![](https://visit-counter.vercel.app/counter.png?page=ashklve/CI4-Silver-Merchandise)
+![](https://visit-counter.vercel.app/counter.png?page=ashklve/CI4-Silver-Atelier-)
 
 <!-- ! Make sure it was similar to your github -->
 
@@ -87,10 +87,6 @@ It serves as both a learning tool and a real-world fashion shop for clothes and 
 #### Databases
 
 ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge\&logo=mysql\&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge\&logo=postgresql\&logoColor=white)
-![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge\&logo=mongodb\&logoColor=white)
-![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge\&logo=firebase\&logoColor=black)
-
 <!-- ! Keep only the used technology -->
 
 ---
