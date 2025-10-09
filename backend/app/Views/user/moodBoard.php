@@ -1,35 +1,15 @@
+<?php
+?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mood Board - Silver Atelier</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'warm-brown': '#57564F',
-                        'sage-green': '#7A7A73',
-                        'cream-beige': '#DDDAD0',
-                        'light-cream': '#F8F3CE'
-                    },
-                    fontFamily: {
-                        'serif': ['Playfair Display', 'Georgia', 'serif'],
-                        'sans': ['Inter', 'system-ui', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
-</head>
-<body class="bg-light-cream font-sans p-8">
-    <div class="max-w-7xl mx-auto">
+<?= view('components/head', ['title' => 'Mood Board - Silver Atelier']) ?>
+
+<body class="font-sans text-warm-brown bg-light-cream">
+    <?= view('components/header') ?>
+
+    <div class="max-w-7xl mx-auto p-8">
         <!-- Header -->
-        <div class="mb-12 text-center">
+        <div class="mb-12 text-center pt-16">
             <h1 class="font-serif text-5xl font-black text-warm-brown mb-3">Mood Board</h1>
             <p class="text-sage-green text-lg">Visual identity guide for Silver Atelier - Premium Fashion & Accessories</p>
         </div>
@@ -52,13 +32,13 @@
                     </div>
                 </div>
 
-                <!-- Sage Green -->
+                <!-- Warm Gray -->
                 <div class="group">
                     <div class="bg-sage-green h-32 rounded-2xl shadow-lg transition-transform duration-300 hover:scale-105 mb-4"></div>
                     <div class="bg-sage-green opacity-70 h-32 rounded-2xl shadow-lg transition-transform duration-300 hover:scale-105 mb-4"></div>
                     <div class="bg-sage-green opacity-40 h-32 rounded-2xl shadow-lg transition-transform duration-300 hover:scale-105 mb-4"></div>
                     <div class="text-center">
-                        <h3 class="font-semibold text-warm-brown mb-1">Sage Green</h3>
+                        <h3 class="font-semibold text-warm-brown mb-1">Warm Gray</h3>
                         <p class="text-sm text-sage-green">Secondary Tone</p>
                         <p class="text-xs text-sage-green font-mono mt-2">#7A7A73</p>
                     </div>
@@ -130,18 +110,7 @@
                 <div class="mb-12">
                     <h3 class="text-lg font-semibold text-warm-brown mb-6">Light Mode</h3>
                     <div class="flex flex-wrap gap-4">
-                        <button class="px-6 py-3 bg-warm-brown text-light-cream rounded-full font-semibold hover:bg-sage-green transition-all duration-300 transform hover:scale-105 shadow-lg">
-                            Primary
-                        </button>
-                        <button class="px-6 py-3 bg-sage-green text-light-cream rounded-full font-semibold hover:bg-warm-brown transition-all duration-300 transform hover:scale-105 shadow-lg">
-                            Secondary
-                        </button>
-                        <button class="px-6 py-3 border-2 border-warm-brown text-warm-brown rounded-full font-semibold hover:bg-warm-brown hover:text-light-cream transition-all duration-300">
-                            Border
-                        </button>
-                        <button class="px-6 py-3 bg-gray-300 text-gray-500 rounded-full font-semibold cursor-not-allowed opacity-50" disabled>
-                            Disabled
-                        </button>
+                        <?= view('components/buttons') ?>
                     </div>
                 </div>
 
@@ -189,15 +158,12 @@
                 </div>
 
                 <!-- Info Card -->
-                <div class="bg-light-cream rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-cream-beige">
-                    <div class="w-16 h-16 bg-warm-brown rounded-full flex items-center justify-center mb-6 mx-auto">
-                        <i class="fas fa-gem text-2xl text-light-cream"></i>
-                    </div>
-                    <h4 class="font-serif text-xl font-bold text-warm-brown mb-3 text-center">Feature Card</h4>
-                    <p class="text-sage-green text-center leading-relaxed">
-                        Highlighting key benefits with elegant iconography and balanced spacing
-                    </p>
-                </div>
+                <?= view('components/cards', [
+                    'icon' => 'gem',
+                    'iconBg' => 'warm-brown',
+                    'title' => 'Feature Card',
+                    'description' => 'Highlighting key benefits with elegant iconography and balanced spacing'
+                ]) ?>
 
                 <!-- Testimonial Card -->
                 <div class="bg-cream-beige rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300">
@@ -225,39 +191,38 @@
 
         <!-- Logos -->
         <section class="mb-16">
-        <h2 class="font-serif text-3xl font-bold text-warm-brown mb-6">Logo Variations</h2>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <h2 class="font-serif text-3xl font-bold text-warm-brown mb-6">Logo Variations</h2>
             
-            <!-- Circle Logo -->
-            <div class="bg-cream-beige rounded-3xl p-12 shadow-lg">
-            <div class="flex flex-col items-center">
-                <div class="w-48 h-48 rounded-full overflow-hidden shadow-2xl">
-                <img src="<?= base_url('images/salogo.png'); ?>" 
-                    alt="Silver Atelier Circle Logo"
-                    class="w-full h-full object-cover">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- Circle Logo -->
+                <div class="bg-cream-beige rounded-3xl p-12 shadow-lg">
+                    <div class="flex flex-col items-center">
+                        <div class="w-48 h-48 rounded-full overflow-hidden shadow-2xl">
+                            <img src="<?= base_url('images/salogo.png'); ?>" 
+                                alt="Silver Atelier Circle Logo"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <h4 class="font-serif text-xl font-bold text-warm-brown mt-6">Circle Logo</h4>
+                        <p class="text-sage-green text-center mt-2">For social media and app icons</p>
+                    </div>
                 </div>
-                <h4 class="font-serif text-xl font-bold text-warm-brown mt-6">Circle Logo</h4>
-                <p class="text-sage-green text-center mt-2">For social media and app icons</p>
-            </div>
-            </div>
 
-            <!-- Square Logo -->
-            <div class="bg-cream-beige rounded-3xl p-12 shadow-lg">
-            <div class="flex flex-col items-center">
-                <div class="w-48 h-48 rounded-3xl overflow-hidden shadow-2xl">
-                <img src="<?= base_url('images/salogo.png'); ?>" 
-                    alt="Silver Atelier Square Logo"
-                    class="w-full h-full object-cover">
+                <!-- Square Logo -->
+                <div class="bg-cream-beige rounded-3xl p-12 shadow-lg">
+                    <div class="flex flex-col items-center">
+                        <div class="w-48 h-48 rounded-3xl overflow-hidden shadow-2xl">
+                            <img src="<?= base_url('images/salogo.png'); ?>" 
+                                alt="Silver Atelier Square Logo"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <h4 class="font-serif text-xl font-bold text-warm-brown mt-6">Square Logo</h4>
+                        <p class="text-sage-green text-center mt-2">For favicons and badges</p>
+                    </div>
                 </div>
-                <h4 class="font-serif text-xl font-bold text-warm-brown mt-6">Square Logo</h4>
-                <p class="text-sage-green text-center mt-2">For favicons and badges</p>
-            </div>
-            </div>
 
-        </div>
+            </div>
         </section>
-
 
         <!-- Design Principles -->
         <section class="mb-16">
@@ -301,5 +266,8 @@
             <p class="text-sage-green">Brand Identity Guidelines • 2025</p>
         </div>
     </div>
+
+    <!-- Footer -->
+    <?= view('components/footer') ?>
 </body>
 </html>
