@@ -32,13 +32,13 @@
                     </div>
                 </div>
 
-                <!-- Warm Gray -->
+                <!-- Sage Green -->
                 <div class="group">
                     <div class="bg-sage-green h-32 rounded-2xl shadow-lg transition-transform duration-300 hover:scale-105 mb-4"></div>
                     <div class="bg-sage-green opacity-70 h-32 rounded-2xl shadow-lg transition-transform duration-300 hover:scale-105 mb-4"></div>
                     <div class="bg-sage-green opacity-40 h-32 rounded-2xl shadow-lg transition-transform duration-300 hover:scale-105 mb-4"></div>
                     <div class="text-center">
-                        <h3 class="font-semibold text-warm-brown mb-1">Warm Gray</h3>
+                        <h3 class="font-semibold text-warm-brown mb-1">Sage Green</h3>
                         <p class="text-sm text-sage-green">Secondary Tone</p>
                         <p class="text-xs text-sage-green font-mono mt-2">#7A7A73</p>
                     </div>
@@ -255,7 +255,10 @@
             </div>
         </section>
 
+    </div>
+
     <!-- Footer -->
     <?= view('components/footer') ?>
+    
 </body>
 </html>
