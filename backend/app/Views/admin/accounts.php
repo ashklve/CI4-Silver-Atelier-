@@ -1,19 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<?= view('components/head', ['title' => 'Manage Accounts - Admin']) ?>
+<?= view('components/head', ['title' => 'Admin Dashboard - Silver Atelier']) ?>
 <body class="font-sans bg-light-cream min-h-screen">
     
-    <!-- Admin Navigation -->
-    <nav class="bg-warm-brown text-light-cream p-4">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-bold">Manage User Accounts</h1>
-            <div class="flex items-center space-x-4">
-                <a href="<?= site_url('admin/dashboard') ?>" class="hover:text-sage-green transition">← Dashboard</a>
-                <span>Welcome, <?= esc(session('user')['username']) ?>!</span>
-                <a href="<?= site_url('logout') ?>" class="bg-sage-green px-4 py-2 rounded hover:bg-light-cream hover:text-warm-brown transition">Logout</a>
-            </div>
-        </div>
-    </nav>
+    <?= view('components/admin_header') ?>
 
     <div class="max-w-7xl mx-auto p-8">
         <!-- Header with Search -->
