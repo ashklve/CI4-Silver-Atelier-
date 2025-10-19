@@ -3,7 +3,7 @@
 <?= view('components/head', ['title' => 'Admin Dashboard - Silver Atelier']) ?>
 <body class="font-sans bg-light-cream min-h-screen">
     
-    <!-- Admin Header (different from main site) -->
+    <!-- Admin Header -->
     <nav class="bg-warm-brown text-light-cream p-4">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <h1 class="text-2xl font-bold">Admin Dashboard</h1>
