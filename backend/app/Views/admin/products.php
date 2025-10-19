@@ -1,14 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<?= view('components/head', ['title' => 'Manage Products - Admin']) ?>
+<?= view('components/head', ['title' => 'Admin Dashboard - Silver Atelier']) ?>
 <body class="font-sans bg-light-cream min-h-screen">
     
-    <nav class="bg-warm-brown text-light-cream p-4">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-bold">Manage Products</h1>
-            <a href="<?= site_url('admin/dashboard') ?>" class="hover:text-sage-green">← Back to Dashboard</a>
-        </div>
-    </nav>
+    <?= view('components/admin_header') ?>
 
     <div class="max-w-7xl mx-auto p-8">
         <div class="flex justify-between items-center mb-6">
