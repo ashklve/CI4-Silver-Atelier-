@@ -11,8 +11,16 @@ $routes->get('/signup', 'Users::signup');
 $routes->get('/moodboard', 'Users::moodBoard');
 $routes->get('/roadmap', 'Users::roadMapPage');
 
-// Admin routes
-$routes->group('admin', ['filter' => 'auth'], function($routes) {
+// authentication routes
+$routes->get('/login', 'Auth::login');
+$routes->post('/auth/login', 'Auth::authenticate');
+$routes->get('/logout', 'Auth::logout');
+$routes->get('/signup', 'Auth::signup');
+$routes->post('/auth/register', 'Auth::register');
+$routes->get('/forgot-password', 'Auth::forgotPassword');
+
+// admin routes (protected)
+$routes->group('admin', function($routes) {
     $routes->get('dashboard', 'Admin::dashboard');
     $routes->get('products', 'Admin::products');
     $routes->get('orders', 'Admin::orders');
