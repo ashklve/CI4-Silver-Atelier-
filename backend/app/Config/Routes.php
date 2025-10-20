@@ -14,7 +14,11 @@ $routes->get('/roadmap', 'Users::roadMapPage');
 // authentication routes
 $routes->get('/login', 'Auth::login');
 $routes->post('/auth/login', 'Auth::authenticate');
-$routes->get('/logout', 'Auth::logout');
+
+// routes for handling user logout (both POST and GET methods)
+$routes->post('/auth/logout', 'Auth::logout');    
+$routes->get('/logout', 'Auth::logout');  
+      
 $routes->get('/signup', 'Auth::signup');
 $routes->post('/auth/register', 'Auth::register');
 $routes->get('/forgot-password', 'Auth::forgotPassword');
