@@ -1,4 +1,6 @@
 <?php
+$errors = $errors ?? [];
+$old = $old ?? [];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,7 +45,7 @@
 
             <!-- Signup Form -->
             <div class="bg-cream-beige rounded-3xl shadow-xl p-8">
-                <form class="space-y-6" id="signupForm" action="<?= base_url('auth/register') ?>" method="POST">
+                <form class="space-y-6" id="signupForm" action="<?= base_url('auth/register') ?>" method="POST" novalidate>
                     <?= csrf_field() ?>
                     
                     <!-- Full Name Field -->
@@ -60,10 +62,18 @@
                                 id="fullname" 
                                 name="fullname" 
                                 required
-                                class="w-full pl-12 pr-4 py-4 border-2 border-light-cream rounded-xl focus:outline-none focus:ring-4 focus:ring-warm-brown/20 focus:border-warm-brown text-warm-brown placeholder-sage-green bg-light-cream transition-all duration-300"
+                                value="<?= esc($old['fullname'] ?? '') ?>"
+                                aria-invalid="<?= isset($errors['fullname']) ? 'true' : 'false' ?>"
+                                aria-describedby="fullname-error"
+                                class="w-full pl-12 pr-4 py-4 border-2 <?= isset($errors['fullname']) ? 'border-red-500' : 'border-light-cream' ?> rounded-xl focus:outline-none focus:ring-4 focus:ring-warm-brown/20 focus:border-warm-brown text-warm-brown placeholder-sage-green bg-light-cream transition-all duration-300"
                                 placeholder="Enter your full name"
                             >
                         </div>
+                        <?php if (!empty($errors['fullname'])): ?>
+                            <p id="fullname-error" class="mt-2 text-red-600 text-sm">
+                                <?= esc($errors['fullname']) ?>
+                            </p>
+                        <?php endif; ?>
                     </div>
 
                     <!-- Username Field -->
@@ -80,11 +90,20 @@
                                 id="username" 
                                 name="username" 
                                 required
-                                class="w-full pl-12 pr-4 py-4 border-2 border-light-cream rounded-xl focus:outline-none focus:ring-4 focus:ring-warm-brown/20 focus:border-warm-brown text-warm-brown placeholder-sage-green bg-light-cream transition-all duration-300"
+                                value="<?= esc($old['username'] ?? '') ?>"
+                                aria-invalid="<?= isset($errors['username']) ? 'true' : 'false' ?>"
+                                aria-describedby="username-error"
+                                class="w-full pl-12 pr-4 py-4 border-2 <?= isset($errors['username']) ? 'border-red-500' : 'border-light-cream' ?> rounded-xl focus:outline-none focus:ring-4 focus:ring-warm-brown/20 focus:border-warm-brown text-warm-brown placeholder-sage-green bg-light-cream transition-all duration-300"
                                 placeholder="Choose a username"
                             >
                         </div>
-                        <p class="text-xs text-sage-green mt-1">Username must be unique and at least 3 characters</p>
+                        <?php if (!empty($errors['username'])): ?>
+                            <p id="username-error" class="mt-2 text-red-600 text-sm">
+                                <?= esc($errors['username']) ?>
+                            </p>
+                        <?php else: ?>
+                            <p class="text-xs text-sage-green mt-1">Username must be unique and at least 3 characters</p>
+                        <?php endif; ?>
                     </div>
 
                     <!-- Email Field -->
@@ -101,10 +120,18 @@
                                 id="email" 
                                 name="email" 
                                 required
-                                class="w-full pl-12 pr-4 py-4 border-2 border-light-cream rounded-xl focus:outline-none focus:ring-4 focus:ring-warm-brown/20 focus:border-warm-brown text-warm-brown placeholder-sage-green bg-light-cream transition-all duration-300"
+                                value="<?= esc($old['email'] ?? '') ?>"
+                                aria-invalid="<?= isset($errors['email']) ? 'true' : 'false' ?>"
+                                aria-describedby="email-error"
+                                class="w-full pl-12 pr-4 py-4 border-2 <?= isset($errors['email']) ? 'border-red-500' : 'border-light-cream' ?> rounded-xl focus:outline-none focus:ring-4 focus:ring-warm-brown/20 focus:border-warm-brown text-warm-brown placeholder-sage-green bg-light-cream transition-all duration-300"
                                 placeholder="Enter your email"
                             >
                         </div>
+                        <?php if (!empty($errors['email'])): ?>
+                            <p id="email-error" class="mt-2 text-red-600 text-sm">
+                                <?= esc($errors['email']) ?>
+                            </p>
+                        <?php endif; ?>
                     </div>
 
                     <!-- Password Field -->
@@ -121,7 +148,9 @@
                                 id="password" 
                                 name="password" 
                                 required
-                                class="w-full pl-12 pr-12 py-4 border-2 border-light-cream rounded-xl focus:outline-none focus:ring-4 focus:ring-warm-brown/20 focus:border-warm-brown text-warm-brown placeholder-sage-green bg-light-cream transition-all duration-300"
+                                aria-invalid="<?= isset($errors['password']) ? 'true' : 'false' ?>"
+                                aria-describedby="password-error"
+                                class="w-full pl-12 pr-12 py-4 border-2 <?= isset($errors['password']) ? 'border-red-500' : 'border-light-cream' ?> rounded-xl focus:outline-none focus:ring-4 focus:ring-warm-brown/20 focus:border-warm-brown text-warm-brown placeholder-sage-green bg-light-cream transition-all duration-300"
                                 placeholder="Create a password"
                             >
                             <button 
@@ -132,6 +161,11 @@
                                 <i class="fas fa-eye" id="eyeIcon"></i>
                             </button>
                         </div>
+                        <?php if (!empty($errors['password'])): ?>
+                            <p id="password-error" class="mt-2 text-red-600 text-sm">
+                                <?= esc($errors['password']) ?>
+                            </p>
+                        <?php endif; ?>
                         <div class="mt-2 text-xs text-sage-green">
                             <p>Password must contain:</p>
                             <ul class="list-disc list-inside ml-2 space-y-1">
@@ -157,7 +191,9 @@
                                 id="confirm_password" 
                                 name="confirm_password" 
                                 required
-                                class="w-full pl-12 pr-12 py-4 border-2 border-light-cream rounded-xl focus:outline-none focus:ring-4 focus:ring-warm-brown/20 focus:border-warm-brown text-warm-brown placeholder-sage-green bg-light-cream transition-all duration-300"
+                                aria-invalid="<?= isset($errors['confirm_password']) ? 'true' : 'false' ?>"
+                                aria-describedby="confirm-password-error"
+                                class="w-full pl-12 pr-12 py-4 border-2 <?= isset($errors['confirm_password']) ? 'border-red-500' : 'border-light-cream' ?> rounded-xl focus:outline-none focus:ring-4 focus:ring-warm-brown/20 focus:border-warm-brown text-warm-brown placeholder-sage-green bg-light-cream transition-all duration-300"
                                 placeholder="Confirm your password"
                             >
                             <button 
@@ -168,8 +204,29 @@
                                 <i class="fas fa-eye" id="eyeIconConfirm"></i>
                             </button>
                         </div>
+                        <?php if (!empty($errors['confirm_password'])): ?>
+                            <p id="confirm-password-error" class="mt-2 text-red-600 text-sm">
+                                <?= esc($errors['confirm_password']) ?>
+                            </p>
+                        <?php endif; ?>
                         <p id="passwordMatch" class="text-xs mt-1 hidden"></p>
                     </div>
+
+                    <!-- General Error Message -->
+                    <?php if (!empty($errors['general'])): ?>
+                        <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-exclamation-circle text-red-500"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm text-red-700">
+                                        <?= esc($errors['general']) ?>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endif; ?>
 
                     <!-- Terms and Privacy -->
                     <div class="flex items-start">
@@ -178,6 +235,7 @@
                             id="terms" 
                             name="terms"
                             required
+                            <?= isset($old['terms']) && $old['terms'] ? 'checked' : '' ?>
                             class="h-4 w-4 text-warm-brown focus:ring-warm-brown border-sage-green rounded mt-1"
                         >
                         <label for="terms" class="ml-3 text-sm text-sage-green leading-relaxed">
@@ -187,6 +245,11 @@
                             <a href="#" class="text-warm-brown hover:text-sage-green font-medium transition-colors duration-300">Privacy Policy</a>
                         </label>
                     </div>
+                    <?php if (!empty($errors['terms'])): ?>
+                        <p class="text-red-600 text-sm -mt-4">
+                            <?= esc($errors['terms']) ?>
+                        </p>
+                    <?php endif; ?>
 
                     <!-- Newsletter Subscription -->
                     <div class="flex items-center">
@@ -194,6 +257,7 @@
                             type="checkbox" 
                             id="newsletter" 
                             name="newsletter"
+                            <?= isset($old['newsletter']) && $old['newsletter'] ? 'checked' : '' ?>
                             class="h-4 w-4 text-warm-brown focus:ring-warm-brown border-sage-green rounded"
                         >
                         <label for="newsletter" class="ml-3 text-sm text-sage-green">

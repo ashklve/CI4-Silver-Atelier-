@@ -1,5 +1,6 @@
 <?php
-// app/Views/user/login.php
+$errors = $errors ?? [];
+$old = $old ?? [];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,7 +45,7 @@
 
             <!-- Login Form -->
             <div class="bg-cream-beige rounded-3xl shadow-xl p-8">
-                <form id="loginForm" class="space-y-6" action="<?= base_url('auth/login') ?>" method="POST">
+                <form id="loginForm" class="space-y-6" action="<?= base_url('auth/login') ?>" method="POST" novalidate>
                     <?= csrf_field() ?>
                     
                     <!-- Username/Email Field -->
@@ -61,10 +62,18 @@
                                 id="username" 
                                 name="username" 
                                 required
-                                class="w-full pl-12 pr-4 py-4 border-2 border-light-cream rounded-xl focus:outline-none focus:ring-4 focus:ring-warm-brown/20 focus:border-warm-brown text-warm-brown placeholder-sage-green bg-light-cream transition-all duration-300"
+                                value="<?= esc($old['username'] ?? '') ?>"
+                                aria-invalid="<?= isset($errors['username']) ? 'true' : 'false' ?>"
+                                aria-describedby="username-error"
+                                class="w-full pl-12 pr-4 py-4 border-2 <?= isset($errors['username']) ? 'border-red-500' : 'border-light-cream' ?> rounded-xl focus:outline-none focus:ring-4 focus:ring-warm-brown/20 focus:border-warm-brown text-warm-brown placeholder-sage-green bg-light-cream transition-all duration-300"
                                 placeholder="Enter your username or email"
                             >
                         </div>
+                        <?php if (!empty($errors['username'])): ?>
+                            <p id="username-error" class="mt-2 text-red-600 text-sm">
+                                <?= esc($errors['username']) ?>
+                            </p>
+                        <?php endif; ?>
                     </div>
 
                     <!-- Password Field -->
@@ -81,7 +90,9 @@
                                 id="password" 
                                 name="password" 
                                 required
-                                class="w-full pl-12 pr-12 py-4 border-2 border-light-cream rounded-xl focus:outline-none focus:ring-4 focus:ring-warm-brown/20 focus:border-warm-brown text-warm-brown placeholder-sage-green bg-light-cream transition-all duration-300"
+                                aria-invalid="<?= isset($errors['password']) ? 'true' : 'false' ?>"
+                                aria-describedby="password-error"
+                                class="w-full pl-12 pr-12 py-4 border-2 <?= isset($errors['password']) ? 'border-red-500' : 'border-light-cream' ?> rounded-xl focus:outline-none focus:ring-4 focus:ring-warm-brown/20 focus:border-warm-brown text-warm-brown placeholder-sage-green bg-light-cream transition-all duration-300"
                                 placeholder="Enter your password"
                             >
                             <button 
@@ -92,7 +103,28 @@
                                 <i class="fas fa-eye" id="eyeIcon"></i>
                             </button>
                         </div>
+                        <?php if (!empty($errors['password'])): ?>
+                            <p id="password-error" class="mt-2 text-red-600 text-sm">
+                                <?= esc($errors['password']) ?>
+                            </p>
+                        <?php endif; ?>
                     </div>
+
+                    <!-- General Error Message -->
+                    <?php if (!empty($errors['general'])): ?>
+                        <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-exclamation-circle text-red-500"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm text-red-700">
+                                        <?= esc($errors['general']) ?>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endif; ?>
 
                     <!-- Remember Me & Forgot Password -->
                     <div class="flex items-center justify-between">
