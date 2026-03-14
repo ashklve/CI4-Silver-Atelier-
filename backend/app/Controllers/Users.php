@@ -7,20 +7,19 @@ use App\Controllers\BaseController;
 class Users extends BaseController
 {
     public function index(): string
-{
-    return view('user/landing');
-}
+    {
+        return view('user/landing');
+    }
 
-public function login(): string
-{
-    return view('user/login');
-}
+    public function products(): string
+    {
+        return view('user/products');
+    }
 
-public function signup(): string
-{
-    return view('user/signup');
-}
-
+    public function login(): string
+    {
+        return view('user/login');
+    }
 public function moodBoard(): string
 {
     return view('user/moodBoard');
@@ -32,4 +31,8 @@ public function roadMapPage(): string
 }
 
 
+    public function signup(): string
+    {
+        return view('user/signup');
+    }
 }
