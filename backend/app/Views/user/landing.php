@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>COCOIR — Eco-Friendly Coconut Coir Products</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,600;0,700;0,900;1,700;1,900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -29,7 +29,7 @@
                         'coco-white':  '#FFFDF8',
                     },
                     fontFamily: {
-                        'display': ['"Playfair Display"', 'serif'],
+                        'display': ['Barlow', 'sans-serif'],
                         'body':    ['Lato', 'sans-serif'],
                     },
                     keyframes: {
@@ -146,7 +146,7 @@
         <nav class="hidden lg:flex items-center gap-8">
             <a href="#home"     class="text-coco-dark font-semibold hover:text-coco-orange transition-colors text-xs tracking-widest uppercase">Home</a>
             <a href="#about"    class="text-coco-dark font-semibold hover:text-coco-orange transition-colors text-xs tracking-widest uppercase">About</a>
-            <a href="#products" class="text-coco-dark font-semibold hover:text-coco-orange transition-colors text-xs tracking-widest uppercase">Products</a>
+            <a href="<?= site_url('products') ?>" class="text-coco-dark font-semibold hover:text-coco-orange transition-colors text-xs tracking-widest uppercase">Products</a>
             <a href="#why-us"   class="text-coco-dark font-semibold hover:text-coco-orange transition-colors text-xs tracking-widest uppercase">Why Us</a>
             <a href="#contact"  class="text-coco-dark font-semibold hover:text-coco-orange transition-colors text-xs tracking-widest uppercase">Contact</a>
         </nav>
@@ -156,7 +156,7 @@
             <a href="<?= site_url('login') ?>" class="text-coco-dark font-semibold px-5 py-2 rounded-full border-2 border-coco-tan hover:border-coco-orange hover:text-coco-orange transition-all text-sm">
                 Sign In
             </a>
-            <a href="<?= site_url('catalog') ?>" class="bg-coco-orange text-white px-6 py-2.5 rounded-full font-bold text-sm hover:bg-coco-dark transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105 transform">
+            <a href="<?= site_url('products') ?>" class="bg-coco-orange text-white px-6 py-2.5 rounded-full font-bold text-sm hover:bg-coco-dark transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105 transform">
                 Shop Now
             </a>
         </div>
@@ -174,10 +174,10 @@
         <nav class="py-4 flex flex-col gap-3">
             <a href="#home"     class="text-coco-dark font-semibold py-2 border-b border-coco-sand/60 text-xs tracking-widest uppercase">Home</a>
             <a href="#about"    class="text-coco-dark font-semibold py-2 border-b border-coco-sand/60 text-xs tracking-widest uppercase">About</a>
-            <a href="#products" class="text-coco-dark font-semibold py-2 border-b border-coco-sand/60 text-xs tracking-widest uppercase">Products</a>
+            <a href="<?= site_url('products') ?>" class="text-coco-dark font-semibold py-2 border-b border-coco-sand/60 text-xs tracking-widest uppercase">Products</a>
             <a href="#why-us"   class="text-coco-dark font-semibold py-2 border-b border-coco-sand/60 text-xs tracking-widest uppercase">Why Us</a>
             <a href="#contact"  class="text-coco-dark font-semibold py-2 text-xs tracking-widest uppercase">Contact</a>
-            <a href="<?= site_url('catalog') ?>" class="bg-coco-orange text-white text-center py-3 rounded-full font-bold mt-2 text-sm">Shop Now</a>
+            <a href="<?= site_url('products') ?>" class="bg-coco-orange text-white text-center py-3 rounded-full font-bold mt-2 text-sm">Shop Now</a>
         </nav>
     </div>
 </header>
@@ -211,7 +211,7 @@
                 </p>
 
                 <div class="flex flex-wrap gap-4 anim-hidden animate-fade-up delay-500">
-                    <a href="<?= site_url('catalog') ?>" class="bg-coco-orange text-white px-8 py-4 rounded-full font-bold hover:bg-coco-dark transform hover:scale-105 transition-all duration-300 shadow-lg shadow-coco-orange/30 inline-flex items-center gap-2">
+                    <a href="<?= site_url('products') ?>" class="bg-coco-orange text-white px-8 py-4 rounded-full font-bold hover:bg-coco-dark transform hover:scale-105 transition-all duration-300 shadow-lg shadow-coco-orange/30 inline-flex items-center gap-2">
                         <i class="fas fa-leaf text-sm"></i> Shop Products
                     </a>
                     <a href="#about" class="border-2 border-coco-brown text-coco-brown px-8 py-4 rounded-full font-bold hover:bg-coco-brown hover:text-coco-cream transition-all duration-300 inline-flex items-center gap-2">
@@ -240,14 +240,9 @@
 
             <!-- Visual -->
             <div class="relative flex justify-center items-center">
-                <!-- Main blob frame -->
-                <div class="relative w-80 h-80 lg:w-[420px] lg:h-[420px] blob-1 bg-gradient-to-br from-coco-orange to-coco-dark shadow-2xl overflow-hidden animate-float">
-                    <img src="/images/coir-hero.jpg" alt="Coconut Coir Products" class="w-full h-full object-cover mix-blend-multiply opacity-65">
-                    <div class="absolute inset-0" style="background:repeating-linear-gradient(45deg,transparent,transparent 8px,rgba(255,255,255,0.04) 8px,rgba(255,255,255,0.04) 9px);"></div>
-                    <!-- Centered logo watermark -->
-                    <div class="absolute inset-0 flex items-center justify-center opacity-20">
-                        <span class="font-display text-6xl font-black text-coco-cream">🥥</span>
-                    </div>
+                <!-- Main hero image: coco.png with transparent bg -->
+                <div class="relative w-80 h-80 lg:w-[460px] lg:h-[460px] animate-float flex items-center justify-center">
+                    <img src="/images/coco.png" alt="Coconut Coir" class="w-full h-full object-contain drop-shadow-2xl">
                 </div>
 
                 <!-- Badge: Eco-Friendly -->
@@ -262,10 +257,7 @@
                     <div class="font-display text-xl font-black text-coco-brown">Philippines</div>
                 </div>
 
-                <!-- Bouncing coconut -->
-                <div class="absolute top-6 right-0 lg:-right-8 w-14 h-14 bg-coco-amber rounded-full flex items-center justify-center shadow-lg animate-bounce">
-                    <span class="text-2xl">🥥</span>
-                </div>
+
             </div>
         </div>
     </div>
@@ -372,7 +364,7 @@
                     <p class="text-coco-mid text-xs mb-4 leading-relaxed">Natural, durable, fully biodegradable entrance mats.</p>
                     <div class="flex items-center justify-between">
                         <span class="font-display font-black text-xl text-coco-orange">₱350</span>
-                        <a href="<?= site_url('catalog') ?>" class="bg-coco-brown text-coco-cream text-xs font-bold px-4 py-2 rounded-full hover:bg-coco-orange transition-colors">Add to Cart</a>
+                        <a href="<?= site_url('products') ?>" class="bg-coco-brown text-coco-cream text-xs font-bold px-4 py-2 rounded-full hover:bg-coco-orange transition-colors">Add to Cart</a>
                     </div>
                 </div>
             </div>
@@ -389,7 +381,7 @@
                     <p class="text-coco-mid text-xs mb-4 leading-relaxed">Perfect moisture retention for vegetables and herbs.</p>
                     <div class="flex items-center justify-between">
                         <span class="font-display font-black text-xl text-coco-orange">₱180</span>
-                        <a href="<?= site_url('catalog') ?>" class="bg-coco-brown text-coco-cream text-xs font-bold px-4 py-2 rounded-full hover:bg-coco-orange transition-colors">Add to Cart</a>
+                        <a href="<?= site_url('products') ?>" class="bg-coco-brown text-coco-cream text-xs font-bold px-4 py-2 rounded-full hover:bg-coco-orange transition-colors">Add to Cart</a>
                     </div>
                 </div>
             </div>
@@ -406,7 +398,7 @@
                     <p class="text-coco-mid text-xs mb-4 leading-relaxed">Slope stabilization and erosion control, project-grade.</p>
                     <div class="flex items-center justify-between">
                         <span class="font-display font-black text-xl text-coco-orange">₱1,200</span>
-                        <a href="<?= site_url('catalog') ?>" class="bg-coco-brown text-coco-cream text-xs font-bold px-4 py-2 rounded-full hover:bg-coco-orange transition-colors">Add to Cart</a>
+                        <a href="<?= site_url('products') ?>" class="bg-coco-brown text-coco-cream text-xs font-bold px-4 py-2 rounded-full hover:bg-coco-orange transition-colors">Add to Cart</a>
                     </div>
                 </div>
             </div>
@@ -422,14 +414,14 @@
                     <p class="text-coco-mid text-xs mb-4 leading-relaxed">Strong, salt-resistant rope for marine and garden use.</p>
                     <div class="flex items-center justify-between">
                         <span class="font-display font-black text-xl text-coco-orange">₱220</span>
-                        <a href="<?= site_url('catalog') ?>" class="bg-coco-brown text-coco-cream text-xs font-bold px-4 py-2 rounded-full hover:bg-coco-orange transition-colors">Add to Cart</a>
+                        <a href="<?= site_url('products') ?>" class="bg-coco-brown text-coco-cream text-xs font-bold px-4 py-2 rounded-full hover:bg-coco-orange transition-colors">Add to Cart</a>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="text-center mt-12">
-            <a href="<?= site_url('catalog') ?>" class="inline-flex items-center gap-2 bg-coco-brown text-coco-cream px-10 py-4 rounded-full font-bold hover:bg-coco-orange transition-all duration-300 shadow-md hover:shadow-xl hover:scale-105 transform">
+            <a href="<?= site_url('products') ?>" class="inline-flex items-center gap-2 bg-coco-brown text-coco-cream px-10 py-4 rounded-full font-bold hover:bg-coco-orange transition-all duration-300 shadow-md hover:shadow-xl hover:scale-105 transform">
                 View All Products <i class="fas fa-arrow-right text-sm"></i>
             </a>
         </div>
@@ -534,7 +526,7 @@
                 <h4 class="font-bold text-coco-cream text-xs tracking-widest uppercase mb-4">Products</h4>
                 <ul class="space-y-2">
                     <?php foreach(['Door Mats','Grow Bags','Geotextile Mats','Coir Rope','Mulch Mat','Erosion Netting'] as $item): ?>
-                    <li><a href="<?= site_url('catalog') ?>" class="text-coco-tan text-sm hover:text-coco-amber transition-colors"><?= $item ?></a></li>
+                    <li><a href="<?= site_url('products') ?>" class="text-coco-tan text-sm hover:text-coco-amber transition-colors"><?= $item ?></a></li>
                     <?php endforeach; ?>
                 </ul>
             </div>
