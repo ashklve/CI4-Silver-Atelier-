@@ -1,0 +1,443 @@
+<?php
+$errors = $errors ?? [];
+$old = $old ?? [];
+?>
+<!DOCTYPE html>
+<html lang="en">
+<?= view('components/head') ?>
+
+<body class="font-sans bg-light-cream min-h-screen">
+    <!-- Header -->
+    <nav class="bg-light-cream/90 backdrop-blur-md border-b border-cream-beige/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="<?= base_url('/') ?>" class="flex items-center space-x-2">
+                        <div class="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
+                            <img src="/images/salogo.png" alt="Silver Atelier Logo" class="w-full h-full object-cover">
+                        </div>
+                        <span class="font-serif text-2xl font-bold text-warm-brown">Silver Atelier</span>
+                    </a>
+                </div>
+                
+                <!-- Back to Home -->
+                <div>
+                    <a href="<?= base_url('/') ?>" class="text-warm-brown hover:text-sage-green transition-colors duration-300 font-medium">
+                        <i class="fas fa-arrow-left mr-2"></i>Back to Home
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-md w-full space-y-8">
+            <!-- Welcome Section -->
+            <div class="text-center">
+                <div class="mx-auto h-16 w-16 bg-warm-brown rounded-full flex items-center justify-center mb-6">
+                    <i class="fas fa-user-plus text-2xl text-light-cream"></i>
+                </div>
+                <h2 class="font-serif text-4xl font-bold text-warm-brown mb-2">Join Silver Atelier</h2>
+                <p class="text-sage-green text-lg">Create your account and start your fashion journey</p>
+            </div>
+
+            <!-- Signup Form -->
+            <div class="bg-cream-beige rounded-3xl shadow-xl p-8">
+                <form class="space-y-6" id="signupForm" action="<?= base_url('auth/register') ?>" method="POST" novalidate>
+                    <?= csrf_field() ?>
+                    
+                    <!-- Full Name Field -->
+                    <div>
+                        <label for="fullname" class="block text-sm font-semibold text-warm-brown mb-2">
+                            Full Name
+                        </label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <i class="fas fa-user text-sage-green"></i>
+                            </div>
+                            <input 
+                                type="text" 
+                                id="fullname" 
+                                name="fullname" 
+                                required
+                                value="<?= esc($old['fullname'] ?? '') ?>"
+                                aria-invalid="<?= isset($errors['fullname']) ? 'true' : 'false' ?>"
+                                aria-describedby="fullname-error"
+                                class="w-full pl-12 pr-4 py-4 border-2 <?= isset($errors['fullname']) ? 'border-red-500' : 'border-light-cream' ?> rounded-xl focus:outline-none focus:ring-4 focus:ring-warm-brown/20 focus:border-warm-brown text-warm-brown placeholder-sage-green bg-light-cream transition-all duration-300"
+                                placeholder="Enter your full name"
+                            >
+                        </div>
+                        <?php if (!empty($errors['fullname'])): ?>
+                            <p id="fullname-error" class="mt-2 text-red-600 text-sm">
+                                <?= esc($errors['fullname']) ?>
+                            </p>
+                        <?php endif; ?>
+                    </div>
+
+                    <!-- Username Field -->
+                    <div>
+                        <label for="username" class="block text-sm font-semibold text-warm-brown mb-2">
+                            Username
+                        </label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <i class="fas fa-at text-sage-green"></i>
+                            </div>
+                            <input 
+                                type="text" 
+                                id="username" 
+                                name="username" 
+                                required
+                                value="<?= esc($old['username'] ?? '') ?>"
+                                aria-invalid="<?= isset($errors['username']) ? 'true' : 'false' ?>"
+                                aria-describedby="username-error"
+                                class="w-full pl-12 pr-4 py-4 border-2 <?= isset($errors['username']) ? 'border-red-500' : 'border-light-cream' ?> rounded-xl focus:outline-none focus:ring-4 focus:ring-warm-brown/20 focus:border-warm-brown text-warm-brown placeholder-sage-green bg-light-cream transition-all duration-300"
+                                placeholder="Choose a username"
+                            >
+                        </div>
+                        <?php if (!empty($errors['username'])): ?>
+                            <p id="username-error" class="mt-2 text-red-600 text-sm">
+                                <?= esc($errors['username']) ?>
+                            </p>
+                        <?php else: ?>
+                            <p class="text-xs text-sage-green mt-1">Username must be unique and at least 3 characters</p>
+                        <?php endif; ?>
+                    </div>
+
+                    <!-- Email Field -->
+                    <div>
+                        <label for="email" class="block text-sm font-semibold text-warm-brown mb-2">
+                            Email Address
+                        </label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <i class="fas fa-envelope text-sage-green"></i>
+                            </div>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                required
+                                value="<?= esc($old['email'] ?? '') ?>"
+                                aria-invalid="<?= isset($errors['email']) ? 'true' : 'false' ?>"
+                                aria-describedby="email-error"
+                                class="w-full pl-12 pr-4 py-4 border-2 <?= isset($errors['email']) ? 'border-red-500' : 'border-light-cream' ?> rounded-xl focus:outline-none focus:ring-4 focus:ring-warm-brown/20 focus:border-warm-brown text-warm-brown placeholder-sage-green bg-light-cream transition-all duration-300"
+                                placeholder="Enter your email"
+                            >
+                        </div>
+                        <?php if (!empty($errors['email'])): ?>
+                            <p id="email-error" class="mt-2 text-red-600 text-sm">
+                                <?= esc($errors['email']) ?>
+                            </p>
+                        <?php endif; ?>
+                    </div>
+
+                    <!-- Password Field -->
+                    <div>
+                        <label for="password" class="block text-sm font-semibold text-warm-brown mb-2">
+                            Password
+                        </label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <i class="fas fa-lock text-sage-green"></i>
+                            </div>
+                            <input 
+                                type="password" 
+                                id="password" 
+                                name="password" 
+                                required
+                                aria-invalid="<?= isset($errors['password']) ? 'true' : 'false' ?>"
+                                aria-describedby="password-error"
+                                class="w-full pl-12 pr-12 py-4 border-2 <?= isset($errors['password']) ? 'border-red-500' : 'border-light-cream' ?> rounded-xl focus:outline-none focus:ring-4 focus:ring-warm-brown/20 focus:border-warm-brown text-warm-brown placeholder-sage-green bg-light-cream transition-all duration-300"
+                                placeholder="Create a password"
+                            >
+                            <button 
+                                type="button" 
+                                id="togglePassword"
+                                class="absolute inset-y-0 right-0 pr-4 flex items-center text-sage-green hover:text-warm-brown transition-colors duration-300"
+                            >
+                                <i class="fas fa-eye" id="eyeIcon"></i>
+                            </button>
+                        </div>
+                        <?php if (!empty($errors['password'])): ?>
+                            <p id="password-error" class="mt-2 text-red-600 text-sm">
+                                <?= esc($errors['password']) ?>
+                            </p>
+                        <?php endif; ?>
+                        <div class="mt-2 text-xs text-sage-green">
+                            <p>Password must contain:</p>
+                            <ul class="list-disc list-inside ml-2 space-y-1">
+                                <li id="length" class="text-red-500">At least 8 characters</li>
+                                <li id="uppercase" class="text-red-500">One uppercase letter</li>
+                                <li id="lowercase" class="text-red-500">One lowercase letter</li>
+                                <li id="number" class="text-red-500">One number</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Confirm Password Field -->
+                    <div>
+                        <label for="confirm_password" class="block text-sm font-semibold text-warm-brown mb-2">
+                            Confirm Password
+                        </label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <i class="fas fa-lock text-sage-green"></i>
+                            </div>
+                            <input 
+                                type="password" 
+                                id="confirm_password" 
+                                name="confirm_password" 
+                                required
+                                aria-invalid="<?= isset($errors['confirm_password']) ? 'true' : 'false' ?>"
+                                aria-describedby="confirm-password-error"
+                                class="w-full pl-12 pr-12 py-4 border-2 <?= isset($errors['confirm_password']) ? 'border-red-500' : 'border-light-cream' ?> rounded-xl focus:outline-none focus:ring-4 focus:ring-warm-brown/20 focus:border-warm-brown text-warm-brown placeholder-sage-green bg-light-cream transition-all duration-300"
+                                placeholder="Confirm your password"
+                            >
+                            <button 
+                                type="button" 
+                                id="toggleConfirmPassword"
+                                class="absolute inset-y-0 right-0 pr-4 flex items-center text-sage-green hover:text-warm-brown transition-colors duration-300"
+                            >
+                                <i class="fas fa-eye" id="eyeIconConfirm"></i>
+                            </button>
+                        </div>
+                        <?php if (!empty($errors['confirm_password'])): ?>
+                            <p id="confirm-password-error" class="mt-2 text-red-600 text-sm">
+                                <?= esc($errors['confirm_password']) ?>
+                            </p>
+                        <?php endif; ?>
+                        <p id="passwordMatch" class="text-xs mt-1 hidden"></p>
+                    </div>
+
+                    <!-- General Error Message -->
+                    <?php if (!empty($errors['general'])): ?>
+                        <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-exclamation-circle text-red-500"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm text-red-700">
+                                        <?= esc($errors['general']) ?>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+
+                    <!-- Terms and Privacy -->
+                    <div class="flex items-start">
+                        <input 
+                            type="checkbox" 
+                            id="terms" 
+                            name="terms"
+                            required
+                            <?= isset($old['terms']) && $old['terms'] ? 'checked' : '' ?>
+                            class="h-4 w-4 text-warm-brown focus:ring-warm-brown border-sage-green rounded mt-1"
+                        >
+                        <label for="terms" class="ml-3 text-sm text-sage-green leading-relaxed">
+                            I agree to the 
+                            <a href="#" class="text-warm-brown hover:text-sage-green font-medium transition-colors duration-300">Terms of Service</a>
+                            and 
+                            <a href="#" class="text-warm-brown hover:text-sage-green font-medium transition-colors duration-300">Privacy Policy</a>
+                        </label>
+                    </div>
+                    <?php if (!empty($errors['terms'])): ?>
+                        <p class="text-red-600 text-sm -mt-4">
+                            <?= esc($errors['terms']) ?>
+                        </p>
+                    <?php endif; ?>
+
+                    <!-- Newsletter Subscription -->
+                    <div class="flex items-center">
+                        <input 
+                            type="checkbox" 
+                            id="newsletter" 
+                            name="newsletter"
+                            <?= isset($old['newsletter']) && $old['newsletter'] ? 'checked' : '' ?>
+                            class="h-4 w-4 text-warm-brown focus:ring-warm-brown border-sage-green rounded"
+                        >
+                        <label for="newsletter" class="ml-3 text-sm text-sage-green">
+                            Subscribe to our newsletter for latest fashion updates
+                        </label>
+                    </div>
+
+                    <!-- Register Button -->
+                    <button 
+                        type="submit"
+                        id="registerBtn"
+                        disabled
+                        class="w-full bg-sage-green text-light-cream py-4 rounded-xl font-semibold text-lg hover:bg-warm-brown transform hover:scale-[1.02] transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                    >
+                        Create Account
+                    </button>
+
+                    <!-- Divider -->
+                    <div class="relative my-6">
+                        <div class="absolute inset-0 flex items-center">
+                            <div class="w-full border-t border-sage-green/30"></div>
+                        </div>
+                        <div class="relative flex justify-center text-sm">
+                            <span class="px-4 bg-cream-beige text-sage-green">or sign up with</span>
+                        </div>
+                    </div>
+
+                    <!-- Social Signup -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <button 
+                            type="button"
+                            class="flex items-center justify-center px-4 py-3 border-2 border-light-cream rounded-xl hover:bg-light-cream transition-colors duration-300 text-warm-brown font-medium"
+                            onclick="alert('Google sign-up would be integrated here')"
+                        >
+                            <i class="fab fa-google mr-2"></i>
+                            Google
+                        </button>
+                        <button 
+                            type="button"
+                            class="flex items-center justify-center px-4 py-3 border-2 border-light-cream rounded-xl hover:bg-light-cream transition-colors duration-300 text-warm-brown font-medium"
+                            onclick="alert('Facebook sign-up would be integrated here')"
+                        >
+                            <i class="fab fa-facebook-f mr-2"></i>
+                            Facebook
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Login Link -->
+                <div class="text-center mt-8 pt-6 border-t border-light-cream">
+                    <p class="text-sage-green">
+                        Already have an account? 
+                        <a href="<?= base_url('login') ?>" class="text-warm-brown hover:text-sage-green font-semibold transition-colors duration-300">
+                            Sign in here
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Password toggle functionality
+        const togglePassword = document.getElementById('togglePassword');
+        const password = document.getElementById('password');
+        const eyeIcon = document.getElementById('eyeIcon');
+
+        togglePassword.addEventListener('click', function() {
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            
+            if (type === 'text') {
+                eyeIcon.classList.remove('fa-eye');
+                eyeIcon.classList.add('fa-eye-slash');
+            } else {
+                eyeIcon.classList.remove('fa-eye-slash');
+                eyeIcon.classList.add('fa-eye');
+            }
+        });
+
+        // Confirm password toggle functionality
+        const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+        const confirmPassword = document.getElementById('confirm_password');
+        const eyeIconConfirm = document.getElementById('eyeIconConfirm');
+
+        toggleConfirmPassword.addEventListener('click', function() {
+            const type = confirmPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+            confirmPassword.setAttribute('type', type);
+            
+            if (type === 'text') {
+                eyeIconConfirm.classList.remove('fa-eye');
+                eyeIconConfirm.classList.add('fa-eye-slash');
+            } else {
+                eyeIconConfirm.classList.remove('fa-eye-slash');
+                eyeIconConfirm.classList.add('fa-eye');
+            }
+        });
+
+        // Password validation
+        const passwordInput = document.getElementById('password');
+        const lengthCheck = document.getElementById('length');
+        const uppercaseCheck = document.getElementById('uppercase');
+        const lowercaseCheck = document.getElementById('lowercase');
+        const numberCheck = document.getElementById('number');
+
+        passwordInput.addEventListener('input', function() {
+            const value = this.value;
+            
+            // Check length
+            if (value.length >= 8) {
+                lengthCheck.classList.remove('text-red-500');
+                lengthCheck.classList.add('text-green-500');
+            } else {
+                lengthCheck.classList.remove('text-green-500');
+                lengthCheck.classList.add('text-red-500');
+            }
+            
+            // Check uppercase
+            if (/[A-Z]/.test(value)) {
+                uppercaseCheck.classList.remove('text-red-500');
+                uppercaseCheck.classList.add('text-green-500');
+            } else {
+                uppercaseCheck.classList.remove('text-green-500');
+                uppercaseCheck.classList.add('text-red-500');
+            }
+            
+            // Check lowercase
+            if (/[a-z]/.test(value)) {
+                lowercaseCheck.classList.remove('text-red-500');
+                lowercaseCheck.classList.add('text-green-500');
+            } else {
+                lowercaseCheck.classList.remove('text-green-500');
+                lowercaseCheck.classList.add('text-red-500');
+            }
+            
+            // Check number
+            if (/[0-9]/.test(value)) {
+                numberCheck.classList.remove('text-red-500');
+                numberCheck.classList.add('text-green-500');
+            } else {
+                numberCheck.classList.remove('text-green-500');
+                numberCheck.classList.add('text-red-500');
+            }
+            
+            validateForm();
+        });
+
+        // Password match validation
+        const passwordMatchMsg = document.getElementById('passwordMatch');
+        
+        confirmPassword.addEventListener('input', function() {
+            if (this.value === '') {
+                passwordMatchMsg.classList.add('hidden');
+            } else if (this.value === passwordInput.value) {
+                passwordMatchMsg.textContent = 'Passwords match ✓';
+                passwordMatchMsg.classList.remove('text-red-500', 'hidden');
+                passwordMatchMsg.classList.add('text-green-500');
+            } else {
+                passwordMatchMsg.textContent = 'Passwords do not match';
+                passwordMatchMsg.classList.remove('text-green-500', 'hidden');
+                passwordMatchMsg.classList.add('text-red-500');
+            }
+            validateForm();
+        });
+
+        // Form validation
+        function validateForm() {
+            const registerBtn = document.getElementById('registerBtn');
+            const isPasswordValid = lengthCheck.classList.contains('text-green-500') &&
+                                   uppercaseCheck.classList.contains('text-green-500') &&
+                                   lowercaseCheck.classList.contains('text-green-500') &&
+                                   numberCheck.classList.contains('text-green-500');
+            const isPasswordMatch = passwordInput.value === confirmPassword.value && confirmPassword.value !== '';
+            const termsChecked = document.getElementById('terms').checked;
+            
+            registerBtn.disabled = !(isPasswordValid && isPasswordMatch && termsChecked);
+        }
+
+        // Add event listener to terms checkbox
+        document.getElementById('terms').addEventListener('change', validateForm);
+    </script>
+</body>
+</html>

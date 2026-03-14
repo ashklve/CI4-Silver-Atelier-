@@ -20,6 +20,16 @@ class Users extends BaseController
     {
         return view('user/login');
     }
+public function moodBoard(): string
+{
+    return view('user/moodBoard');
+}
+
+public function roadMapPage(): string
+{
+    return view('user/roadMapPage');
+}
+
 
     public function signup(): string
     {
