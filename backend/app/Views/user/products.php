@@ -1,9 +1,4 @@
 <?php
-/**
- * View: user/products.php
- * Controller: Users::products()
- * Route: /products  OR  /catalog
- */
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -260,17 +255,17 @@
              * And use: foreach ($products as $p):
              */
             $products = [
-                ['id'=>1, 'name'=>'Coir Door Mat',        'category'=>'Home & Living',   'price'=>350,  'image'=>'coir-mat.jpg',        'badge'=>'New',        'desc'=>'Natural, durable, fully biodegradable entrance mat.'],
-                ['id'=>2, 'name'=>'Coco Grow Bag',         'category'=>'Gardening',       'price'=>180,  'image'=>'coir-growbag.jpg',     'badge'=>'Trending',   'desc'=>'Perfect moisture retention for vegetables and herbs.'],
-                ['id'=>3, 'name'=>'Geotextile Mat',        'category'=>'Construction',    'price'=>1200, 'image'=>'coir-geotextile.jpg',  'badge'=>'Best Seller','desc'=>'Slope stabilization and erosion control, project-grade.'],
-                ['id'=>4, 'name'=>'Twisted Coir Rope',     'category'=>'Craft & Utility', 'price'=>220,  'image'=>'coir-rope.jpg',        'badge'=>'',           'desc'=>'Strong, salt-resistant rope for marine and garden use.'],
-                ['id'=>5, 'name'=>'Coir Mulch Mat',        'category'=>'Gardening',       'price'=>295,  'image'=>'coir-mulch.jpg',       'badge'=>'New',        'desc'=>'Suppress weeds and retain soil moisture naturally.'],
+                ['id'=>1, 'name'=>'Coir Door Mat',        'category'=>'Home & Living',   'price'=>350,  'image'=>'coirdoormat.png',        'badge'=>'New',        'desc'=>'Natural, durable, fully biodegradable entrance mat.'],
+                ['id'=>2, 'name'=>'Coco Grow Bag',         'category'=>'Gardening',       'price'=>180,  'image'=>'growbag.png',     'badge'=>'Trending',   'desc'=>'Perfect moisture retention for vegetables and herbs.'],
+                ['id'=>3, 'name'=>'Geotextile Mat',        'category'=>'Construction',    'price'=>1200, 'image'=>'geotextitle.png',  'badge'=>'Best Seller','desc'=>'Slope stabilization and erosion control, project-grade.'],
+                ['id'=>4, 'name'=>'Twisted Coir Rope',     'category'=>'Craft & Utility', 'price'=>220,  'image'=>'coirrope.jpg',        'badge'=>'',           'desc'=>'Strong, salt-resistant rope for marine and garden use.'],
+                ['id'=>5, 'name'=>'Coir Mulch Mat',        'category'=>'Gardening',       'price'=>295,  'image'=>'coirmulch.jpg',       'badge'=>'New',        'desc'=>'Suppress weeds and retain soil moisture naturally.'],
                 ['id'=>6, 'name'=>'Erosion Control Net',   'category'=>'Construction',    'price'=>890,  'image'=>'coir-erosion.jpg',     'badge'=>'',           'desc'=>'Biodegradable netting for slopes and waterway banks.'],
                 ['id'=>7, 'name'=>'Coco Peat Block',       'category'=>'Agriculture',     'price'=>150,  'image'=>'coir-peat.jpg',        'badge'=>'Sale',       'desc'=>'Compressed coco peat — expands 5–6x with water.'],
-                ['id'=>8, 'name'=>'Coir Hanging Basket',   'category'=>'Home & Living',   'price'=>420,  'image'=>'coir-basket.jpg',      'badge'=>'Trending',   'desc'=>'Rustic lined hanging baskets for indoor and outdoor plants.'],
+                ['id'=>8, 'name'=>'Coir Hanging Basket',   'category'=>'Home & Living',   'price'=>420,  'image'=>'coir-basket.png',      'badge'=>'Trending',   'desc'=>'Rustic lined hanging baskets for indoor and outdoor plants.'],
                 ['id'=>9, 'name'=>'Coir Fibre Bale',       'category'=>'Agriculture',     'price'=>550,  'image'=>'coir-bale.jpg',        'badge'=>'Best Seller','desc'=>'Bulk coir fibre for soil amendment and composting.'],
-                ['id'=>10,'name'=>'Coir Log',               'category'=>'Construction',    'price'=>1800, 'image'=>'coir-log.jpg',         'badge'=>'',           'desc'=>'Cylindrical rolls for streambank and shoreline erosion.'],
-                ['id'=>11,'name'=>'Seedling Tray Liner',   'category'=>'Gardening',       'price'=>95,   'image'=>'coir-liner.jpg',       'badge'=>'New',        'desc'=>'Natural coir liners for nursery trays and planters.'],
+                ['id'=>10,'name'=>'Coir Log',               'category'=>'Construction',    'price'=>1800, 'image'=>'coir_logs.jpg',         'badge'=>'',           'desc'=>'Cylindrical rolls for streambank and shoreline erosion.'],
+                ['id'=>11,'name'=>'Seedling Tray Liner',   'category'=>'Gardening',       'price'=>95,   'image'=>'coir-liner.png',       'badge'=>'New',        'desc'=>'Natural coir liners for nursery trays and planters.'],
                 ['id'=>12,'name'=>'Coir Doormat Runner',   'category'=>'Home & Living',   'price'=>680,  'image'=>'coir-runner.jpg',      'badge'=>'',           'desc'=>'Long hallway runner, natural woven coir design.'],
             ];
 
