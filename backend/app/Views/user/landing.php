@@ -352,7 +352,7 @@
             <!-- Card 1 -->
             <div class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-coco-sand/60 group">
                 <div class="relative aspect-[4/3] bg-gradient-to-br from-coco-green/20 to-coco-sage/20 overflow-hidden">
-                    <img src="/images/coir-mat.jpg" alt="Coir Door Mat" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <img src="/images/coirdoormat.png" alt="Coir Door Mat" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                     <span class="absolute top-3 left-3 badge-new text-[10px] font-black tracking-widest uppercase rounded-full px-3 py-1">New</span>
                     <button class="absolute top-3 right-3 w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-coco-orange hover:text-white text-coco-brown">
                         <i class="fas fa-heart text-xs"></i>
@@ -372,7 +372,7 @@
             <!-- Card 2 -->
             <div class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-coco-sand/60 group">
                 <div class="relative aspect-[4/3] bg-gradient-to-br from-coco-amber/20 to-coco-orange/10 overflow-hidden">
-                    <img src="/images/coir-growbag.jpg" alt="Coco Grow Bag" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <img src="/images/growbag.png" alt="Coco Grow Bag" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                     <span class="absolute top-3 left-3 badge-trending text-[10px] font-black tracking-widest uppercase rounded-full px-3 py-1">Trending</span>
                 </div>
                 <div class="p-5">
@@ -389,7 +389,7 @@
             <!-- Card 3 -->
             <div class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-coco-sand/60 group">
                 <div class="relative aspect-[4/3] bg-gradient-to-br from-coco-brown/10 to-coco-tan/20 overflow-hidden">
-                    <img src="/images/coir-geotextile.jpg" alt="Geotextile Erosion Mat" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <img src="/images/geotextitle.png" alt="Geotextile Erosion Mat" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                     <span class="absolute top-3 left-3 badge-bestseller text-[10px] font-black tracking-widest uppercase rounded-full px-3 py-1">Best Seller</span>
                 </div>
                 <div class="p-5">
@@ -406,7 +406,7 @@
             <!-- Card 4 -->
             <div class="product-card bg-white rounded-3xl overflow-hidden shadow-md border border-coco-sand/60 group">
                 <div class="relative aspect-[4/3] bg-gradient-to-br from-coco-leaf/20 to-coco-green/10 overflow-hidden">
-                    <img src="/images/coir-rope.jpg" alt="Twisted Coir Rope" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <img src="/images/coirrope.jpg" alt="Twisted Coir Rope" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                 </div>
                 <div class="p-5">
                     <p class="text-coco-green text-[10px] font-bold tracking-widest uppercase mb-1">Craft & Utility</p>
@@ -478,7 +478,7 @@
         <p class="text-coco-tan text-lg font-light max-w-xl mx-auto">Subscribe for exclusive deals, new product launches, and tips on sustainable living with coconut coir.</p>
 
         <form class="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto" onsubmit="return false;">
-            <input type="email" placeholder="your@email.com"
+            <input type="ilil" placeholder="cocoirph@gmail.com"
                 class="flex-1 bg-white/10 border border-coco-tan/30 text-coco-cream placeholder-coco-tan/50 px-6 py-4 rounded-full focus:outline-none focus:border-coco-amber transition-colors text-sm">
             <button type="submit" class="bg-coco-orange text-white px-8 py-4 rounded-full font-bold hover:bg-coco-amber hover:text-coco-brown transition-all duration-300 shadow-lg whitespace-nowrap">
                 Subscribe
@@ -488,11 +488,11 @@
 
         <!-- Contact strip -->
         <div class="flex flex-wrap justify-center gap-8 pt-8 border-t border-white/10">
-            <a href="mailto:hello@cocoir.ph" class="flex items-center gap-2 text-coco-tan hover:text-coco-amber transition-colors text-sm">
-                <i class="fas fa-envelope text-coco-orange"></i> hello@cocoir.ph
+            <a href="mailto:cocoirph@gmail.com" class="flex items-center gap-2 text-coco-tan hover:text-coco-amber transition-colors text-sm">
+                <i class="fas fa-envelope text-coco-orange"></i> cocoirph@gmail.com
             </a>
             <a href="tel:+639XXXXXXXXX" class="flex items-center gap-2 text-coco-tan hover:text-coco-amber transition-colors text-sm">
-                <i class="fas fa-phone text-coco-orange"></i> +63 9XX XXX XXXX
+                <i class="fas fa-phone text-coco-orange"></i> +63 945 872 2774
             </a>
             <span class="flex items-center gap-2 text-coco-tan text-sm">
                 <i class="fas fa-map-marker-alt text-coco-orange"></i> Philippines
