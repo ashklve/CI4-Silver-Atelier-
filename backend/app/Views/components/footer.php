@@ -1,63 +1,61 @@
-<footer class="bg-warm-brown text-light-cream py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+<footer class="bg-coco-dark py-16">
+    <div class="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+        <div class="gap-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mb-12">
+
             <!-- Brand -->
-            <div class="lg:col-span-2">
-                <div class="flex items-center space-x-3 mb-6">
-                    <img src="<?= base_url('images/salogo.png') ?>" alt="Silver Atelier Logo" class="w-10 h-10 object-cover rounded-full">
-                    <span class="font-serif text-2xl font-bold">Silver Atelier</span>
+            <div class="space-y-4">
+                <div class="flex items-center gap-2">
+                    <span class="font-display font-black text-coco-cream text-2xl">COCOIR</span>
+                    <span class="text-coco-tan text-xs uppercase tracking-widest">Co.</span>
                 </div>
-                <p class="text-cream-beige leading-relaxed mb-6 max-w-md">
-                    Your premier destination for luxury fashion and contemporary style. Where elegance meets innovation in every piece.
-                </p>
-                <div class="flex space-x-4">
-                    <a href="#" class="w-12 h-12 bg-sage-green rounded-full flex items-center justify-center hover:bg-light-cream hover:text-warm-brown transition-all duration-300">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="#" class="w-12 h-12 bg-sage-green rounded-full flex items-center justify-center hover:bg-light-cream hover:text-warm-brown transition-all duration-300">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="#" class="w-12 h-12 bg-sage-green rounded-full flex items-center justify-center hover:bg-light-cream hover:text-warm-brown transition-all duration-300">
-                        <i class="fab fa-tiktok"></i>
-                    </a>
+                <p class="font-light text-coco-tan text-sm leading-relaxed">Transforming coconut husks into premium eco-products. Proudly made in the Philippines.</p>
+                <div class="flex gap-3 pt-2">
+                    <a href="#" class="flex justify-center items-center bg-white/10 hover:bg-coco-orange rounded-full w-9 h-9 text-coco-tan hover:text-white transition-all"><i class="text-xs fab fa-facebook-f"></i></a>
+                    <a href="#" class="flex justify-center items-center bg-white/10 hover:bg-coco-orange rounded-full w-9 h-9 text-coco-tan hover:text-white transition-all"><i class="text-xs fab fa-instagram"></i></a>
+                    <a href="#" class="flex justify-center items-center bg-white/10 hover:bg-coco-orange rounded-full w-9 h-9 text-coco-tan hover:text-white transition-all"><i class="text-xs fab fa-tiktok"></i></a>
                 </div>
             </div>
-            
-            <!-- Quick Links -->
+
+            <!-- Products -->
             <div>
-                <h4 class="text-xl font-serif font-bold mb-6">Quick Links</h4>
-                <ul class="space-y-3">
-                    <li><a href="<?= site_url('/') ?>#home" class="text-cream-beige hover:text-light-cream transition-colors duration-300">Home</a></li>
-                    <li><a href="<?= site_url('/') ?>#collections" class="text-cream-beige hover:text-light-cream transition-colors duration-300">Collections</a></li>
-                    <li><a href="<?= site_url('catalog') ?>" class="text-cream-beige hover:text-light-cream transition-colors duration-300">Look Catalog</a></li>
-                    <li><a href="<?= site_url('/') ?>#about" class="text-cream-beige hover:text-light-cream transition-colors duration-300">About Us</a></li>
-                    <li><a href="<?= site_url('moodboard') ?>" class="text-cream-beige hover:text-light-cream transition-colors duration-300">Mood Board</a></li>
-                    <li><a href="<?= site_url('roadmap') ?>" class="text-cream-beige hover:text-light-cream transition-colors duration-300">Roadmap</a></li>
+                <h4 class="mb-4 font-bold text-coco-cream text-xs uppercase tracking-widest">Products</h4>
+                <ul class="space-y-2">
+                    <?php foreach (['Door Mats', 'Grow Bags', 'Geotextile Mats', 'Coir Rope', 'Mulch Mat', 'Erosion Netting'] as $item): ?>
+                        <li><a href="<?= site_url('products') ?>" class="text-coco-tan hover:text-coco-amber text-sm transition-colors"><?= $item ?></a></li>
+                    <?php endforeach; ?>
                 </ul>
             </div>
-            
-            <!-- Contact Info -->
+
+            <!-- Company -->
             <div>
-                <h4 class="text-xl font-serif font-bold mb-6">Contact</h4>
-                <div class="space-y-3 text-cream-beige">
-                    <div class="flex items-center space-x-3">
-                        <i class="fas fa-map-marker-alt text-sage-green"></i>
-                        <span>Manila, Philippines</span>
-                    </div>
-                    <div class="flex items-center space-x-3">
-                        <i class="fas fa-phone text-sage-green"></i>
-                        <span>+63 912 345 6789</span>
-                    </div>
-                    <div class="flex items-center space-x-3">
-                        <i class="fas fa-envelope text-sage-green"></i>
-                        <span>silveratelier@gmail.com</span>
-                    </div>
-                </div>
+                <h4 class="mb-4 font-bold text-coco-cream text-xs uppercase tracking-widest">Company</h4>
+                <ul class="space-y-2">
+                    <?php foreach (['About Us' => '#about', 'Our Farmers' => '#', 'Sustainability' => '#', 'Blog' => '#', 'Careers' => '#'] as $label => $link): ?>
+                        <li><a href="<?= $link ?>" class="text-coco-tan hover:text-coco-amber text-sm transition-colors"><?= $label ?></a></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+
+            <!-- Support -->
+            <div>
+                <h4 class="mb-4 font-bold text-coco-cream text-xs uppercase tracking-widest">Support</h4>
+                <ul class="space-y-2">
+                    <?php foreach (['My Orders' => site_url('orders'), 'Track Delivery' => '#', 'Returns & Refunds' => '#', 'FAQs' => '#', 'Contact Us' => '#contact', 'Seller Portal' => site_url('seller')] as $label => $link): ?>
+                        <li><a href="<?= $link ?>" class="text-coco-tan hover:text-coco-amber text-sm transition-colors"><?= $label ?></a></li>
+                    <?php endforeach; ?>
+                </ul>
             </div>
         </div>
-        
-        <div class="border-t border-sage-green pt-8 text-center text-cream-beige">
-            <p>&copy; 2025 Silver Atelier. All rights reserved. Crafted with love for fashion enthusiasts.</p>
+
+        <div class="flex sm:flex-row flex-col justify-between items-center gap-4 pt-8 border-white/10 border-t">
+            <p class="text-coco-tan/50 text-xs">© <?= date('Y') ?> COCOIR — Coconut Coir Co. All rights reserved.</p>
+            <div class="flex gap-6">
+                <a href="#" class="text-coco-tan/50 hover:text-coco-amber text-xs transition-colors">Privacy Policy</a>
+                <a href="#" class="text-coco-tan/50 hover:text-coco-amber text-xs transition-colors">Terms of Service</a>
+            </div>
+        </div>
+        <div class="mt-6 pt-6 border-white/10 border-t text-center">
+            <p class="text-coco-tan/50 text-xs">For educational purposes only, and no copyright infringement is intended.</p>
         </div>
     </div>
 </footer>

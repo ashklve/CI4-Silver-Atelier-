@@ -1,75 +1,69 @@
-<nav class="fixed w-full top-0 z-50 bg-light-cream/90 backdrop-blur-md border-b border-cream-beige/50 transition-all duration-300">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center h-16">
-            <!-- Logo -->
-            <div class="flex-shrink-0">
-                <a href="<?= base_url('/') ?>" class="flex items-center space-x-2">
-                    <div class="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
-                        <img src="/images/salogo.png" alt="Silver Atelier Logo" class="w-full h-full object-cover">
-                    </div>
-                    <span class="font-serif text-2xl font-bold text-warm-brown">Silver Atelier</span>
-                </a>
-            </div>
+<!-- ══════════════════════════ HEADER ══════════════════════════ -->
+<header id="main-header" class="top-0 right-0 left-0 z-50 fixed px-4 lg:px-8 py-3 transition-all duration-400">
+    <div class="flex justify-between items-center mx-auto max-w-7xl">
 
-            <!-- Desktop Navigation -->
-            <div class="hidden md:block">
-                <div class="ml-10 flex items-baseline space-x-8">
-                    <a href="<?= base_url('/') ?>#home" class="nav-link text-warm-brown hover:text-sage-green transition-colors duration-300 font-medium">Home</a>
-                    <a href="<?= base_url('/') ?>#collections" class="nav-link text-warm-brown hover:text-sage-green transition-colors duration-300 font-medium">Collections</a>
-                    <a href="<?= base_url('catalog') ?>" class="nav-link text-warm-brown hover:text-sage-green transition-colors duration-300 font-medium">Look Catalog</a>
-                    <a href="<?= base_url('/') ?>#about" class="nav-link text-warm-brown hover:text-sage-green transition-colors duration-300 font-medium">About</a>
-                    <a href="<?= base_url('moodboard') ?>" class="nav-link text-warm-brown hover:text-sage-green transition-colors duration-300 font-medium">Mood Board</a>
-                    <a href="<?= base_url('roadmap') ?>" class="nav-link text-warm-brown hover:text-sage-green transition-colors duration-300 font-medium">Roadmap</a>
-                </div>
+        <!-- Logo -->
+        <a href="#home" class="group flex items-center gap-3">
+            <svg class="drop-shadow-md w-12 h-12" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Sun -->
+                <circle cx="19" cy="13" r="8" fill="#E87722" opacity="0.92" />
+                <path d="M13 13 Q16 11 19 13" stroke="#F4A940" stroke-width="1.5" fill="none" stroke-linecap="round" />
+                <!-- Palm trunk -->
+                <path d="M33 45 Q31 33 35 21" stroke="#5C3317" stroke-width="3" stroke-linecap="round" />
+                <!-- Palm leaves -->
+                <path d="M35 21 Q44 15 48 11" stroke="#4A7C59" stroke-width="2.5" stroke-linecap="round" />
+                <path d="M35 21 Q27 13 25 8" stroke="#6BAF78" stroke-width="2" stroke-linecap="round" />
+                <path d="M35 21 Q42 20 46 18" stroke="#4A7C59" stroke-width="2" stroke-linecap="round" />
+                <!-- Ground -->
+                <ellipse cx="30" cy="46" rx="16" ry="4" fill="#6BAF78" opacity="0.45" />
+                <!-- Coconuts -->
+                <circle cx="21" cy="44" r="5.2" fill="#3B2314" />
+                <circle cx="30" cy="44" r="5.2" fill="#5C3317" />
+                <circle cx="21" cy="44" r="2.2" fill="#8B5E3C" opacity="0.55" />
+                <circle cx="30" cy="44" r="2.2" fill="#8B5E3C" opacity="0.55" />
+            </svg>
+            <div>
+                <span class="block font-display font-black text-coco-brown text-2xl leading-none tracking-wide">COCOIR</span>
+                <span class="font-body text-[10px] text-coco-green uppercase leading-none tracking-[0.22em]">Coconut Coir Co.</span>
             </div>
+        </a>
 
-            <!-- CTA Button -->
-            <div class="hidden md:block">
-                <?php if (session()->has('user')): ?>
-                    <form action="<?= base_url('auth/logout') ?>" method="POST" class="inline">
-                        <?= csrf_field() ?>
-                        <button type="submit" class="bg-warm-brown text-light-cream px-6 py-2 rounded-full hover:bg-sage-green transition-all duration-300 transform hover:scale-105 font-medium">
-                            Logout
-                        </button>
-                    </form>
-                <?php else: ?>
-                    <a href="<?= base_url('login') ?>" class="bg-warm-brown text-light-cream px-6 py-2 rounded-full hover:bg-sage-green transition-all duration-300 transform hover:scale-105 font-medium inline-block text-center">
-                        Login
-                    </a>
-                <?php endif; ?>
-            </div>
+        <!-- Desktop Nav -->
+        <nav class="hidden lg:flex items-center gap-8">
+            <a href="#home" class="font-semibold text-coco-dark hover:text-coco-orange text-xs uppercase tracking-widest transition-colors">Home</a>
+            <a href="#about" class="font-semibold text-coco-dark hover:text-coco-orange text-xs uppercase tracking-widest transition-colors">About</a>
+            <a href="<?= site_url('products') ?>" class="font-semibold text-coco-dark hover:text-coco-orange text-xs uppercase tracking-widest transition-colors">Products</a>
+            <a href="#why-us" class="font-semibold text-coco-dark hover:text-coco-orange text-xs uppercase tracking-widest transition-colors">Why Us</a>
+            <a href="#contact" class="font-semibold text-coco-dark hover:text-coco-orange text-xs uppercase tracking-widest transition-colors">Contact</a>
+        </nav>
 
-            <!-- Mobile menu button -->
-            <div class="md:hidden">
-                <button id="mobile-menu-btn" class="text-warm-brown hover:text-sage-green transition-colors duration-300">
-                    <i class="fas fa-bars text-xl"></i>
-                </button>
-            </div>
+        <!-- CTA -->
+        <div class="hidden lg:flex items-center gap-3">
+            <a href="<?= site_url('login') ?>" class="px-5 py-2 border-2 border-coco-tan hover:border-coco-orange rounded-full font-semibold text-coco-dark hover:text-coco-orange text-sm transition-all">
+                Sign In
+            </a>
+            <a href="<?= site_url('products') ?>" class="bg-coco-orange hover:bg-coco-dark shadow-md hover:shadow-lg px-6 py-2.5 rounded-full font-bold text-white text-sm hover:scale-105 transition-all duration-300 transform">
+                Shop Now
+            </a>
         </div>
+
+        <!-- Hamburger -->
+        <button id="hamburger" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="Menu">
+            <span class="block bg-coco-brown w-6 h-0.5"></span>
+            <span class="block bg-coco-brown w-6 h-0.5"></span>
+            <span class="block bg-coco-brown w-4 h-0.5"></span>
+        </button>
     </div>
-    
-    <!-- Mobile Navigation -->
-    <div id="mobile-menu" class="md:hidden hidden bg-light-cream border-t border-cream-beige/50">
-        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <a href="<?= base_url('/') ?>#home" class="block px-3 py-2 text-warm-brown hover:text-sage-green transition-colors duration-300">Home</a>
-            <a href="<?= base_url('/') ?>#collections" class="block px-3 py-2 text-warm-brown hover:text-sage-green transition-colors duration-300">Collections</a>
-            <a href="<?= base_url('catalog') ?>" class="block px-3 py-2 text-warm-brown hover:text-sage-green transition-colors duration-300">Look Catalog</a>
-            <a href="<?= base_url('/') ?>#about" class="block px-3 py-2 text-warm-brown hover:text-sage-green transition-colors duration-300">About</a>
-            <a href="<?= base_url('moodboard') ?>" class="block px-3 py-2 text-warm-brown hover:text-sage-green transition-colors duration-300">Mood Board</a>
-            <a href="<?= base_url('roadmap') ?>" class="block px-3 py-2 text-warm-brown hover:text-sage-green transition-colors duration-300">Roadmap</a>
-            
-            <?php if (session()->has('user')): ?>
-                <form action="<?= base_url('auth/logout') ?>" method="POST" class="px-3 py-2">
-                    <?= csrf_field() ?>
-                    <button type="submit" class="block w-full bg-warm-brown text-light-cream px-6 py-2 rounded-full hover:bg-sage-green transition-all duration-300 text-center font-medium">
-                        Logout
-                    </button>
-                </form>
-            <?php else: ?>
-                <a href="<?= base_url('login') ?>" class="block w-full mt-4 bg-warm-brown text-light-cream px-6 py-2 rounded-full hover:bg-sage-green transition-all duration-300 text-center font-medium">
-                    Login
-                </a>
-            <?php endif; ?>
-        </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="lg:hidden bg-coco-cream px-4 border-coco-sand border-t">
+        <nav class="flex flex-col gap-3 py-4">
+            <a href="#home" class="py-2 border-coco-sand/60 border-b font-semibold text-coco-dark text-xs uppercase tracking-widest">Home</a>
+            <a href="#about" class="py-2 border-coco-sand/60 border-b font-semibold text-coco-dark text-xs uppercase tracking-widest">About</a>
+            <a href="<?= site_url('products') ?>" class="py-2 border-coco-sand/60 border-b font-semibold text-coco-dark text-xs uppercase tracking-widest">Products</a>
+            <a href="#why-us" class="py-2 border-coco-sand/60 border-b font-semibold text-coco-dark text-xs uppercase tracking-widest">Why Us</a>
+            <a href="#contact" class="py-2 font-semibold text-coco-dark text-xs uppercase tracking-widest">Contact</a>
+            <a href="<?= site_url('products') ?>" class="bg-coco-orange mt-2 py-3 rounded-full font-bold text-white text-sm text-center">Shop Now</a>
+        </nav>
     </div>
-</nav>
+</header>
