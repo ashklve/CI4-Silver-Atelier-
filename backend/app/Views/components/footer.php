@@ -1,3 +1,4 @@
+<?php $isLanding = uri_string() === '' || uri_string() === '/'; ?>
 <footer class="bg-coco-dark py-16">
     <div class="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         <div class="gap-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mb-12">
@@ -30,7 +31,7 @@
             <div>
                 <h4 class="mb-4 font-bold text-coco-cream text-xs uppercase tracking-widest">Company</h4>
                 <ul class="space-y-2">
-                    <?php foreach (['About Us' => '#about', 'Our Farmers' => '#', 'Sustainability' => '#', 'Blog' => '#', 'Careers' => '#'] as $label => $link): ?>
+                    <?php foreach (['About Us' => $isLanding ? '#about' : site_url('/') . '#about', 'Our Farmers' => '#', 'Sustainability' => '#', 'Blog' => '#', 'Careers' => '#'] as $label => $link): ?>
                         <li><a href="<?= $link ?>" class="text-coco-tan hover:text-coco-amber text-sm transition-colors"><?= $label ?></a></li>
                     <?php endforeach; ?>
                 </ul>
@@ -40,7 +41,7 @@
             <div>
                 <h4 class="mb-4 font-bold text-coco-cream text-xs uppercase tracking-widest">Support</h4>
                 <ul class="space-y-2">
-                    <?php foreach (['My Orders' => site_url('orders'), 'Track Delivery' => '#', 'Returns & Refunds' => '#', 'FAQs' => '#', 'Contact Us' => '#contact', 'Seller Portal' => site_url('seller')] as $label => $link): ?>
+                    <?php foreach (['My Orders' => site_url('orders'), 'Track Delivery' => '#', 'Returns & Refunds' => '#', 'FAQs' => '#', 'Contact Us' => $isLanding ? '#contact' : site_url('/') . '#contact', 'Seller Portal' => site_url('seller')] as $label => $link): ?>
                         <li><a href="<?= $link ?>" class="text-coco-tan hover:text-coco-amber text-sm transition-colors"><?= $label ?></a></li>
                     <?php endforeach; ?>
                 </ul>

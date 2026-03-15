@@ -1,9 +1,10 @@
 <!-- ══════════════════════════ HEADER ══════════════════════════ -->
 <header id="main-header" class="top-0 right-0 left-0 z-50 fixed px-4 lg:px-8 py-3 transition-all duration-400">
+    <?php $isLanding = uri_string() === '' || uri_string() === '/'; ?>
     <div class="flex justify-between items-center mx-auto max-w-7xl">
 
         <!-- Logo -->
-        <a href="#home" class="group flex items-center gap-3">
+        <a href="<?= $isLanding ? '#home' : site_url('/') ?>" class="group flex items-center gap-3">
             <svg class="drop-shadow-md w-12 h-12" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <!-- Sun -->
                 <circle cx="19" cy="13" r="8" fill="#E87722" opacity="0.92" />
@@ -30,11 +31,11 @@
 
         <!-- Desktop Nav -->
         <nav class="hidden lg:flex items-center gap-8">
-            <a href="#home" class="font-semibold text-coco-dark hover:text-coco-orange text-xs uppercase tracking-widest transition-colors">Home</a>
-            <a href="#about" class="font-semibold text-coco-dark hover:text-coco-orange text-xs uppercase tracking-widest transition-colors">About</a>
+            <a href="<?= $isLanding ? '#home' : site_url('/') ?>" class="font-semibold text-coco-dark hover:text-coco-orange text-xs uppercase tracking-widest transition-colors">Home</a>
+            <a href="<?= $isLanding ? '#about' : site_url('/') . '#about' ?>" class="font-semibold text-coco-dark hover:text-coco-orange text-xs uppercase tracking-widest transition-colors">About</a>
             <a href="<?= site_url('products') ?>" class="font-semibold text-coco-dark hover:text-coco-orange text-xs uppercase tracking-widest transition-colors">Products</a>
-            <a href="#why-us" class="font-semibold text-coco-dark hover:text-coco-orange text-xs uppercase tracking-widest transition-colors">Why Us</a>
-            <a href="#contact" class="font-semibold text-coco-dark hover:text-coco-orange text-xs uppercase tracking-widest transition-colors">Contact</a>
+            <a href="<?= $isLanding ? '#why-us' : site_url('/') . '#why-us' ?>" class="font-semibold text-coco-dark hover:text-coco-orange text-xs uppercase tracking-widest transition-colors">Why Us</a>
+            <a href="<?= $isLanding ? '#contact' : site_url('/') . '#contact' ?>" class="font-semibold text-coco-dark hover:text-coco-orange text-xs uppercase tracking-widest transition-colors">Contact</a>
         </nav>
 
         <!-- CTA -->
@@ -58,11 +59,11 @@
     <!-- Mobile Menu -->
     <div id="mobile-menu" class="lg:hidden bg-coco-cream px-4 border-coco-sand border-t">
         <nav class="flex flex-col gap-3 py-4">
-            <a href="#home" class="py-2 border-coco-sand/60 border-b font-semibold text-coco-dark text-xs uppercase tracking-widest">Home</a>
-            <a href="#about" class="py-2 border-coco-sand/60 border-b font-semibold text-coco-dark text-xs uppercase tracking-widest">About</a>
+            <a href="<?= $isLanding ? '#home' : site_url('/') ?>" class="py-2 border-coco-sand/60 border-b font-semibold text-coco-dark text-xs uppercase tracking-widest">Home</a>
+            <a href="<?= $isLanding ? '#about' : site_url('/') . '#about' ?>" class="py-2 border-coco-sand/60 border-b font-semibold text-coco-dark text-xs uppercase tracking-widest">About</a>
             <a href="<?= site_url('products') ?>" class="py-2 border-coco-sand/60 border-b font-semibold text-coco-dark text-xs uppercase tracking-widest">Products</a>
-            <a href="#why-us" class="py-2 border-coco-sand/60 border-b font-semibold text-coco-dark text-xs uppercase tracking-widest">Why Us</a>
-            <a href="#contact" class="py-2 font-semibold text-coco-dark text-xs uppercase tracking-widest">Contact</a>
+            <a href="<?= $isLanding ? '#why-us' : site_url('/') . '#why-us' ?>" class="py-2 border-coco-sand/60 border-b font-semibold text-coco-dark text-xs uppercase tracking-widest">Why Us</a>
+            <a href="<?= $isLanding ? '#contact' : site_url('/') . '#contact' ?>" class="py-2 font-semibold text-coco-dark text-xs uppercase tracking-widest">Contact</a>
             <a href="<?= site_url('products') ?>" class="bg-coco-orange mt-2 py-3 rounded-full font-bold text-white text-sm text-center">Shop Now</a>
         </nav>
     </div>
