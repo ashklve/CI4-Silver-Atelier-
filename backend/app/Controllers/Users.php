@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\CartItemModel;
 
 class Users extends BaseController
 {
@@ -18,10 +19,12 @@ class Users extends BaseController
 
     public function cart()
     {
-        $cart = session()->get('cart') ?? [];
+        $model = new CartItemModel();
+        $cartItems = $model->where($this->getCartConditions())->findAll();
+
         $data = [
             'title' => 'Your Shopping Cart',
-            'cartItems' => array_values($cart) // re-index for easier looping in view
+            'cartItems' => $cartItems
         ];
         return view('user/cart', $data);
     }
@@ -39,23 +42,28 @@ class Users extends BaseController
             return $this->response->setStatusCode(400)->setBody(json_encode(['success' => false, 'message' => 'Invalid product data.']));
         }
 
-        $cart = session()->get('cart') ?? [];
+        $model = new CartItemModel();
+        $conditions = $this->getCartConditions();
 
-        if (isset($cart[$id])) {
-            $cart[$id]['quantity']++;
+        // Check if item exists for this user/session
+        $existingItem = $model->where($conditions)->where('product_id', $id)->first();
+
+        if ($existingItem) {
+            // Update quantity
+            $model->update($existingItem['id'], ['quantity' => $existingItem['quantity'] + 1]);
         } else {
-            $cart[$id] = [
-                'id'       => $id,
-                'name'     => $name,
-                'price'    => (float)$price,
-                'image'    => $image ?? 'default.png',
-                'quantity' => 1
-            ];
+            // Insert new
+            $data = array_merge($conditions, [
+                'product_id' => $id,
+                'name'       => $name,
+                'price'      => (float)$price,
+                'image'      => $image ?? 'default.png',
+                'quantity'   => 1
+            ]);
+            $model->insert($data);
         }
 
-        session()->set('cart', $cart);
-
-        $totalItems = array_reduce($cart, fn($sum, $item) => $sum + $item['quantity'], 0);
+        $totalItems = $this->getCartTotal($model);
 
         $responseData = [
             'success' => true,
@@ -73,11 +81,15 @@ class Users extends BaseController
 
         $id = $this->request->getPost('id');
         $quantity = (int)$this->request->getPost('quantity');
-        $cart = session()->get('cart') ?? [];
 
-        if (isset($cart[$id]) && $quantity > 0) {
-            $cart[$id]['quantity'] = $quantity;
-            session()->set('cart', $cart);
+        $model = new CartItemModel();
+
+        // Note: $id here refers to the primary key of the cart_items table (passed from view)
+        // We also check conditions to ensure user owns this item
+        $item = $model->where($this->getCartConditions())->where('id', $id)->first();
+
+        if ($item && $quantity > 0) {
+            $model->update($id, ['quantity' => $quantity]);
             return $this->response->setBody(json_encode(['success' => true, 'csrf_hash' => csrf_hash()]));
         }
 
@@ -88,15 +100,36 @@ class Users extends BaseController
     {
         $this->response->setHeader('Content-Type', 'application/json');
         $id = $this->request->getPost('id');
-        $cart = session()->get('cart') ?? [];
 
-        if (isset($cart[$id])) {
-            unset($cart[$id]);
-            session()->set('cart', $cart);
+        $model = new CartItemModel();
+        $item = $model->where($this->getCartConditions())->where('id', $id)->first();
+
+        if ($item) {
+            $model->delete($id);
             return $this->response->setBody(json_encode(['success' => true, 'csrf_hash' => csrf_hash()]));
         }
 
         return $this->response->setStatusCode(404)->setBody(json_encode(['success' => false, 'message' => 'Item not found.', 'csrf_hash' => csrf_hash()]));
+    }
+
+    /**
+     * Helper to get database query conditions for the current user/guest
+     */
+    private function getCartConditions(): array
+    {
+        $userId = session()->get('user')['id'] ?? null;
+
+        if ($userId) {
+            return ['user_id' => $userId];
+        }
+
+        return ['session_id' => session_id()];
+    }
+
+    private function getCartTotal($model)
+    {
+        $result = $model->selectSum('quantity')->where($this->getCartConditions())->first();
+        return (int)($result['quantity'] ?? 0);
     }
 
     public function login(): string
