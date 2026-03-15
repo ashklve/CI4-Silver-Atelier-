@@ -40,11 +40,16 @@
 
         <!-- CTA -->
         <div class="hidden lg:flex items-center gap-3">
+            <a href="<?= site_url('cart') ?>" class="group relative mr-2 p-2 text-coco-dark hover:text-coco-orange transition-colors" title="View Cart">
+                <i class="text-lg fas fa-shopping-bag"></i>
+                <?php
+                $cart = session()->get('cart') ?? [];
+                $cartCount = array_reduce($cart, fn($sum, $item) => $sum + $item['quantity'], 0);
+                ?>
+                <span id="global-cart-count" class="top-0 right-0 absolute flex justify-center items-center bg-coco-orange <?= $cartCount > 0 ? '' : 'opacity-0' ?> -mt-1 -mr-1 rounded-full w-4 h-4 font-bold text-[10px] text-white transition-opacity"><?= $cartCount ?></span>
+            </a>
             <a href="<?= site_url('login') ?>" class="px-5 py-2 border-2 border-coco-tan hover:border-coco-orange rounded-full font-semibold text-coco-dark hover:text-coco-orange text-sm transition-all">
                 Sign In
-            </a>
-            <a href="<?= site_url('products') ?>" class="bg-coco-orange hover:bg-coco-dark shadow-md hover:shadow-lg px-6 py-2.5 rounded-full font-bold text-white text-sm hover:scale-105 transition-all duration-300 transform">
-                Shop Now
             </a>
         </div>
 
@@ -64,7 +69,19 @@
             <a href="<?= site_url('products') ?>" class="py-2 border-coco-sand/60 border-b font-semibold text-coco-dark text-xs uppercase tracking-widest">Products</a>
             <a href="<?= $isLanding ? '#why-us' : site_url('/') . '#why-us' ?>" class="py-2 border-coco-sand/60 border-b font-semibold text-coco-dark text-xs uppercase tracking-widest">Why Us</a>
             <a href="<?= $isLanding ? '#contact' : site_url('/') . '#contact' ?>" class="py-2 font-semibold text-coco-dark text-xs uppercase tracking-widest">Contact</a>
-            <a href="<?= site_url('products') ?>" class="bg-coco-orange mt-2 py-3 rounded-full font-bold text-white text-sm text-center">Shop Now</a>
+            <a href="<?= site_url('cart') ?>" class="bg-coco-orange mt-2 py-3 rounded-full font-bold text-white text-sm text-center">View Cart</a>
         </nav>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            window.addEventListener('cartUpdated', (event) => {
+                const badge = document.getElementById('global-cart-count');
+                if (badge) {
+                    const count = event.detail.count;
+                    badge.textContent = count;
+                    badge.classList.toggle('opacity-0', count === 0);
+                }
+            });
+        });
+    </script>
 </header>
