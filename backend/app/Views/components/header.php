@@ -43,8 +43,11 @@
             <a href="<?= site_url('cart') ?>" class="group relative mr-2 p-2 text-coco-dark hover:text-coco-orange transition-colors" title="View Cart">
                 <i class="text-lg fas fa-shopping-bag"></i>
                 <?php
-                $cart = session()->get('cart') ?? [];
-                $cartCount = array_reduce($cart, fn($sum, $item) => $sum + $item['quantity'], 0);
+                $cartModel = new \App\Models\CartItemModel();
+                $userId = session()->get('user')['id'] ?? null;
+                $conditions = $userId ? ['user_id' => $userId] : ['session_id' => session_id()];
+                $result = $cartModel->selectSum('quantity')->where($conditions)->first();
+                $cartCount = (int)($result['quantity'] ?? 0);
                 ?>
                 <span id="global-cart-count" class="top-0 right-0 absolute flex justify-center items-center bg-coco-orange <?= $cartCount > 0 ? '' : 'opacity-0' ?> -mt-1 -mr-1 rounded-full w-4 h-4 font-bold text-[10px] text-white transition-opacity"><?= $cartCount ?></span>
             </a>

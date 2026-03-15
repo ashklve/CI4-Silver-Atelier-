@@ -114,113 +114,58 @@ $shipping = 150.00;
     </div>
 
     <script>
-        // Cart Logic
-        const cartKey = 'cocoir_cart';
+        async function updateCartAPI(url, data) {
+            const csrfToken = document.querySelector('.csrf-token');
+            data.append(csrfToken.name, csrfToken.value);
 
-        function getCart() {
-            return JSON.parse(localStorage.getItem(cartKey)) || [];
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    body: data,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                });
+                const result = await response.json();
+                if (result.success) {
+                    // Reload the page to reflect changes.
+                    window.location.reload();
+                } else {
+                    alert(result.message || 'An error occurred.');
+                    if (response.status === 403) { // CSRF error
+                        window.location.reload();
+                    }
+                }
+            } catch (error) {
+                console.error('Cart API Error:', error);
+                alert('Could not update cart. Please try again.');
+            }
         }
 
-        function saveCart(cart) {
-            localStorage.setItem(cartKey, JSON.stringify(cart));
-            renderCart();
-            // Dispatch event for header count
-            window.dispatchEvent(new Event('cartUpdated'));
-        }
-
-        function formatPrice(price) {
-            return '₱' + parseFloat(price).toLocaleString('en-US', {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            });
-        }
-
-        function renderCart() {
-            const cart = getCart();
-            const container = document.getElementById('cart-items-container');
-            const content = document.getElementById('cart-content');
-            const empty = document.getElementById('cart-empty');
-
-            if (cart.length === 0) {
-                content.classList.add('hidden');
-                empty.classList.remove('hidden');
-                empty.classList.add('flex');
+        function updateQty(id, quantity) {
+            const newQuantity = parseInt(quantity, 10);
+            if (isNaN(newQuantity) || newQuantity < 1) {
+                removeItem(id);
                 return;
             }
-
-            content.classList.remove('hidden');
-            empty.classList.add('hidden');
-            empty.classList.remove('flex');
-
-            container.innerHTML = '';
-            let subtotal = 0;
-
-            cart.forEach((item, index) => {
-                const itemTotal = item.price * item.quantity;
-                subtotal += itemTotal;
-
-                container.innerHTML += `
-                    <div class="flex sm:flex-row flex-col gap-6 bg-white hover:shadow-md p-5 border border-coco-sand/40 hover:border-coco-orange/30 rounded-3xl transition-all duration-300">
-                        <!-- Image -->
-                        <div class="group relative flex-shrink-0 bg-coco-cream rounded-2xl w-full sm:w-28 h-28 overflow-hidden">
-                            <img src="/images/${item.image}" alt="${item.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                        </div>
-                        
-                        <!-- Details -->
-                        <div class="flex flex-col flex-1 justify-between">
-                            <div class="flex justify-between items-start">
-                                <div>
-                                    <h4 class="font-display font-bold text-coco-brown text-xl">${item.name}</h4>
-                                    <p class="text-coco-mid text-sm">Unit Price: ${formatPrice(item.price)}</p>
-                                </div>
-                                <button onclick="removeItem(${index})" class="flex justify-center items-center hover:bg-red-50 rounded-full w-8 h-8 text-coco-mid/50 hover:text-red-500 transition-colors" title="Remove Item">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
-                            </div>
-                            
-                            <div class="flex flex-wrap justify-between items-center gap-4 mt-4 sm:mt-0">
-                                <div class="flex items-center gap-3 bg-coco-sand/20 px-1 py-1 border border-coco-sand rounded-full">
-                                    <button onclick="updateQty(${index}, -1)" class="flex justify-center items-center hover:bg-white hover:shadow-sm rounded-full w-8 h-8 font-bold text-coco-brown transition-all">-</button>
-                                    <span class="w-6 font-bold text-coco-brown text-sm text-center">${item.quantity}</span>
-                                    <button onclick="updateQty(${index}, 1)" class="flex justify-center items-center hover:bg-white hover:shadow-sm rounded-full w-8 h-8 font-bold text-coco-brown transition-all">+</button>
-                                </div>
-                                <div class="font-display font-black text-coco-orange text-lg">
-                                    ${formatPrice(itemTotal)}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
-
-            // Update Summary
-            const shipping = 150;
-            document.getElementById('summary-subtotal').textContent = formatPrice(subtotal);
-            document.getElementById('summary-total').textContent = formatPrice(subtotal + shipping);
+            const formData = new FormData();
+            formData.append('id', id);
+            formData.append('quantity', newQuantity);
+            updateCartAPI('<?= site_url('cart/update') ?>', formData);
         }
 
-        function updateQty(index, change) {
-            const cart = getCart();
-            if (cart[index]) {
-                cart[index].quantity += change;
-                if (cart[index].quantity < 1) cart[index].quantity = 1;
-                saveCart(cart);
-            }
-        }
-
-        function removeItem(index) {
-            const cart = getCart();
-            cart.splice(index, 1);
-            saveCart(cart);
+        function removeItem(id) {
+            if (!confirm('Are you sure you want to remove this item?')) return;
+            const formData = new FormData();
+            formData.append('id', id);
+            updateCartAPI('<?= site_url('cart/remove') ?>', formData);
         }
 
         function checkout() {
             alert('Proceeding to checkout...');
             // Redirect to checkout controller logic
+            // window.location.href = '<?= site_url('checkout') ?>';
         }
-
-        // Init
-        document.addEventListener('DOMContentLoaded', renderCart);
     </script>
 </body>
 
