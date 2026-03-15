@@ -6,68 +6,46 @@ $old = $old ?? [];
 <html lang="en">
 <?= view('components/head') ?>
 
-<body class="font-sans bg-light-cream min-h-screen">
-    <!-- Header -->
-    <nav class="bg-light-cream/90 backdrop-blur-md border-b border-cream-beige/50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <!-- Logo -->
-                <div class="flex-shrink-0">
-                    <a href="<?= base_url('/') ?>" class="flex items-center space-x-2">
-                        <div class="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
-                            <img src="/images/salogo.png" alt="Silver Atelier Logo" class="w-full h-full object-cover">
-                        </div>
-                        <span class="font-serif text-2xl font-bold text-warm-brown">Silver Atelier</span>
-                    </a>
-                </div>
-                
-                <!-- Back to Home -->
-                <div>
-                    <a href="<?= base_url('/') ?>" class="text-warm-brown hover:text-sage-green transition-colors duration-300 font-medium">
-                        <i class="fas fa-arrow-left mr-2"></i>Back to Home
-                    </a>
-                </div>
-            </div>
-        </div>
-    </nav>
+<body class="bg-coco-cream font-body text-coco-brown">
+    <?= $this->include('components/header') ?>
 
     <!-- Main Content -->
-    <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-md w-full space-y-8">
+    <div class="flex justify-center items-center px-4 sm:px-6 lg:px-8 py-24 min-h-screen">
+        <div class="w-full max-w-2xl">
             <!-- Welcome Section -->
-            <div class="text-center">
-                <div class="mx-auto h-16 w-16 bg-warm-brown rounded-full flex items-center justify-center mb-6">
-                    <i class="fas fa-user-plus text-2xl text-light-cream"></i>
-                </div>
-                <h2 class="font-serif text-4xl font-bold text-warm-brown mb-2">Join Silver Atelier</h2>
-                <p class="text-sage-green text-lg">Create your account and start your fashion journey</p>
+            <div class="mb-12 text-center">
+                <h1 class="mb-4 font-display font-black text-coco-brown text-5xl sm:text-6xl leading-tight">
+                    Join COCOIR
+                </h1>
+                <p class="mx-auto max-w-lg font-light text-coco-mid text-lg">
+                    Create your account and become part of our eco-friendly community
+                </p>
             </div>
 
             <!-- Signup Form -->
-            <div class="bg-cream-beige rounded-3xl shadow-xl p-8">
+            <div class="bg-white shadow-2xl p-8 md:p-12 rounded-2xl">
                 <form class="space-y-6" id="signupForm" action="<?= base_url('auth/register') ?>" method="POST" novalidate>
                     <?= csrf_field() ?>
-                    
-                    <!-- Full Name Field -->
+
+                    <!-- Complete Name Field -->
                     <div>
-                        <label for="fullname" class="block text-sm font-semibold text-warm-brown mb-2">
-                            Full Name
+                        <label for="fullname" class="block mb-2 font-semibold text-coco-brown text-sm">
+                            Complete Name <span class="text-coco-orange">*</span>
                         </label>
                         <div class="relative">
-                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                <i class="fas fa-user text-sage-green"></i>
+                            <div class="left-0 absolute inset-y-0 flex items-center pl-4 pointer-events-none">
+                                <i class="text-coco-green fas fa-user"></i>
                             </div>
-                            <input 
-                                type="text" 
-                                id="fullname" 
-                                name="fullname" 
+                            <input
+                                type="text"
+                                id="fullname"
+                                name="fullname"
                                 required
                                 value="<?= esc($old['fullname'] ?? '') ?>"
                                 aria-invalid="<?= isset($errors['fullname']) ? 'true' : 'false' ?>"
                                 aria-describedby="fullname-error"
-                                class="w-full pl-12 pr-4 py-4 border-2 <?= isset($errors['fullname']) ? 'border-red-500' : 'border-light-cream' ?> rounded-xl focus:outline-none focus:ring-4 focus:ring-warm-brown/20 focus:border-warm-brown text-warm-brown placeholder-sage-green bg-light-cream transition-all duration-300"
-                                placeholder="Enter your full name"
-                            >
+                                class="w-full pl-12 pr-4 py-3 border-2 <?= isset($errors['fullname']) ? 'border-red-500' : 'border-coco-sand' ?> rounded-lg focus:outline-none focus:ring-4 focus:ring-coco-orange/20 focus:border-coco-orange text-coco-brown placeholder-coco-tan bg-coco-cream transition-all duration-300"
+                                placeholder="John Doe">
                         </div>
                         <?php if (!empty($errors['fullname'])): ?>
                             <p id="fullname-error" class="mt-2 text-red-600 text-sm">
@@ -76,56 +54,25 @@ $old = $old ?? [];
                         <?php endif; ?>
                     </div>
 
-                    <!-- Username Field -->
-                    <div>
-                        <label for="username" class="block text-sm font-semibold text-warm-brown mb-2">
-                            Username
-                        </label>
-                        <div class="relative">
-                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                <i class="fas fa-at text-sage-green"></i>
-                            </div>
-                            <input 
-                                type="text" 
-                                id="username" 
-                                name="username" 
-                                required
-                                value="<?= esc($old['username'] ?? '') ?>"
-                                aria-invalid="<?= isset($errors['username']) ? 'true' : 'false' ?>"
-                                aria-describedby="username-error"
-                                class="w-full pl-12 pr-4 py-4 border-2 <?= isset($errors['username']) ? 'border-red-500' : 'border-light-cream' ?> rounded-xl focus:outline-none focus:ring-4 focus:ring-warm-brown/20 focus:border-warm-brown text-warm-brown placeholder-sage-green bg-light-cream transition-all duration-300"
-                                placeholder="Choose a username"
-                            >
-                        </div>
-                        <?php if (!empty($errors['username'])): ?>
-                            <p id="username-error" class="mt-2 text-red-600 text-sm">
-                                <?= esc($errors['username']) ?>
-                            </p>
-                        <?php else: ?>
-                            <p class="text-xs text-sage-green mt-1">Username must be unique and at least 3 characters</p>
-                        <?php endif; ?>
-                    </div>
-
                     <!-- Email Field -->
                     <div>
-                        <label for="email" class="block text-sm font-semibold text-warm-brown mb-2">
-                            Email Address
+                        <label for="email" class="block mb-2 font-semibold text-coco-brown text-sm">
+                            Email Address <span class="text-coco-orange">*</span>
                         </label>
                         <div class="relative">
-                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                <i class="fas fa-envelope text-sage-green"></i>
+                            <div class="left-0 absolute inset-y-0 flex items-center pl-4 pointer-events-none">
+                                <i class="text-coco-green fas fa-envelope"></i>
                             </div>
-                            <input 
-                                type="email" 
-                                id="email" 
-                                name="email" 
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
                                 required
                                 value="<?= esc($old['email'] ?? '') ?>"
                                 aria-invalid="<?= isset($errors['email']) ? 'true' : 'false' ?>"
                                 aria-describedby="email-error"
-                                class="w-full pl-12 pr-4 py-4 border-2 <?= isset($errors['email']) ? 'border-red-500' : 'border-light-cream' ?> rounded-xl focus:outline-none focus:ring-4 focus:ring-warm-brown/20 focus:border-warm-brown text-warm-brown placeholder-sage-green bg-light-cream transition-all duration-300"
-                                placeholder="Enter your email"
-                            >
+                                class="w-full pl-12 pr-4 py-3 border-2 <?= isset($errors['email']) ? 'border-red-500' : 'border-coco-sand' ?> rounded-lg focus:outline-none focus:ring-4 focus:ring-coco-orange/20 focus:border-coco-orange text-coco-brown placeholder-coco-tan bg-coco-cream transition-all duration-300"
+                                placeholder="you@example.com">
                         </div>
                         <?php if (!empty($errors['email'])): ?>
                             <p id="email-error" class="mt-2 text-red-600 text-sm">
@@ -134,30 +81,82 @@ $old = $old ?? [];
                         <?php endif; ?>
                     </div>
 
-                    <!-- Password Field -->
+                    <!-- Mobile Number Field -->
                     <div>
-                        <label for="password" class="block text-sm font-semibold text-warm-brown mb-2">
-                            Password
+                        <label for="phone" class="block mb-2 font-semibold text-coco-brown text-sm">
+                            Mobile Number <span class="text-coco-orange">*</span>
                         </label>
                         <div class="relative">
-                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                <i class="fas fa-lock text-sage-green"></i>
+                            <div class="left-0 absolute inset-y-0 flex items-center pl-4 pointer-events-none">
+                                <i class="text-coco-green fas fa-phone"></i>
                             </div>
-                            <input 
-                                type="password" 
-                                id="password" 
-                                name="password" 
+                            <input
+                                type="tel"
+                                id="phone"
+                                name="phone"
+                                required
+                                value="<?= esc($old['phone'] ?? '') ?>"
+                                aria-invalid="<?= isset($errors['phone']) ? 'true' : 'false' ?>"
+                                aria-describedby="phone-error"
+                                class="w-full pl-12 pr-4 py-3 border-2 <?= isset($errors['phone']) ? 'border-red-500' : 'border-coco-sand' ?> rounded-lg focus:outline-none focus:ring-4 focus:ring-coco-orange/20 focus:border-coco-orange text-coco-brown placeholder-coco-tan bg-coco-cream transition-all duration-300"
+                                placeholder="+63 912 345 6789">
+                        </div>
+                        <?php if (!empty($errors['phone'])): ?>
+                            <p id="phone-error" class="mt-2 text-red-600 text-sm">
+                                <?= esc($errors['phone']) ?>
+                            </p>
+                        <?php endif; ?>
+                    </div>
+
+                    <!-- Address Field -->
+                    <div>
+                        <label for="address" class="block mb-2 font-semibold text-coco-brown text-sm">
+                            Address <span class="text-coco-orange">*</span>
+                        </label>
+                        <div class="relative">
+                            <div class="top-4 left-0 absolute flex pl-4 pointer-events-none">
+                                <i class="text-coco-green fas fa-map-marker-alt"></i>
+                            </div>
+                            <textarea
+                                id="address"
+                                name="address"
+                                required
+                                rows="3"
+                                value="<?= esc($old['address'] ?? '') ?>"
+                                aria-invalid="<?= isset($errors['address']) ? 'true' : 'false' ?>"
+                                aria-describedby="address-error"
+                                class="w-full pl-12 pr-4 py-3 border-2 <?= isset($errors['address']) ? 'border-red-500' : 'border-coco-sand' ?> rounded-lg focus:outline-none focus:ring-4 focus:ring-coco-orange/20 focus:border-coco-orange text-coco-brown placeholder-coco-tan bg-coco-cream transition-all duration-300"
+                                placeholder="Street address, city, and postal code"><?= esc($old['address'] ?? '') ?></textarea>
+                        </div>
+                        <?php if (!empty($errors['address'])): ?>
+                            <p id="address-error" class="mt-2 text-red-600 text-sm">
+                                <?= esc($errors['address']) ?>
+                            </p>
+                        <?php endif; ?>
+                    </div>
+
+                    <!-- Password Field -->
+                    <div>
+                        <label for="password" class="block mb-2 font-semibold text-coco-brown text-sm">
+                            Password <span class="text-coco-orange">*</span>
+                        </label>
+                        <div class="relative">
+                            <div class="left-0 absolute inset-y-0 flex items-center pl-4 pointer-events-none">
+                                <i class="text-coco-green fas fa-lock"></i>
+                            </div>
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
                                 required
                                 aria-invalid="<?= isset($errors['password']) ? 'true' : 'false' ?>"
                                 aria-describedby="password-error"
-                                class="w-full pl-12 pr-12 py-4 border-2 <?= isset($errors['password']) ? 'border-red-500' : 'border-light-cream' ?> rounded-xl focus:outline-none focus:ring-4 focus:ring-warm-brown/20 focus:border-warm-brown text-warm-brown placeholder-sage-green bg-light-cream transition-all duration-300"
-                                placeholder="Create a password"
-                            >
-                            <button 
-                                type="button" 
+                                class="w-full pl-12 pr-12 py-3 border-2 <?= isset($errors['password']) ? 'border-red-500' : 'border-coco-sand' ?> rounded-lg focus:outline-none focus:ring-4 focus:ring-coco-orange/20 focus:border-coco-orange text-coco-brown placeholder-coco-tan bg-coco-cream transition-all duration-300"
+                                placeholder="Create a strong password">
+                            <button
+                                type="button"
                                 id="togglePassword"
-                                class="absolute inset-y-0 right-0 pr-4 flex items-center text-sage-green hover:text-warm-brown transition-colors duration-300"
-                            >
+                                class="right-0 absolute inset-y-0 flex items-center pr-4 text-coco-tan hover:text-coco-dark transition-colors duration-300">
                                 <i class="fas fa-eye" id="eyeIcon"></i>
                             </button>
                         </div>
@@ -166,9 +165,9 @@ $old = $old ?? [];
                                 <?= esc($errors['password']) ?>
                             </p>
                         <?php endif; ?>
-                        <div class="mt-2 text-xs text-sage-green">
-                            <p>Password must contain:</p>
-                            <ul class="list-disc list-inside ml-2 space-y-1">
+                        <div class="mt-2 text-coco-mid text-xs">
+                            <p class="mb-1 font-semibold">Password must contain:</p>
+                            <ul class="space-y-1 ml-2 list-disc list-inside">
                                 <li id="length" class="text-red-500">At least 8 characters</li>
                                 <li id="uppercase" class="text-red-500">One uppercase letter</li>
                                 <li id="lowercase" class="text-red-500">One lowercase letter</li>
@@ -179,28 +178,26 @@ $old = $old ?? [];
 
                     <!-- Confirm Password Field -->
                     <div>
-                        <label for="confirm_password" class="block text-sm font-semibold text-warm-brown mb-2">
-                            Confirm Password
+                        <label for="confirm_password" class="block mb-2 font-semibold text-coco-brown text-sm">
+                            Confirm Password <span class="text-coco-orange">*</span>
                         </label>
                         <div class="relative">
-                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                <i class="fas fa-lock text-sage-green"></i>
+                            <div class="left-0 absolute inset-y-0 flex items-center pl-4 pointer-events-none">
+                                <i class="text-coco-green fas fa-lock"></i>
                             </div>
-                            <input 
-                                type="password" 
-                                id="confirm_password" 
-                                name="confirm_password" 
+                            <input
+                                type="password"
+                                id="confirm_password"
+                                name="confirm_password"
                                 required
                                 aria-invalid="<?= isset($errors['confirm_password']) ? 'true' : 'false' ?>"
                                 aria-describedby="confirm-password-error"
-                                class="w-full pl-12 pr-12 py-4 border-2 <?= isset($errors['confirm_password']) ? 'border-red-500' : 'border-light-cream' ?> rounded-xl focus:outline-none focus:ring-4 focus:ring-warm-brown/20 focus:border-warm-brown text-warm-brown placeholder-sage-green bg-light-cream transition-all duration-300"
-                                placeholder="Confirm your password"
-                            >
-                            <button 
-                                type="button" 
+                                class="w-full pl-12 pr-12 py-3 border-2 <?= isset($errors['confirm_password']) ? 'border-red-500' : 'border-coco-sand' ?> rounded-lg focus:outline-none focus:ring-4 focus:ring-coco-orange/20 focus:border-coco-orange text-coco-brown placeholder-coco-tan bg-coco-cream transition-all duration-300"
+                                placeholder="Confirm your password">
+                            <button
+                                type="button"
                                 id="toggleConfirmPassword"
-                                class="absolute inset-y-0 right-0 pr-4 flex items-center text-sage-green hover:text-warm-brown transition-colors duration-300"
-                            >
+                                class="right-0 absolute inset-y-0 flex items-center pr-4 text-coco-tan hover:text-coco-dark transition-colors duration-300">
                                 <i class="fas fa-eye" id="eyeIconConfirm"></i>
                             </button>
                         </div>
@@ -209,18 +206,18 @@ $old = $old ?? [];
                                 <?= esc($errors['confirm_password']) ?>
                             </p>
                         <?php endif; ?>
-                        <p id="passwordMatch" class="text-xs mt-1 hidden"></p>
+                        <p id="passwordMatch" class="hidden mt-1 text-xs"></p>
                     </div>
 
                     <!-- General Error Message -->
                     <?php if (!empty($errors['general'])): ?>
-                        <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded">
+                        <div class="bg-red-50 p-4 border-red-500 border-l-4 rounded">
                             <div class="flex">
                                 <div class="flex-shrink-0">
-                                    <i class="fas fa-exclamation-circle text-red-500"></i>
+                                    <i class="text-red-500 fas fa-exclamation-circle"></i>
                                 </div>
                                 <div class="ml-3">
-                                    <p class="text-sm text-red-700">
+                                    <p class="text-red-700 text-sm">
                                         <?= esc($errors['general']) ?>
                                     </p>
                                 </div>
@@ -230,87 +227,41 @@ $old = $old ?? [];
 
                     <!-- Terms and Privacy -->
                     <div class="flex items-start">
-                        <input 
-                            type="checkbox" 
-                            id="terms" 
+                        <input
+                            type="checkbox"
+                            id="terms"
                             name="terms"
                             required
                             <?= isset($old['terms']) && $old['terms'] ? 'checked' : '' ?>
-                            class="h-4 w-4 text-warm-brown focus:ring-warm-brown border-sage-green rounded mt-1"
-                        >
-                        <label for="terms" class="ml-3 text-sm text-sage-green leading-relaxed">
-                            I agree to the 
-                            <a href="#" class="text-warm-brown hover:text-sage-green font-medium transition-colors duration-300">Terms of Service</a>
-                            and 
-                            <a href="#" class="text-warm-brown hover:text-sage-green font-medium transition-colors duration-300">Privacy Policy</a>
+                            class="mt-1 border-coco-sand rounded focus:ring-coco-orange w-4 h-4 text-coco-orange">
+                        <label for="terms" class="ml-3 text-coco-mid text-sm leading-relaxed">
+                            I agree to the
+                            <a href="#" class="font-medium text-coco-orange hover:text-coco-dark transition-colors duration-300">Terms of Service</a>
+                            and
+                            <a href="#" class="font-medium text-coco-orange hover:text-coco-dark transition-colors duration-300">Privacy Policy</a>
                         </label>
                     </div>
                     <?php if (!empty($errors['terms'])): ?>
-                        <p class="text-red-600 text-sm -mt-4">
+                        <p class="-mt-4 text-red-600 text-sm">
                             <?= esc($errors['terms']) ?>
                         </p>
                     <?php endif; ?>
 
-                    <!-- Newsletter Subscription -->
-                    <div class="flex items-center">
-                        <input 
-                            type="checkbox" 
-                            id="newsletter" 
-                            name="newsletter"
-                            <?= isset($old['newsletter']) && $old['newsletter'] ? 'checked' : '' ?>
-                            class="h-4 w-4 text-warm-brown focus:ring-warm-brown border-sage-green rounded"
-                        >
-                        <label for="newsletter" class="ml-3 text-sm text-sage-green">
-                            Subscribe to our newsletter for latest fashion updates
-                        </label>
-                    </div>
-
                     <!-- Register Button -->
-                    <button 
+                    <button
                         type="submit"
                         id="registerBtn"
                         disabled
-                        class="w-full bg-sage-green text-light-cream py-4 rounded-xl font-semibold text-lg hover:bg-warm-brown transform hover:scale-[1.02] transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
-                    >
+                        class="bg-coco-orange hover:bg-coco-dark disabled:opacity-50 shadow-lg hover:shadow-xl py-3 rounded-lg w-full font-bold text-white text-lg hover:scale-[1.02] disabled:hover:scale-100 transition-all duration-300 disabled:cursor-not-allowed transform">
                         Create Account
                     </button>
-
-                    <!-- Divider -->
-                    <div class="relative my-6">
-                        <div class="absolute inset-0 flex items-center">
-                            <div class="w-full border-t border-sage-green/30"></div>
-                        </div>
-                        <div class="relative flex justify-center text-sm">
-                            <span class="px-4 bg-cream-beige text-sage-green">or sign up with</span>
-                        </div>
-                    </div>
-
-                    <!-- Social Signup -->
-                    <div class="grid grid-cols-2 gap-4">
-                        <button 
-                            type="button"
-                            class="flex items-center justify-center px-4 py-3 border-2 border-light-cream rounded-xl hover:bg-light-cream transition-colors duration-300 text-warm-brown font-medium"
-                            onclick="alert('Google sign-up would be integrated here')"
-                        >
-                            <i class="fab fa-google mr-2"></i>
-                            Google
-                        </button>
-                        <button 
-                            type="button"
-                            class="flex items-center justify-center px-4 py-3 border-2 border-light-cream rounded-xl hover:bg-light-cream transition-colors duration-300 text-warm-brown font-medium"
-                            onclick="alert('Facebook sign-up would be integrated here')"
-                        >
-                            <i class="fab fa-facebook-f mr-2"></i>
-                            Facebook
-                        </button>
-                    </div>
                 </form>
 
                 <!-- Login Link -->
-                <div class="text-center mt-8 pt-6 border-t border-light-cream">
-                    <p class="text-sage-green">
-                        Already have an account? 
-                        <a href="<?= base_url('login') ?>" class="text-warm-brown hover:text-sage-green font-semibold transition-colors duration-300">
+                <div class="mt-8 pt-6 border-coco-sand border-t text-center">
+                    <p class="text-coco-mid">
+                        Already have an account?
+                        <a href="<?= base_url('login') ?>" class="font-semibold text-coco-orange hover:text-coco-dark transition-colors duration-300">
                             Sign in here
                         </a>
                     </p>
@@ -318,6 +269,8 @@ $old = $old ?? [];
             </div>
         </div>
     </div>
+
+    <?= $this->include('components/footer') ?>
 
     <script>
         // Password toggle functionality
@@ -328,7 +281,7 @@ $old = $old ?? [];
         togglePassword.addEventListener('click', function() {
             const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
             password.setAttribute('type', type);
-            
+
             if (type === 'text') {
                 eyeIcon.classList.remove('fa-eye');
                 eyeIcon.classList.add('fa-eye-slash');
@@ -346,7 +299,7 @@ $old = $old ?? [];
         toggleConfirmPassword.addEventListener('click', function() {
             const type = confirmPassword.getAttribute('type') === 'password' ? 'text' : 'password';
             confirmPassword.setAttribute('type', type);
-            
+
             if (type === 'text') {
                 eyeIconConfirm.classList.remove('fa-eye');
                 eyeIconConfirm.classList.add('fa-eye-slash');
@@ -365,7 +318,7 @@ $old = $old ?? [];
 
         passwordInput.addEventListener('input', function() {
             const value = this.value;
-            
+
             // Check length
             if (value.length >= 8) {
                 lengthCheck.classList.remove('text-red-500');
@@ -374,7 +327,7 @@ $old = $old ?? [];
                 lengthCheck.classList.remove('text-green-500');
                 lengthCheck.classList.add('text-red-500');
             }
-            
+
             // Check uppercase
             if (/[A-Z]/.test(value)) {
                 uppercaseCheck.classList.remove('text-red-500');
@@ -383,7 +336,7 @@ $old = $old ?? [];
                 uppercaseCheck.classList.remove('text-green-500');
                 uppercaseCheck.classList.add('text-red-500');
             }
-            
+
             // Check lowercase
             if (/[a-z]/.test(value)) {
                 lowercaseCheck.classList.remove('text-red-500');
@@ -392,7 +345,7 @@ $old = $old ?? [];
                 lowercaseCheck.classList.remove('text-green-500');
                 lowercaseCheck.classList.add('text-red-500');
             }
-            
+
             // Check number
             if (/[0-9]/.test(value)) {
                 numberCheck.classList.remove('text-red-500');
@@ -401,13 +354,13 @@ $old = $old ?? [];
                 numberCheck.classList.remove('text-green-500');
                 numberCheck.classList.add('text-red-500');
             }
-            
+
             validateForm();
         });
 
         // Password match validation
         const passwordMatchMsg = document.getElementById('passwordMatch');
-        
+
         confirmPassword.addEventListener('input', function() {
             if (this.value === '') {
                 passwordMatchMsg.classList.add('hidden');
@@ -426,18 +379,24 @@ $old = $old ?? [];
         // Form validation
         function validateForm() {
             const registerBtn = document.getElementById('registerBtn');
+            const fullname = document.getElementById('fullname').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
             const isPasswordValid = lengthCheck.classList.contains('text-green-500') &&
-                                   uppercaseCheck.classList.contains('text-green-500') &&
-                                   lowercaseCheck.classList.contains('text-green-500') &&
-                                   numberCheck.classList.contains('text-green-500');
+                uppercaseCheck.classList.contains('text-green-500') &&
+                lowercaseCheck.classList.contains('text-green-500') &&
+                numberCheck.classList.contains('text-green-500');
             const isPasswordMatch = passwordInput.value === confirmPassword.value && confirmPassword.value !== '';
             const termsChecked = document.getElementById('terms').checked;
-            
-            registerBtn.disabled = !(isPasswordValid && isPasswordMatch && termsChecked);
+
+            registerBtn.disabled = !(fullname && email && phone && address && isPasswordValid && isPasswordMatch && termsChecked);
         }
 
-        // Add event listener to terms checkbox
+        // Add event listeners
+        document.getElementById('fullname').addEventListener('input', validateForm);
+        document.getElementById('email').addEventListener('input', validateForm);
+        document.getElementById('phone').addEventListener('input', validateForm);
+        document.getElementById('address').addEventListener('input', validateForm);
         document.getElementById('terms').addEventListener('change', validateForm);
     </script>
-</body>
-</html>

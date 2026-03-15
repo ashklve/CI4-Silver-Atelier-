@@ -6,68 +6,46 @@ $old = $old ?? [];
 <html lang="en">
 <?= view('components/head') ?>
 
-<body class="font-sans bg-light-cream min-h-screen">
-    <!-- Header -->
-    <nav class="bg-light-cream/90 backdrop-blur-md border-b border-cream-beige/50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <!-- Logo -->
-                <div class="flex-shrink-0">
-                    <a href="<?= base_url('/') ?>" class="flex items-center space-x-2">
-                        <div class="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
-                            <img src="/images/salogo.png" alt="Silver Atelier Logo" class="w-full h-full object-cover">
-                        </div>
-                        <span class="font-serif text-2xl font-bold text-warm-brown">Silver Atelier</span>
-                    </a>
-                </div>
-                
-                <!-- Back to Home -->
-                <div>
-                    <a href="<?= base_url('/') ?>" class="text-warm-brown hover:text-sage-green transition-colors duration-300 font-medium">
-                        <i class="fas fa-arrow-left mr-2"></i>Back to Home
-                    </a>
-                </div>
-            </div>
-        </div>
-    </nav>
+<body class="bg-coco-cream font-body text-coco-brown">
+    <?= $this->include('components/header') ?>
 
     <!-- Main Content -->
-    <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-md w-full space-y-8">
+    <div class="flex justify-center items-center px-4 sm:px-6 lg:px-8 py-24 min-h-screen">
+        <div class="w-full max-w-md">
             <!-- Welcome Section -->
-            <div class="text-center">
-                <div class="mx-auto h-16 w-16 bg-warm-brown rounded-full flex items-center justify-center mb-6">
-                    <i class="fas fa-user text-2xl text-light-cream"></i>
-                </div>
-                <h2 class="font-serif text-4xl font-bold text-warm-brown mb-2">Welcome Back</h2>
-                <p class="text-sage-green text-lg">Sign in to your Silver Atelier account</p>
+            <div class="mb-12 text-center">
+                <h1 class="mb-4 font-display font-black text-coco-brown text-5xl sm:text-6xl leading-tight">
+                    Welcome Back
+                </h1>
+                <p class="font-light text-coco-mid text-lg">
+                    Sign in to your COCOIR account
+                </p>
             </div>
 
             <!-- Login Form -->
-            <div class="bg-cream-beige rounded-3xl shadow-xl p-8">
+            <div class="bg-white shadow-2xl p-8 md:p-12 rounded-2xl">
                 <form id="loginForm" class="space-y-6" action="<?= base_url('auth/login') ?>" method="POST" novalidate>
                     <?= csrf_field() ?>
-                    
-                    <!-- Username/Email Field -->
+
+                    <!-- Email/Username Field -->
                     <div>
-                        <label for="username" class="block text-sm font-semibold text-warm-brown mb-2">
-                            Username or Email
+                        <label for="username" class="block mb-2 font-semibold text-coco-brown text-sm">
+                            Email or Username <span class="text-coco-orange">*</span>
                         </label>
                         <div class="relative">
-                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                <i class="fas fa-user text-sage-green"></i>
+                            <div class="left-0 absolute inset-y-0 flex items-center pl-4 pointer-events-none">
+                                <i class="text-coco-green fas fa-at"></i>
                             </div>
-                            <input 
-                                type="text" 
-                                id="username" 
-                                name="username" 
+                            <input
+                                type="text"
+                                id="username"
+                                name="username"
                                 required
                                 value="<?= esc($old['username'] ?? '') ?>"
                                 aria-invalid="<?= isset($errors['username']) ? 'true' : 'false' ?>"
                                 aria-describedby="username-error"
-                                class="w-full pl-12 pr-4 py-4 border-2 <?= isset($errors['username']) ? 'border-red-500' : 'border-light-cream' ?> rounded-xl focus:outline-none focus:ring-4 focus:ring-warm-brown/20 focus:border-warm-brown text-warm-brown placeholder-sage-green bg-light-cream transition-all duration-300"
-                                placeholder="Enter your username or email"
-                            >
+                                class="w-full pl-12 pr-4 py-3 border-2 <?= isset($errors['username']) ? 'border-red-500' : 'border-coco-sand' ?> rounded-lg focus:outline-none focus:ring-4 focus:ring-coco-orange/20 focus:border-coco-orange text-coco-brown placeholder-coco-tan bg-coco-cream transition-all duration-300"
+                                placeholder="Enter your email or username">
                         </div>
                         <?php if (!empty($errors['username'])): ?>
                             <p id="username-error" class="mt-2 text-red-600 text-sm">
@@ -78,28 +56,26 @@ $old = $old ?? [];
 
                     <!-- Password Field -->
                     <div>
-                        <label for="password" class="block text-sm font-semibold text-warm-brown mb-2">
-                            Password
+                        <label for="password" class="block mb-2 font-semibold text-coco-brown text-sm">
+                            Password <span class="text-coco-orange">*</span>
                         </label>
                         <div class="relative">
-                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                <i class="fas fa-lock text-sage-green"></i>
+                            <div class="left-0 absolute inset-y-0 flex items-center pl-4 pointer-events-none">
+                                <i class="text-coco-green fas fa-lock"></i>
                             </div>
-                            <input 
-                                type="password" 
-                                id="password" 
-                                name="password" 
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
                                 required
                                 aria-invalid="<?= isset($errors['password']) ? 'true' : 'false' ?>"
                                 aria-describedby="password-error"
-                                class="w-full pl-12 pr-12 py-4 border-2 <?= isset($errors['password']) ? 'border-red-500' : 'border-light-cream' ?> rounded-xl focus:outline-none focus:ring-4 focus:ring-warm-brown/20 focus:border-warm-brown text-warm-brown placeholder-sage-green bg-light-cream transition-all duration-300"
-                                placeholder="Enter your password"
-                            >
-                            <button 
-                                type="button" 
+                                class="w-full pl-12 pr-12 py-3 border-2 <?= isset($errors['password']) ? 'border-red-500' : 'border-coco-sand' ?> rounded-lg focus:outline-none focus:ring-4 focus:ring-coco-orange/20 focus:border-coco-orange text-coco-brown placeholder-coco-tan bg-coco-cream transition-all duration-300"
+                                placeholder="Enter your password">
+                            <button
+                                type="button"
                                 id="togglePassword"
-                                class="absolute inset-y-0 right-0 pr-4 flex items-center text-sage-green hover:text-warm-brown transition-colors duration-300"
-                            >
+                                class="right-0 absolute inset-y-0 flex items-center pr-4 text-coco-tan hover:text-coco-dark transition-colors duration-300">
                                 <i class="fas fa-eye" id="eyeIcon"></i>
                             </button>
                         </div>
@@ -112,13 +88,13 @@ $old = $old ?? [];
 
                     <!-- General Error Message -->
                     <?php if (!empty($errors['general'])): ?>
-                        <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded">
+                        <div class="bg-red-50 p-4 border-red-500 border-l-4 rounded">
                             <div class="flex">
                                 <div class="flex-shrink-0">
-                                    <i class="fas fa-exclamation-circle text-red-500"></i>
+                                    <i class="text-red-500 fas fa-exclamation-circle"></i>
                                 </div>
                                 <div class="ml-3">
-                                    <p class="text-sm text-red-700">
+                                    <p class="text-red-700 text-sm">
                                         <?= esc($errors['general']) ?>
                                     </p>
                                 </div>
@@ -127,65 +103,35 @@ $old = $old ?? [];
                     <?php endif; ?>
 
                     <!-- Remember Me & Forgot Password -->
-                    <div class="flex items-center justify-between">
+                    <div class="flex justify-between items-center">
                         <div class="flex items-center">
-                            <input 
-                                type="checkbox" 
-                                id="remember" 
+                            <input
+                                type="checkbox"
+                                id="remember"
                                 name="remember"
-                                class="h-4 w-4 text-warm-brown focus:ring-warm-brown border-sage-green rounded"
-                            >
-                            <label for="remember" class="ml-2 text-sm text-sage-green">
+                                class="border-coco-sand rounded focus:ring-coco-orange w-4 h-4 text-coco-orange">
+                            <label for="remember" class="ml-2 text-coco-mid text-sm">
                                 Remember me
                             </label>
                         </div>
-                        <a href="<?= base_url('forgot-password') ?>" class="text-sm text-warm-brown hover:text-sage-green transition-colors duration-300 font-medium">
+                        <a href="<?= base_url('forgot-password') ?>" class="font-medium text-coco-orange hover:text-coco-dark text-sm transition-colors duration-300">
                             Forgot password?
                         </a>
                     </div>
 
                     <!-- Login Button -->
-                    <button 
+                    <button
                         type="submit"
-                        class="w-full bg-warm-brown text-light-cream py-4 rounded-xl font-semibold text-lg hover:bg-sage-green transform hover:scale-[1.02] transition-all duration-300 shadow-lg hover:shadow-xl"
-                    >
+                        class="bg-coco-orange hover:bg-coco-dark shadow-lg hover:shadow-xl py-3 rounded-lg w-full font-bold text-white text-lg hover:scale-[1.02] transition-all duration-300 transform">
                         Sign In
                     </button>
-
-                    <!-- Divider -->
-                    <div class="relative my-6">
-                        <div class="absolute inset-0 flex items-center">
-                            <div class="w-full border-t border-sage-green/30"></div>
-                        </div>
-                        <div class="relative flex justify-center text-sm">
-                            <span class="px-4 bg-cream-beige text-sage-green">or continue with</span>
-                        </div>
-                    </div>
-
-                    <!-- Social Login -->
-                    <div class="grid grid-cols-2 gap-4">
-                        <button 
-                            type="button"
-                            class="flex items-center justify-center px-4 py-3 border-2 border-light-cream rounded-xl hover:bg-light-cream transition-colors duration-300 text-warm-brown font-medium"
-                        >
-                            <i class="fab fa-google mr-2"></i>
-                            Google
-                        </button>
-                        <button 
-                            type="button"
-                            class="flex items-center justify-center px-4 py-3 border-2 border-light-cream rounded-xl hover:bg-light-cream transition-colors duration-300 text-warm-brown font-medium"
-                        >
-                            <i class="fab fa-facebook-f mr-2"></i>
-                            Facebook
-                        </button>
-                    </div>
                 </form>
 
                 <!-- Sign Up Link -->
-                <div class="text-center mt-8 pt-6 border-t border-light-cream">
-                    <p class="text-sage-green">
-                        Don't have an account? 
-                        <a href="<?= base_url('signup') ?>" class="text-warm-brown hover:text-sage-green font-semibold transition-colors duration-300">
+                <div class="mt-8 pt-6 border-coco-sand border-t text-center">
+                    <p class="text-coco-mid">
+                        Don't have an account?
+                        <a href="<?= base_url('signup') ?>" class="font-semibold text-coco-orange hover:text-coco-dark transition-colors duration-300">
                             Sign up here
                         </a>
                     </p>
@@ -193,7 +139,9 @@ $old = $old ?? [];
             </div>
         </div>
     </div>
-    
+
+    <?= $this->include('components/footer') ?>
+
     <script>
         document.getElementById('togglePassword').addEventListener('click', () => {
             const password = document.getElementById('password');
@@ -206,4 +154,5 @@ $old = $old ?? [];
     </script>
 
 </body>
+
 </html>
