@@ -1,6 +1,6 @@
 <?php
-$errors = $errors ?? [];
-$old = $old ?? [];
+$errors = session()->getFlashdata('errors') ?? [];
+$old = session()->getFlashdata('old') ?? [];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +24,7 @@ $old = $old ?? [];
 
             <!-- Login Form -->
             <div class="bg-white shadow-2xl p-8 md:p-12 rounded-2xl">
-                <form id="loginForm" class="space-y-6" action="<?= base_url('auth/login') ?>" method="POST" novalidate>
+                <form id="loginForm" class="space-y-6" action="<?= site_url('auth/login') ?>" method="POST" novalidate>
                     <?= csrf_field() ?>
 
                     <!-- Email/Username Field -->
@@ -131,7 +131,7 @@ $old = $old ?? [];
                 <div class="mt-8 pt-6 border-coco-sand border-t text-center">
                     <p class="text-coco-mid">
                         Don't have an account?
-                        <a href="<?= base_url('signup') ?>" class="font-semibold text-coco-orange hover:text-coco-dark transition-colors duration-300">
+                        <a href="<?= site_url('signup') ?>" class="font-semibold text-coco-orange hover:text-coco-dark transition-colors duration-300">
                             Sign up here
                         </a>
                     </p>

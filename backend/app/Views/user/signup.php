@@ -1,6 +1,6 @@
 <?php
-$errors = $errors ?? [];
-$old = $old ?? [];
+$errors = session()->getFlashdata('errors') ?? [];
+$old = session()->getFlashdata('old') ?? [];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,10 +9,8 @@ $old = $old ?? [];
 <body class="bg-coco-cream font-body text-coco-brown">
     <?= $this->include('components/header') ?>
 
-    <!-- Main Content -->
     <div class="flex justify-center items-center px-4 sm:px-6 lg:px-8 py-24 min-h-screen">
         <div class="w-full max-w-2xl">
-            <!-- Welcome Section -->
             <div class="mb-12 text-center">
                 <h1 class="mb-4 font-display font-black text-coco-brown text-5xl sm:text-6xl leading-tight">
                     Join COCOIR
@@ -22,9 +20,8 @@ $old = $old ?? [];
                 </p>
             </div>
 
-            <!-- Signup Form -->
             <div class="bg-white shadow-2xl p-8 md:p-12 rounded-2xl">
-                <form class="space-y-6" id="signupForm" action="<?= base_url('auth/register') ?>" method="POST" novalidate>
+                <form class="space-y-6" id="signupForm" action="<?= site_url('auth/register') ?>" method="POST" novalidate>
                     <?= csrf_field() ?>
 
                     <!-- Complete Name Field -->
@@ -45,12 +42,35 @@ $old = $old ?? [];
                                 aria-invalid="<?= isset($errors['fullname']) ? 'true' : 'false' ?>"
                                 aria-describedby="fullname-error"
                                 class="w-full pl-12 pr-4 py-3 border-2 <?= isset($errors['fullname']) ? 'border-red-500' : 'border-coco-sand' ?> rounded-lg focus:outline-none focus:ring-4 focus:ring-coco-orange/20 focus:border-coco-orange text-coco-brown placeholder-coco-tan bg-coco-cream transition-all duration-300"
-                                placeholder="John Doe">
+                                placeholder="Juan Dela Cruz">
                         </div>
                         <?php if (!empty($errors['fullname'])): ?>
-                            <p id="fullname-error" class="mt-2 text-red-600 text-sm">
-                                <?= esc($errors['fullname']) ?>
-                            </p>
+                            <p id="fullname-error" class="mt-2 text-red-600 text-sm"><?= esc($errors['fullname']) ?></p>
+                        <?php endif; ?>
+                    </div>
+
+                    <!-- ✅ Added Username Field -->
+                    <div>
+                        <label for="username" class="block mb-2 font-semibold text-coco-brown text-sm">
+                            Username <span class="text-coco-orange">*</span>
+                        </label>
+                        <div class="relative">
+                            <div class="left-0 absolute inset-y-0 flex items-center pl-4 pointer-events-none">
+                                <i class="text-coco-green fas fa-at"></i>
+                            </div>
+                            <input
+                                type="text"
+                                id="username"
+                                name="username"
+                                required
+                                value="<?= esc($old['username'] ?? '') ?>"
+                                aria-invalid="<?= isset($errors['username']) ? 'true' : 'false' ?>"
+                                aria-describedby="username-error"
+                                class="w-full pl-12 pr-4 py-3 border-2 <?= isset($errors['username']) ? 'border-red-500' : 'border-coco-sand' ?> rounded-lg focus:outline-none focus:ring-4 focus:ring-coco-orange/20 focus:border-coco-orange text-coco-brown placeholder-coco-tan bg-coco-cream transition-all duration-300"
+                                placeholder="juandelacruz">
+                        </div>
+                        <?php if (!empty($errors['username'])): ?>
+                            <p id="username-error" class="mt-2 text-red-600 text-sm"><?= esc($errors['username']) ?></p>
                         <?php endif; ?>
                     </div>
 
@@ -75,9 +95,7 @@ $old = $old ?? [];
                                 placeholder="you@example.com">
                         </div>
                         <?php if (!empty($errors['email'])): ?>
-                            <p id="email-error" class="mt-2 text-red-600 text-sm">
-                                <?= esc($errors['email']) ?>
-                            </p>
+                            <p id="email-error" class="mt-2 text-red-600 text-sm"><?= esc($errors['email']) ?></p>
                         <?php endif; ?>
                     </div>
 
@@ -102,9 +120,7 @@ $old = $old ?? [];
                                 placeholder="+63 912 345 6789">
                         </div>
                         <?php if (!empty($errors['phone'])): ?>
-                            <p id="phone-error" class="mt-2 text-red-600 text-sm">
-                                <?= esc($errors['phone']) ?>
-                            </p>
+                            <p id="phone-error" class="mt-2 text-red-600 text-sm"><?= esc($errors['phone']) ?></p>
                         <?php endif; ?>
                     </div>
 
@@ -117,21 +133,19 @@ $old = $old ?? [];
                             <div class="top-4 left-0 absolute flex pl-4 pointer-events-none">
                                 <i class="text-coco-green fas fa-map-marker-alt"></i>
                             </div>
+                            <!-- ✅ Removed invalid value attribute, kept only inner content -->
                             <textarea
                                 id="address"
                                 name="address"
                                 required
                                 rows="3"
-                                value="<?= esc($old['address'] ?? '') ?>"
                                 aria-invalid="<?= isset($errors['address']) ? 'true' : 'false' ?>"
                                 aria-describedby="address-error"
                                 class="w-full pl-12 pr-4 py-3 border-2 <?= isset($errors['address']) ? 'border-red-500' : 'border-coco-sand' ?> rounded-lg focus:outline-none focus:ring-4 focus:ring-coco-orange/20 focus:border-coco-orange text-coco-brown placeholder-coco-tan bg-coco-cream transition-all duration-300"
                                 placeholder="Street address, city, and postal code"><?= esc($old['address'] ?? '') ?></textarea>
                         </div>
                         <?php if (!empty($errors['address'])): ?>
-                            <p id="address-error" class="mt-2 text-red-600 text-sm">
-                                <?= esc($errors['address']) ?>
-                            </p>
+                            <p id="address-error" class="mt-2 text-red-600 text-sm"><?= esc($errors['address']) ?></p>
                         <?php endif; ?>
                     </div>
 
@@ -153,17 +167,13 @@ $old = $old ?? [];
                                 aria-describedby="password-error"
                                 class="w-full pl-12 pr-12 py-3 border-2 <?= isset($errors['password']) ? 'border-red-500' : 'border-coco-sand' ?> rounded-lg focus:outline-none focus:ring-4 focus:ring-coco-orange/20 focus:border-coco-orange text-coco-brown placeholder-coco-tan bg-coco-cream transition-all duration-300"
                                 placeholder="Create a strong password">
-                            <button
-                                type="button"
-                                id="togglePassword"
+                            <button type="button" id="togglePassword"
                                 class="right-0 absolute inset-y-0 flex items-center pr-4 text-coco-tan hover:text-coco-dark transition-colors duration-300">
                                 <i class="fas fa-eye" id="eyeIcon"></i>
                             </button>
                         </div>
                         <?php if (!empty($errors['password'])): ?>
-                            <p id="password-error" class="mt-2 text-red-600 text-sm">
-                                <?= esc($errors['password']) ?>
-                            </p>
+                            <p id="password-error" class="mt-2 text-red-600 text-sm"><?= esc($errors['password']) ?></p>
                         <?php endif; ?>
                         <div class="mt-2 text-coco-mid text-xs">
                             <p class="mb-1 font-semibold">Password must contain:</p>
@@ -194,22 +204,18 @@ $old = $old ?? [];
                                 aria-describedby="confirm-password-error"
                                 class="w-full pl-12 pr-12 py-3 border-2 <?= isset($errors['confirm_password']) ? 'border-red-500' : 'border-coco-sand' ?> rounded-lg focus:outline-none focus:ring-4 focus:ring-coco-orange/20 focus:border-coco-orange text-coco-brown placeholder-coco-tan bg-coco-cream transition-all duration-300"
                                 placeholder="Confirm your password">
-                            <button
-                                type="button"
-                                id="toggleConfirmPassword"
+                            <button type="button" id="toggleConfirmPassword"
                                 class="right-0 absolute inset-y-0 flex items-center pr-4 text-coco-tan hover:text-coco-dark transition-colors duration-300">
                                 <i class="fas fa-eye" id="eyeIconConfirm"></i>
                             </button>
                         </div>
                         <?php if (!empty($errors['confirm_password'])): ?>
-                            <p id="confirm-password-error" class="mt-2 text-red-600 text-sm">
-                                <?= esc($errors['confirm_password']) ?>
-                            </p>
+                            <p id="confirm-password-error" class="mt-2 text-red-600 text-sm"><?= esc($errors['confirm_password']) ?></p>
                         <?php endif; ?>
                         <p id="passwordMatch" class="hidden mt-1 text-xs"></p>
                     </div>
 
-                    <!-- General Error Message -->
+                    <!-- General Error -->
                     <?php if (!empty($errors['general'])): ?>
                         <div class="bg-red-50 p-4 border-red-500 border-l-4 rounded">
                             <div class="flex">
@@ -217,13 +223,24 @@ $old = $old ?? [];
                                     <i class="text-red-500 fas fa-exclamation-circle"></i>
                                 </div>
                                 <div class="ml-3">
-                                    <p class="text-red-700 text-sm">
-                                        <?= esc($errors['general']) ?>
-                                    </p>
+                                    <p class="text-red-700 text-sm"><?= esc($errors['general']) ?></p>
                                 </div>
                             </div>
                         </div>
                     <?php endif; ?>
+
+                    <!-- ✅ Added Newsletter Checkbox -->
+                    <div class="flex items-start">
+                        <input
+                            type="checkbox"
+                            id="newsletter"
+                            name="newsletter"
+                            <?= isset($old['newsletter']) ? 'checked' : '' ?>
+                            class="mt-1 border-coco-sand rounded focus:ring-coco-orange w-4 h-4 text-coco-orange">
+                        <label for="newsletter" class="ml-3 text-coco-mid text-sm leading-relaxed">
+                            Subscribe to our newsletter for eco-friendly tips and updates
+                        </label>
+                    </div>
 
                     <!-- Terms and Privacy -->
                     <div class="flex items-start">
@@ -242,9 +259,7 @@ $old = $old ?? [];
                         </label>
                     </div>
                     <?php if (!empty($errors['terms'])): ?>
-                        <p class="-mt-4 text-red-600 text-sm">
-                            <?= esc($errors['terms']) ?>
-                        </p>
+                        <p class="-mt-4 text-red-600 text-sm"><?= esc($errors['terms']) ?></p>
                     <?php endif; ?>
 
                     <!-- Register Button -->
@@ -257,11 +272,10 @@ $old = $old ?? [];
                     </button>
                 </form>
 
-                <!-- Login Link -->
                 <div class="mt-8 pt-6 border-coco-sand border-t text-center">
                     <p class="text-coco-mid">
                         Already have an account?
-                        <a href="<?= base_url('login') ?>" class="font-semibold text-coco-orange hover:text-coco-dark transition-colors duration-300">
+                        <a href="<?= site_url('login') ?>" class="font-semibold text-coco-orange hover:text-coco-dark transition-colors duration-300">
                             Sign in here
                         </a>
                     </p>
@@ -273,7 +287,7 @@ $old = $old ?? [];
     <?= $this->include('components/footer') ?>
 
     <script>
-        // Password toggle functionality
+        // Password toggle
         const togglePassword = document.getElementById('togglePassword');
         const password = document.getElementById('password');
         const eyeIcon = document.getElementById('eyeIcon');
@@ -281,17 +295,11 @@ $old = $old ?? [];
         togglePassword.addEventListener('click', function() {
             const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
             password.setAttribute('type', type);
-
-            if (type === 'text') {
-                eyeIcon.classList.remove('fa-eye');
-                eyeIcon.classList.add('fa-eye-slash');
-            } else {
-                eyeIcon.classList.remove('fa-eye-slash');
-                eyeIcon.classList.add('fa-eye');
-            }
+            eyeIcon.classList.toggle('fa-eye');
+            eyeIcon.classList.toggle('fa-eye-slash');
         });
 
-        // Confirm password toggle functionality
+        // Confirm password toggle
         const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
         const confirmPassword = document.getElementById('confirm_password');
         const eyeIconConfirm = document.getElementById('eyeIconConfirm');
@@ -299,104 +307,75 @@ $old = $old ?? [];
         toggleConfirmPassword.addEventListener('click', function() {
             const type = confirmPassword.getAttribute('type') === 'password' ? 'text' : 'password';
             confirmPassword.setAttribute('type', type);
-
-            if (type === 'text') {
-                eyeIconConfirm.classList.remove('fa-eye');
-                eyeIconConfirm.classList.add('fa-eye-slash');
-            } else {
-                eyeIconConfirm.classList.remove('fa-eye-slash');
-                eyeIconConfirm.classList.add('fa-eye');
-            }
+            eyeIconConfirm.classList.toggle('fa-eye');
+            eyeIconConfirm.classList.toggle('fa-eye-slash');
         });
 
-        // Password validation
-        const passwordInput = document.getElementById('password');
+        // Password strength checks
         const lengthCheck = document.getElementById('length');
         const uppercaseCheck = document.getElementById('uppercase');
         const lowercaseCheck = document.getElementById('lowercase');
         const numberCheck = document.getElementById('number');
 
-        passwordInput.addEventListener('input', function() {
-            const value = this.value;
-
-            // Check length
-            if (value.length >= 8) {
-                lengthCheck.classList.remove('text-red-500');
-                lengthCheck.classList.add('text-green-500');
-            } else {
-                lengthCheck.classList.remove('text-green-500');
-                lengthCheck.classList.add('text-red-500');
-            }
-
-            // Check uppercase
-            if (/[A-Z]/.test(value)) {
-                uppercaseCheck.classList.remove('text-red-500');
-                uppercaseCheck.classList.add('text-green-500');
-            } else {
-                uppercaseCheck.classList.remove('text-green-500');
-                uppercaseCheck.classList.add('text-red-500');
-            }
-
-            // Check lowercase
-            if (/[a-z]/.test(value)) {
-                lowercaseCheck.classList.remove('text-red-500');
-                lowercaseCheck.classList.add('text-green-500');
-            } else {
-                lowercaseCheck.classList.remove('text-green-500');
-                lowercaseCheck.classList.add('text-red-500');
-            }
-
-            // Check number
-            if (/[0-9]/.test(value)) {
-                numberCheck.classList.remove('text-red-500');
-                numberCheck.classList.add('text-green-500');
-            } else {
-                numberCheck.classList.remove('text-green-500');
-                numberCheck.classList.add('text-red-500');
-            }
-
+        password.addEventListener('input', function() {
+            const v = this.value;
+            toggle(lengthCheck, v.length >= 8);
+            toggle(uppercaseCheck, /[A-Z]/.test(v));
+            toggle(lowercaseCheck, /[a-z]/.test(v));
+            toggle(numberCheck, /[0-9]/.test(v));
             validateForm();
         });
 
-        // Password match validation
+        function toggle(el, valid) {
+            el.classList.toggle('text-green-500', valid);
+            el.classList.toggle('text-red-500', !valid);
+        }
+
+        // Password match
         const passwordMatchMsg = document.getElementById('passwordMatch');
 
         confirmPassword.addEventListener('input', function() {
             if (this.value === '') {
                 passwordMatchMsg.classList.add('hidden');
-            } else if (this.value === passwordInput.value) {
+            } else if (this.value === password.value) {
                 passwordMatchMsg.textContent = 'Passwords match ✓';
-                passwordMatchMsg.classList.remove('text-red-500', 'hidden');
-                passwordMatchMsg.classList.add('text-green-500');
+                passwordMatchMsg.className = 'mt-1 text-xs text-green-500';
             } else {
                 passwordMatchMsg.textContent = 'Passwords do not match';
-                passwordMatchMsg.classList.remove('text-green-500', 'hidden');
-                passwordMatchMsg.classList.add('text-red-500');
+                passwordMatchMsg.className = 'mt-1 text-xs text-red-500';
             }
             validateForm();
         });
 
-        // Form validation
+        // Enable/disable submit button
         function validateForm() {
-            const registerBtn = document.getElementById('registerBtn');
-            const fullname = document.getElementById('fullname').value;
-            const email = document.getElementById('email').value;
-            const phone = document.getElementById('phone').value;
-            const address = document.getElementById('address').value;
-            const isPasswordValid = lengthCheck.classList.contains('text-green-500') &&
+            const isPasswordValid =
+                lengthCheck.classList.contains('text-green-500') &&
                 uppercaseCheck.classList.contains('text-green-500') &&
                 lowercaseCheck.classList.contains('text-green-500') &&
                 numberCheck.classList.contains('text-green-500');
-            const isPasswordMatch = passwordInput.value === confirmPassword.value && confirmPassword.value !== '';
-            const termsChecked = document.getElementById('terms').checked;
 
-            registerBtn.disabled = !(fullname && email && phone && address && isPasswordValid && isPasswordMatch && termsChecked);
+            const isPasswordMatch = password.value === confirmPassword.value && confirmPassword.value !== '';
+
+            document.getElementById('registerBtn').disabled = !(
+                document.getElementById('fullname').value &&
+                document.getElementById('username').value && // ✅ added username check
+                document.getElementById('email').value &&
+                document.getElementById('phone').value &&
+                document.getElementById('address').value &&
+                isPasswordValid &&
+                isPasswordMatch &&
+                document.getElementById('terms').checked
+            );
         }
 
-        // Add event listeners
         document.getElementById('fullname').addEventListener('input', validateForm);
+        document.getElementById('username').addEventListener('input', validateForm); // ✅ added
         document.getElementById('email').addEventListener('input', validateForm);
         document.getElementById('phone').addEventListener('input', validateForm);
         document.getElementById('address').addEventListener('input', validateForm);
         document.getElementById('terms').addEventListener('change', validateForm);
     </script>
+</body>
+
+</html>
