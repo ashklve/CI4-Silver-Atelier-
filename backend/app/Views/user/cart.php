@@ -1,9 +1,13 @@
 <?php
-
+/**
+ * View: user/cart.php
+ * The checkout() button now checks if user is logged in client-side
+ * and redirects accordingly. The server also enforces the check in Users::checkout()
+ */
 $cartItems = $cartItems ?? [];
-$subtotal = 0;
-$shipping = 150.00;
-
+$subtotal  = 0;
+$shipping  = 150.00;
+$isLoggedIn = session()->has('user'); // pass login state to JS
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,6 +35,7 @@ $shipping = 150.00;
 
         <!-- Cart Content -->
         <div id="cart-content" class="<?= empty($cartItems) ? 'hidden' : 'grid' ?> gap-10 grid grid-cols-1 lg:grid-cols-3 animate-fade-up">
+
             <!-- Items List -->
             <div class="space-y-6 lg:col-span-2" id="cart-items-container">
                 <?php foreach ($cartItems as $item): ?>
@@ -67,7 +72,7 @@ $shipping = 150.00;
                 <?php endforeach; ?>
             </div>
 
-            <!-- Summary -->
+            <!-- Order Summary -->
             <div class="lg:col-span-1">
                 <div class="top-28 sticky bg-white shadow-lg p-6 border border-coco-sand/60 rounded-3xl">
                     <h3 class="mb-6 pb-4 border-coco-sand/60 border-b font-display font-bold text-coco-brown text-xl">Order Summary</h3>
@@ -88,15 +93,19 @@ $shipping = 150.00;
 
                     <div class="flex justify-between items-end mb-8">
                         <span class="font-bold text-coco-brown">Total</span>
-                        <span class="font-display font-black text-coco-orange text-3xl leading-none" id="summary-total">₱<?= number_format($subtotal + $shipping, 2) ?></span>
+                        <span class="font-display font-black text-coco-orange text-3xl leading-none" id="summary-total">
+                            ₱<?= number_format($subtotal + $shipping, 2) ?>
+                        </span>
                     </div>
 
-                    <button onclick="checkout()" class="bg-coco-brown hover:bg-coco-orange hover:shadow-lg py-4 rounded-full w-full font-bold text-white text-lg transition-all hover:-translate-y-1 duration-300 transform">
+                    <!-- ── CHECKOUT BUTTON: checks login state ── -->
+                    <button onclick="proceedToCheckout()"
+                        class="bg-coco-brown hover:bg-coco-orange hover:shadow-lg py-4 rounded-full w-full font-bold text-white text-lg transition-all hover:-translate-y-1 duration-300 transform">
                         Checkout
                     </button>
 
                     <div class="flex justify-center items-center gap-2 mt-6 text-coco-mid/70 text-xs">
-                        <i class="text-coco-green fas fa-lock"></i> Secure Checkout via PayMongo
+                        <i class="text-coco-green fas fa-lock"></i> Secure Checkout
                     </div>
                 </div>
             </div>
@@ -105,7 +114,36 @@ $shipping = 150.00;
 
     <?= $this->include('components/footer') ?>
 
-    <!-- Toast Notification (Reused) -->
+    <!-- Login Prompt Modal (shown when guest tries to checkout) -->
+    <div id="login-modal" class="fixed inset-0 z-[9997] hidden items-center justify-center p-4">
+        <div class="absolute inset-0 bg-coco-brown/40 backdrop-blur-sm" onclick="closeLoginModal()"></div>
+        <div class="relative bg-white rounded-3xl shadow-2xl w-full max-w-sm p-8 text-center space-y-5">
+            <div class="w-16 h-16 bg-coco-orange/10 rounded-full flex items-center justify-center mx-auto">
+                <i class="fas fa-lock text-coco-orange text-2xl"></i>
+            </div>
+            <div>
+                <h3 class="font-display font-black text-2xl text-coco-brown mb-2">Sign In Required</h3>
+                <p class="text-coco-mid text-sm leading-relaxed">
+                    Please sign in to your COCOIR account to proceed with checkout. Your cart will be saved!
+                </p>
+            </div>
+            <div class="flex flex-col gap-3">
+                <a href="<?= site_url('login') ?>"
+                   class="bg-coco-orange text-white font-bold py-3 rounded-full hover:bg-coco-dark transition-colors">
+                    Sign In
+                </a>
+                <a href="<?= site_url('signup') ?>"
+                   class="border-2 border-coco-sand text-coco-dark font-bold py-3 rounded-full hover:border-coco-orange hover:text-coco-orange transition-colors text-sm">
+                    Create Account
+                </a>
+                <button onclick="closeLoginModal()" class="text-coco-mid text-sm hover:text-coco-orange transition-colors">
+                    Continue Browsing
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
     <div id="toast" class="right-6 bottom-6 z-[9998] fixed opacity-0 transition-all translate-y-24 duration-300">
         <div class="flex items-center gap-3 bg-coco-brown shadow-2xl px-6 py-3 rounded-2xl font-semibold text-coco-cream text-sm">
             <i class="text-coco-leaf fas fa-check-circle"></i>
@@ -114,27 +152,46 @@ $shipping = 150.00;
     </div>
 
     <script>
+        // ── Is user logged in? (from PHP session) ──
+        const isLoggedIn = <?= $isLoggedIn ? 'true' : 'false' ?>;
+        const checkoutUrl = '<?= site_url('checkout') ?>';
+
+        function proceedToCheckout() {
+            if (isLoggedIn) {
+                window.location.href = checkoutUrl;
+            } else {
+                // Show login prompt modal
+                const modal = document.getElementById('login-modal');
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            }
+        }
+
+        function closeLoginModal() {
+            const modal = document.getElementById('login-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') closeLoginModal();
+        });
+
+        // ── Cart API ──
         async function updateCartAPI(url, data) {
             const csrfToken = document.querySelector('.csrf-token');
             data.append(csrfToken.name, csrfToken.value);
-
             try {
                 const response = await fetch(url, {
-                    method: 'POST',
-                    body: data,
-                    headers: {
-                        'X-Requested-With': 'XMLHttpRequest'
-                    }
+                    method: 'POST', body: data,
+                    headers: { 'X-Requested-With': 'XMLHttpRequest' }
                 });
                 const result = await response.json();
                 if (result.success) {
-                    // Reload the page to reflect changes.
                     window.location.reload();
                 } else {
                     alert(result.message || 'An error occurred.');
-                    if (response.status === 403) { // CSRF error
-                        window.location.reload();
-                    }
+                    if (response.status === 403) window.location.reload();
                 }
             } catch (error) {
                 console.error('Cart API Error:', error);
@@ -143,30 +200,20 @@ $shipping = 150.00;
         }
 
         function updateQty(id, quantity) {
-            const newQuantity = parseInt(quantity, 10);
-            if (isNaN(newQuantity) || newQuantity < 1) {
-                removeItem(id);
-                return;
-            }
-            const formData = new FormData();
-            formData.append('id', id);
-            formData.append('quantity', newQuantity);
-            updateCartAPI('<?= site_url('cart/update') ?>', formData);
+            const q = parseInt(quantity, 10);
+            if (isNaN(q) || q < 1) { removeItem(id); return; }
+            const fd = new FormData();
+            fd.append('id', id);
+            fd.append('quantity', q);
+            updateCartAPI('<?= site_url('cart/update') ?>', fd);
         }
 
         function removeItem(id) {
-            if (!confirm('Are you sure you want to remove this item?')) return;
-            const formData = new FormData();
-            formData.append('id', id);
-            updateCartAPI('<?= site_url('cart/remove') ?>', formData);
-        }
-
-        function checkout() {
-            alert('Proceeding to checkout...');
-            // Redirect to checkout controller logic
-            // window.location.href = '<?= site_url('checkout') ?>';
+            if (!confirm('Remove this item from your cart?')) return;
+            const fd = new FormData();
+            fd.append('id', id);
+            updateCartAPI('<?= site_url('cart/remove') ?>', fd);
         }
     </script>
 </body>
-
 </html>
