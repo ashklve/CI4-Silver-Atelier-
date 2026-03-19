@@ -115,64 +115,8 @@
 
 <body class="font-body text-coco-brown bg-coco-cream">
 
-<!-- ══════════════════════ HEADER (same as landing) ══════════════════════ -->
-<header id="main-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-3 px-4 lg:px-8">
-    <div class="max-w-7xl mx-auto flex items-center justify-between">
+<?= $this->include('components/header') ?>
 
-        <a href="<?= site_url('/') ?>" class="flex items-center gap-3 group">
-            <svg class="w-12 h-12 drop-shadow-md" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="19" cy="13" r="8" fill="#E87722" opacity="0.92"/>
-                <path d="M13 13 Q16 11 19 13" stroke="#F4A940" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-                <path d="M33 45 Q31 33 35 21" stroke="#5C3317" stroke-width="3" stroke-linecap="round"/>
-                <path d="M35 21 Q44 15 48 11" stroke="#4A7C59" stroke-width="2.5" stroke-linecap="round"/>
-                <path d="M35 21 Q27 13 25 8"  stroke="#6BAF78" stroke-width="2"   stroke-linecap="round"/>
-                <path d="M35 21 Q42 20 46 18" stroke="#4A7C59" stroke-width="2"   stroke-linecap="round"/>
-                <ellipse cx="30" cy="46" rx="16" ry="4" fill="#6BAF78" opacity="0.45"/>
-                <circle cx="21" cy="44" r="5.2" fill="#3B2314"/>
-                <circle cx="30" cy="44" r="5.2" fill="#5C3317"/>
-                <circle cx="21" cy="44" r="2.2" fill="#8B5E3C" opacity="0.55"/>
-                <circle cx="30" cy="44" r="2.2" fill="#8B5E3C" opacity="0.55"/>
-            </svg>
-            <div>
-                <span class="font-display text-2xl font-black text-coco-brown tracking-wide leading-none block">COCOIR</span>
-                <span class="text-[10px] font-body text-coco-green tracking-[0.22em] uppercase leading-none">Coconut Coir Co.</span>
-            </div>
-        </a>
-
-        <nav class="hidden lg:flex items-center gap-8">
-            <a href="<?= site_url('/') ?>"          class="text-coco-dark font-semibold hover:text-coco-orange transition-colors text-xs tracking-widest uppercase">Home</a>
-            <a href="<?= site_url('/') ?>#about"    class="text-coco-dark font-semibold hover:text-coco-orange transition-colors text-xs tracking-widest uppercase">About</a>
-            <a href="<?= site_url('products') ?>"   class="text-coco-orange font-bold text-xs tracking-widest uppercase border-b-2 border-coco-orange pb-0.5">Products</a>
-            <a href="<?= site_url('/') ?>#why-us"   class="text-coco-dark font-semibold hover:text-coco-orange transition-colors text-xs tracking-widest uppercase">Why Us</a>
-            <a href="<?= site_url('/') ?>#contact"  class="text-coco-dark font-semibold hover:text-coco-orange transition-colors text-xs tracking-widest uppercase">Contact</a>
-        </nav>
-
-        <div class="hidden lg:flex items-center gap-3">
-            <a href="<?= site_url('login') ?>" class="text-coco-dark font-semibold px-5 py-2 rounded-full border-2 border-coco-tan hover:border-coco-orange hover:text-coco-orange transition-all text-sm">Sign In</a>
-            <a href="<?= site_url('cart') ?>"  class="relative bg-coco-orange text-white px-6 py-2.5 rounded-full font-bold text-sm hover:bg-coco-dark transition-all duration-300 shadow-md hover:scale-105 transform inline-flex items-center gap-2">
-                <i class="fas fa-shopping-bag text-xs"></i> Cart
-                <span class="absolute -top-1.5 -right-1.5 w-5 h-5 bg-coco-brown text-white text-[10px] font-black rounded-full flex items-center justify-center">0</span>
-            </a>
-        </div>
-
-        <button id="hamburger" class="lg:hidden p-2 flex flex-col gap-1.5" aria-label="Menu">
-            <span class="w-6 h-0.5 bg-coco-brown block"></span>
-            <span class="w-6 h-0.5 bg-coco-brown block"></span>
-            <span class="w-4 h-0.5 bg-coco-brown block"></span>
-        </button>
-    </div>
-
-    <div id="mobile-menu" class="lg:hidden bg-coco-cream border-t border-coco-sand px-4">
-        <nav class="py-4 flex flex-col gap-3">
-            <a href="<?= site_url('/') ?>"        class="text-coco-dark font-semibold py-2 border-b border-coco-sand/60 text-xs tracking-widest uppercase">Home</a>
-            <a href="<?= site_url('/') ?>#about"  class="text-coco-dark font-semibold py-2 border-b border-coco-sand/60 text-xs tracking-widest uppercase">About</a>
-            <a href="<?= site_url('products') ?>" class="text-coco-orange font-bold py-2 border-b border-coco-sand/60 text-xs tracking-widest uppercase">Products</a>
-            <a href="<?= site_url('/') ?>#why-us" class="text-coco-dark font-semibold py-2 border-b border-coco-sand/60 text-xs tracking-widest uppercase">Why Us</a>
-            <a href="<?= site_url('/') ?>#contact" class="text-coco-dark font-semibold py-2 text-xs tracking-widest uppercase">Contact</a>
-            <a href="<?= site_url('cart') ?>" class="bg-coco-orange text-white text-center py-3 rounded-full font-bold mt-2 text-sm">View Cart</a>
-        </nav>
-    </div>
-</header>
 
 <!-- ══════════════════════ FLASH MESSAGES ══════════════════════ -->
 <?php $flashSuccess = session()->getFlashdata('success'); $flashError = session()->getFlashdata('error'); ?>
@@ -384,57 +328,7 @@
 </section>
 
 
-<!-- ══════════════════════ FOOTER (same as landing) ══════════════════════ -->
-<footer class="bg-coco-dark py-16 mt-10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
-            <div class="space-y-4">
-                <div class="flex items-center gap-2">
-                    <span class="font-display text-2xl font-black text-coco-cream">COCOIR</span>
-                    <span class="text-coco-tan text-xs tracking-widest uppercase">Co.</span>
-                </div>
-                <p class="text-coco-tan text-sm leading-relaxed font-light">Transforming coconut husks into premium eco-products. Proudly made in the Philippines.</p>
-                <div class="flex gap-3 pt-2">
-                    <a href="#" class="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center text-coco-tan hover:bg-coco-orange hover:text-white transition-all"><i class="fab fa-facebook-f text-xs"></i></a>
-                    <a href="#" class="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center text-coco-tan hover:bg-coco-orange hover:text-white transition-all"><i class="fab fa-instagram text-xs"></i></a>
-                    <a href="#" class="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center text-coco-tan hover:bg-coco-orange hover:text-white transition-all"><i class="fab fa-tiktok text-xs"></i></a>
-                </div>
-            </div>
-            <div>
-                <h4 class="font-bold text-coco-cream text-xs tracking-widest uppercase mb-4">Products</h4>
-                <ul class="space-y-2">
-                    <?php foreach(['Door Mats','Grow Bags','Geotextile Mats','Coir Rope','Mulch Mat','Erosion Netting'] as $item): ?>
-                    <li><a href="<?= site_url('products') ?>?category=<?= urlencode($item) ?>" class="text-coco-tan text-sm hover:text-coco-amber transition-colors"><?= $item ?></a></li>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
-            <div>
-                <h4 class="font-bold text-coco-cream text-xs tracking-widest uppercase mb-4">Company</h4>
-                <ul class="space-y-2">
-                    <?php foreach(['About Us'=>site_url('/').'#about','Our Farmers'=>'#','Sustainability'=>'#','Blog'=>'#'] as $label=>$link): ?>
-                    <li><a href="<?= $link ?>" class="text-coco-tan text-sm hover:text-coco-amber transition-colors"><?= $label ?></a></li>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
-            <div>
-                <h4 class="font-bold text-coco-cream text-xs tracking-widest uppercase mb-4">Support</h4>
-                <ul class="space-y-2">
-                    <?php foreach(['My Orders'=>site_url('orders'),'Track Delivery'=>'#','Returns & Refunds'=>'#','FAQs'=>'#','Seller Portal'=>site_url('seller')] as $label=>$link): ?>
-                    <li><a href="<?= $link ?>" class="text-coco-tan text-sm hover:text-coco-amber transition-colors"><?= $label ?></a></li>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
-        </div>
-        <div class="border-t border-white/10 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
-            <p class="text-coco-tan/50 text-xs">© <?= date('Y') ?> COCOIR — Coconut Coir Co. All rights reserved.</p>
-            <div class="flex gap-6">
-                <a href="#" class="text-coco-tan/50 text-xs hover:text-coco-amber transition-colors">Privacy Policy</a>
-                <a href="#" class="text-coco-tan/50 text-xs hover:text-coco-amber transition-colors">Terms of Service</a>
-            </div>
-        </div>
-    </div>
-</footer>
-
+ <?= $this->include('components/footer') ?>
 
 <!-- ══════════════════════ TOAST NOTIFICATION ══════════════════════ -->
 <div id="toast" class="fixed bottom-6 right-6 z-[9998] translate-y-24 opacity-0 transition-all duration-300">
