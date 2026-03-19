@@ -66,8 +66,8 @@
         <nav class="hidden lg:flex items-center gap-8">
             <a href="<?= $isLanding ? '#home'    : site_url('/') ?>"
                class="font-semibold text-coco-dark hover:text-coco-orange text-xs uppercase tracking-widest transition-colors">Home</a>
-            <a href="<?= $isLanding ? '#about'   : site_url('/') . '#about' ?>"
-               class="font-semibold text-coco-dark hover:text-coco-orange text-xs uppercase tracking-widest transition-colors">About</a>
+            <a href="<?= site_url('about') ?>"
+                class="font-semibold hover:text-coco-orange text-xs uppercase tracking-widest transition-colors <?= uri_string() === 'about' ? 'text-coco-orange border-b-2 border-coco-orange pb-0.5' : 'text-coco-dark' ?>">About</a>
             <a href="<?= site_url('products') ?>"
                class="font-semibold hover:text-coco-orange text-xs uppercase tracking-widest transition-colors <?= uri_string() === 'products' ? 'text-coco-orange border-b-2 border-coco-orange pb-0.5' : 'text-coco-dark' ?>">Products</a>
             <a href="<?= $isLanding ? '#why-us'  : site_url('/') . '#why-us' ?>"
@@ -204,7 +204,7 @@
         <nav class="flex flex-col gap-1 py-4">
             <!-- Nav links -->
             <a href="<?= $isLanding ? '#home'    : site_url('/') ?>"             class="py-2.5 border-b border-coco-sand/50 font-semibold text-coco-dark text-xs uppercase tracking-widest hover:text-coco-orange transition-colors">Home</a>
-            <a href="<?= $isLanding ? '#about'   : site_url('/') . '#about' ?>"   class="py-2.5 border-b border-coco-sand/50 font-semibold text-coco-dark text-xs uppercase tracking-widest hover:text-coco-orange transition-colors">About</a>
+            <a href="<?= site_url('about') ?>" class="py-2.5 border-b border-coco-sand/50 font-semibold text-coco-dark text-xs uppercase tracking-widest hover:text-coco-orange transition-colors">About</a>
             <a href="<?= site_url('products') ?>"                                 class="py-2.5 border-b border-coco-sand/50 font-semibold text-coco-dark text-xs uppercase tracking-widest hover:text-coco-orange transition-colors">Products</a>
             <a href="<?= $isLanding ? '#why-us'  : site_url('/') . '#why-us' ?>"  class="py-2.5 border-b border-coco-sand/50 font-semibold text-coco-dark text-xs uppercase tracking-widest hover:text-coco-orange transition-colors">Why Us</a>
             <a href="<?= $isLanding ? '#contact' : site_url('/') . '#contact' ?>" class="py-2.5 font-semibold text-coco-dark text-xs uppercase tracking-widest hover:text-coco-orange transition-colors">Contact</a>
