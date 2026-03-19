@@ -166,95 +166,121 @@
     </section>
 
 
-    <!-- ══════════════════════════ FEATURED PRODUCTS ══════════════════════════ -->
-    <section id="products" class="bg-coco-cream py-24">
-        <div class="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-            <div class="space-y-4 mb-16 text-center">
-                <p class="font-bold text-coco-orange text-xs uppercase tracking-[0.3em]">Our Range</p>
-                <h2 class="font-display font-black text-coco-brown text-4xl sm:text-5xl">Featured Products</h2>
-                <p class="mx-auto max-w-2xl font-light text-coco-mid text-lg">Eco-friendly coir products handcrafted for gardening, construction, and sustainable living.</p>
-            </div>
-
-            <div class="gap-7 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-
-                <!-- Card 1 -->
-                <div class="group bg-white shadow-md border border-coco-sand/60 rounded-3xl overflow-hidden product-card">
-                    <div class="relative bg-gradient-to-br from-coco-green/20 to-coco-sage/20 aspect-[4/3] overflow-hidden">
-                        <img src="/images/coirdoormat.png" alt="Coir Door Mat" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <span class="top-3 left-3 absolute px-3 py-1 rounded-full font-black text-[10px] uppercase tracking-widest badge-new">New</span>
-                        <button class="top-3 right-3 absolute flex justify-center items-center bg-white/80 hover:bg-coco-orange opacity-0 group-hover:opacity-100 backdrop-blur-sm rounded-full w-8 h-8 text-coco-brown hover:text-white transition-opacity">
-                            <i class="text-xs fas fa-heart"></i>
+<!-- ══════════════════════════ FEATURED PRODUCTS ══════════════════════════ -->
+<section id="products" class="bg-coco-cream py-24">
+    <div class="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+        <div class="space-y-4 mb-16 text-center">
+            <p class="font-bold text-coco-orange text-xs uppercase tracking-[0.3em]">Our Range</p>
+            <h2 class="font-display font-black text-coco-brown text-4xl sm:text-5xl">Featured Products</h2>
+            <p class="mx-auto max-w-2xl font-light text-coco-mid text-lg">Eco-friendly coir products handcrafted for gardening, construction, and sustainable living.</p>
+        </div>
+ 
+        <!-- CSRF token for cart AJAX -->
+        <input type="hidden" id="landing-csrf-name"  value="<?= csrf_token() ?>">
+        <input type="hidden" id="landing-csrf-value" value="<?= csrf_hash() ?>">
+ 
+        <div class="gap-7 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+ 
+            <!-- Card 1 -->
+            <div class="group bg-white shadow-md border border-coco-sand/60 rounded-3xl overflow-hidden product-card">
+                <div class="relative bg-gradient-to-br from-coco-green/20 to-coco-sage/20 aspect-[4/3] overflow-hidden">
+                    <img src="/images/coirdoormat.png" alt="Coir Door Mat" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <span class="top-3 left-3 absolute px-3 py-1 rounded-full font-black text-[10px] uppercase tracking-widest badge-new">New</span>
+                    <button class="wishlist-btn top-3 right-3 absolute flex justify-center items-center bg-white/80 hover:bg-coco-orange opacity-0 group-hover:opacity-100 backdrop-blur-sm rounded-full w-8 h-8 text-coco-brown hover:text-white transition-all">
+                        <i class="text-xs fas fa-heart"></i>
+                    </button>
+                </div>
+                <div class="p-5">
+                    <p class="mb-1 font-bold text-[10px] text-coco-green uppercase tracking-widest">Home & Living</p>
+                    <h3 class="mb-1 font-display font-bold text-coco-brown text-lg leading-snug">Coir Door Mat</h3>
+                    <p class="mb-4 text-coco-mid text-xs leading-relaxed">Natural, durable, fully biodegradable entrance mats.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="font-display font-black text-coco-orange text-xl">₱350</span>
+                        <button class="landing-atc bg-coco-brown hover:bg-coco-orange px-4 py-2 rounded-full font-bold text-coco-cream text-xs transition-colors inline-flex items-center gap-1.5"
+                            data-id="1" data-name="Coir Door Mat" data-price="350" data-image="coirdoormat.png">
+                            <i class="fas fa-shopping-bag text-[10px]"></i> Add to Cart
                         </button>
                     </div>
-                    <div class="p-5">
-                        <p class="mb-1 font-bold text-[10px] text-coco-green uppercase tracking-widest">Home & Living</p>
-                        <h3 class="mb-1 font-display font-bold text-coco-brown text-lg leading-snug">Coir Door Mat</h3>
-                        <p class="mb-4 text-coco-mid text-xs leading-relaxed">Natural, durable, fully biodegradable entrance mats.</p>
-                        <div class="flex justify-between items-center">
-                            <span class="font-display font-black text-coco-orange text-xl">₱350</span>
-                            <a href="<?= site_url('products') ?>" class="bg-coco-brown hover:bg-coco-orange px-4 py-2 rounded-full font-bold text-coco-cream text-xs transition-colors">Add to Cart</a>
-                        </div>
-                    </div>
                 </div>
-
-                <!-- Card 2 -->
-                <div class="group bg-white shadow-md border border-coco-sand/60 rounded-3xl overflow-hidden product-card">
-                    <div class="relative bg-gradient-to-br from-coco-amber/20 to-coco-orange/10 aspect-[4/3] overflow-hidden">
-                        <img src="/images/growbag.png" alt="Coco Grow Bag" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <span class="top-3 left-3 absolute px-3 py-1 rounded-full font-black text-[10px] uppercase tracking-widest badge-trending">Trending</span>
-                    </div>
-                    <div class="p-5">
-                        <p class="mb-1 font-bold text-[10px] text-coco-green uppercase tracking-widest">Gardening</p>
-                        <h3 class="mb-1 font-display font-bold text-coco-brown text-lg leading-snug">Coco Grow Bag</h3>
-                        <p class="mb-4 text-coco-mid text-xs leading-relaxed">Perfect moisture retention for vegetables and herbs.</p>
-                        <div class="flex justify-between items-center">
-                            <span class="font-display font-black text-coco-orange text-xl">₱180</span>
-                            <a href="<?= site_url('products') ?>" class="bg-coco-brown hover:bg-coco-orange px-4 py-2 rounded-full font-bold text-coco-cream text-xs transition-colors">Add to Cart</a>
-                        </div>
-                    </div>
+            </div>
+ 
+            <!-- Card 2 -->
+            <div class="group bg-white shadow-md border border-coco-sand/60 rounded-3xl overflow-hidden product-card">
+                <div class="relative bg-gradient-to-br from-coco-amber/20 to-coco-orange/10 aspect-[4/3] overflow-hidden">
+                    <img src="/images/growbag.png" alt="Coco Grow Bag" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <span class="top-3 left-3 absolute px-3 py-1 rounded-full font-black text-[10px] uppercase tracking-widest badge-trending">Trending</span>
+                    <button class="wishlist-btn top-3 right-3 absolute flex justify-center items-center bg-white/80 hover:bg-coco-orange opacity-0 group-hover:opacity-100 backdrop-blur-sm rounded-full w-8 h-8 text-coco-brown hover:text-white transition-all">
+                        <i class="text-xs fas fa-heart"></i>
+                    </button>
                 </div>
-
-                <!-- Card 3 -->
-                <div class="group bg-white shadow-md border border-coco-sand/60 rounded-3xl overflow-hidden product-card">
-                    <div class="relative bg-gradient-to-br from-coco-brown/10 to-coco-tan/20 aspect-[4/3] overflow-hidden">
-                        <img src="/images/geotextitle.png" alt="Geotextile Erosion Mat" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <span class="top-3 left-3 absolute px-3 py-1 rounded-full font-black text-[10px] uppercase tracking-widest badge-bestseller">Best Seller</span>
-                    </div>
-                    <div class="p-5">
-                        <p class="mb-1 font-bold text-[10px] text-coco-green uppercase tracking-widest">Construction</p>
-                        <h3 class="mb-1 font-display font-bold text-coco-brown text-lg leading-snug">Geotextile Mat</h3>
-                        <p class="mb-4 text-coco-mid text-xs leading-relaxed">Slope stabilization and erosion control, project-grade.</p>
-                        <div class="flex justify-between items-center">
-                            <span class="font-display font-black text-coco-orange text-xl">₱1,200</span>
-                            <a href="<?= site_url('products') ?>" class="bg-coco-brown hover:bg-coco-orange px-4 py-2 rounded-full font-bold text-coco-cream text-xs transition-colors">Add to Cart</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 4 -->
-                <div class="group bg-white shadow-md border border-coco-sand/60 rounded-3xl overflow-hidden product-card">
-                    <div class="relative bg-gradient-to-br from-coco-leaf/20 to-coco-green/10 aspect-[4/3] overflow-hidden">
-                        <img src="/images/coirrope.jpg" alt="Twisted Coir Rope" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <div class="p-5">
-                        <p class="mb-1 font-bold text-[10px] text-coco-green uppercase tracking-widest">Craft & Utility</p>
-                        <h3 class="mb-1 font-display font-bold text-coco-brown text-lg leading-snug">Twisted Coir Rope</h3>
-                        <p class="mb-4 text-coco-mid text-xs leading-relaxed">Strong, salt-resistant rope for marine and garden use.</p>
-                        <div class="flex justify-between items-center">
-                            <span class="font-display font-black text-coco-orange text-xl">₱220</span>
-                            <a href="<?= site_url('products') ?>" class="bg-coco-brown hover:bg-coco-orange px-4 py-2 rounded-full font-bold text-coco-cream text-xs transition-colors">Add to Cart</a>
-                        </div>
+                <div class="p-5">
+                    <p class="mb-1 font-bold text-[10px] text-coco-green uppercase tracking-widest">Gardening</p>
+                    <h3 class="mb-1 font-display font-bold text-coco-brown text-lg leading-snug">Coco Grow Bag</h3>
+                    <p class="mb-4 text-coco-mid text-xs leading-relaxed">Perfect moisture retention for vegetables and herbs.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="font-display font-black text-coco-orange text-xl">₱180</span>
+                        <button class="landing-atc bg-coco-brown hover:bg-coco-orange px-4 py-2 rounded-full font-bold text-coco-cream text-xs transition-colors inline-flex items-center gap-1.5"
+                            data-id="2" data-name="Coco Grow Bag" data-price="180" data-image="growbag.png">
+                            <i class="fas fa-shopping-bag text-[10px]"></i> Add to Cart
+                        </button>
                     </div>
                 </div>
             </div>
-
-            <div class="mt-12 text-center">
-                <a href="<?= site_url('products') ?>" class="inline-flex items-center gap-2 bg-coco-brown hover:bg-coco-orange shadow-md hover:shadow-xl px-10 py-4 rounded-full font-bold text-coco-cream hover:scale-105 transition-all duration-300 transform">
-                    View All Products <i class="fa-arrow-right text-sm fas"></i>
-                </a>
+ 
+            <!-- Card 3 -->
+            <div class="group bg-white shadow-md border border-coco-sand/60 rounded-3xl overflow-hidden product-card">
+                <div class="relative bg-gradient-to-br from-coco-brown/10 to-coco-tan/20 aspect-[4/3] overflow-hidden">
+                    <img src="/images/geotextitle.png" alt="Geotextile Erosion Mat" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <span class="top-3 left-3 absolute px-3 py-1 rounded-full font-black text-[10px] uppercase tracking-widest badge-bestseller">Best Seller</span>
+                    <button class="wishlist-btn top-3 right-3 absolute flex justify-center items-center bg-white/80 hover:bg-coco-orange opacity-0 group-hover:opacity-100 backdrop-blur-sm rounded-full w-8 h-8 text-coco-brown hover:text-white transition-all">
+                        <i class="text-xs fas fa-heart"></i>
+                    </button>
+                </div>
+                <div class="p-5">
+                    <p class="mb-1 font-bold text-[10px] text-coco-green uppercase tracking-widest">Construction</p>
+                    <h3 class="mb-1 font-display font-bold text-coco-brown text-lg leading-snug">Geotextile Mat</h3>
+                    <p class="mb-4 text-coco-mid text-xs leading-relaxed">Slope stabilization and erosion control, project-grade.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="font-display font-black text-coco-orange text-xl">₱1,200</span>
+                        <button class="landing-atc bg-coco-brown hover:bg-coco-orange px-4 py-2 rounded-full font-bold text-coco-cream text-xs transition-colors inline-flex items-center gap-1.5"
+                            data-id="3" data-name="Geotextile Mat" data-price="1200" data-image="geotextitle.png">
+                            <i class="fas fa-shopping-bag text-[10px]"></i> Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+ 
+            <!-- Card 4 -->
+            <div class="group bg-white shadow-md border border-coco-sand/60 rounded-3xl overflow-hidden product-card">
+                <div class="relative bg-gradient-to-br from-coco-leaf/20 to-coco-green/10 aspect-[4/3] overflow-hidden">
+                    <img src="/images/coirrope.jpg" alt="Twisted Coir Rope" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <button class="wishlist-btn top-3 right-3 absolute flex justify-center items-center bg-white/80 hover:bg-coco-orange opacity-0 group-hover:opacity-100 backdrop-blur-sm rounded-full w-8 h-8 text-coco-brown hover:text-white transition-all">
+                        <i class="text-xs fas fa-heart"></i>
+                    </button>
+                </div>
+                <div class="p-5">
+                    <p class="mb-1 font-bold text-[10px] text-coco-green uppercase tracking-widest">Craft & Utility</p>
+                    <h3 class="mb-1 font-display font-bold text-coco-brown text-lg leading-snug">Twisted Coir Rope</h3>
+                    <p class="mb-4 text-coco-mid text-xs leading-relaxed">Strong, salt-resistant rope for marine and garden use.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="font-display font-black text-coco-orange text-xl">₱220</span>
+                        <button class="landing-atc bg-coco-brown hover:bg-coco-orange px-4 py-2 rounded-full font-bold text-coco-cream text-xs transition-colors inline-flex items-center gap-1.5"
+                            data-id="4" data-name="Twisted Coir Rope" data-price="220" data-image="coirrope.jpg">
+                            <i class="fas fa-shopping-bag text-[10px]"></i> Add to Cart
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
-    </section>
+ 
+        <div class="mt-12 text-center">
+            <a href="<?= site_url('products') ?>" class="inline-flex items-center gap-2 bg-coco-brown hover:bg-coco-orange shadow-md hover:shadow-xl px-10 py-4 rounded-full font-bold text-coco-cream hover:scale-105 transition-all duration-300 transform">
+                View All Products <i class="fa-arrow-right text-sm fas"></i>
+            </a>
+        </div>
+    </div>
+</section>
+ 
 
 
     <!-- ══════════════════════════ WHY COCOIR ══════════════════════════ -->
@@ -335,54 +361,90 @@
 
 
     <script src="<?= base_url('js/main.js') ?>"></script>
-    <script>
-        // Nav scroll
-        const header = document.getElementById('main-header');
-        window.addEventListener('scroll', () => {
-            header.classList.toggle('nav-scrolled', window.scrollY > 50);
-        });
-
-        // Mobile menu
-        const hamburger = document.getElementById('hamburger');
-        const mobileMenu = document.getElementById('mobile-menu');
-        hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
-        mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
-
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    e.preventDefault();
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+<script>
+(function() {
+    // ── Add to Cart ──
+    document.querySelectorAll('.landing-atc').forEach(btn => {
+        btn.addEventListener('click', async function() {
+            const id    = this.dataset.id;
+            const name  = this.dataset.name;
+            const price = this.dataset.price;
+            const image = this.dataset.image;
+ 
+            // Show loading state
+            const original = this.innerHTML;
+            this.innerHTML = '<i class="fas fa-spinner fa-spin text-[10px]"></i> Adding...';
+            this.disabled  = true;
+ 
+            const csrfName  = document.getElementById('landing-csrf-name').value;
+            const csrfValue = document.getElementById('landing-csrf-value').value;
+ 
+            const fd = new FormData();
+            fd.append('id',    id);
+            fd.append('name',  name);
+            fd.append('price', price);
+            fd.append('image', image);
+            fd.append(csrfName, csrfValue);
+ 
+            try {
+                const res    = await fetch('<?= site_url('cart/add') ?>', {
+                    method: 'POST',
+                    body: fd,
+                    headers: { 'X-Requested-With': 'XMLHttpRequest' }
+                });
+                const result = await res.json();
+ 
+                if (result.success) {
+                    // Update CSRF token
+                    document.getElementById('landing-csrf-value').value = result.csrf_hash;
+ 
+                    // Update cart badge in header
+                    window.dispatchEvent(new CustomEvent('cartUpdated', {
+                        detail: { count: result.totalItems }
+                    }));
+ 
+                    // Show success state on button
+                    this.innerHTML = '<i class="fas fa-check text-[10px]"></i> Added!';
+                    this.classList.remove('bg-coco-brown');
+                    this.classList.add('bg-coco-green');
+ 
+                    showLandingToast('"' + name + '" added to cart!');
+ 
+                    // Reset button after 2s
+                    setTimeout(() => {
+                        this.innerHTML = original;
+                        this.classList.add('bg-coco-brown');
+                        this.classList.remove('bg-coco-green');
+                        this.disabled = false;
+                    }, 2000);
+                } else {
+                    this.innerHTML = original;
+                    this.disabled  = false;
+                    showLandingToast(result.message || 'Could not add to cart.', true);
                 }
-            });
+            } catch (e) {
+                this.innerHTML = original;
+                this.disabled  = false;
+                showLandingToast('Error — please try again.', true);
+            }
         });
-
-        // Scroll-triggered fade-in
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, {
-            threshold: 0.1
-        });
-
-        document.querySelectorAll('.product-card, .fiber-bg').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(24px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(el);
-        });
-    </script>
-
+    });
+ 
+    // ── Toast ──
+    function showLandingToast(msg, isError = false) {
+        const toast = document.getElementById('landing-toast');
+        const inner = toast.querySelector('div');
+        document.getElementById('landing-toast-msg').textContent = msg;
+        inner.className = inner.className.replace(/bg-\S+/, isError ? 'bg-red-600' : 'bg-coco-brown');
+        toast.classList.remove('translate-y-24', 'opacity-0');
+        toast.classList.add('translate-y-0', 'opacity-100');
+        setTimeout(() => {
+            toast.classList.add('translate-y-24', 'opacity-0');
+            toast.classList.remove('translate-y-0', 'opacity-100');
+        }, 3000);
+    }
+})();
+</script>
 </body>
 
 </html>
