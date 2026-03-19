@@ -439,7 +439,6 @@ document.querySelectorAll('.add-to-cart').forEach(btn => {
     btn.addEventListener('click', function() {
         const name = this.dataset.name;
         showToast(`"${name}" added to cart!`);
-        // TODO: wire up to your cart controller via fetch/AJAX
     });
 });
 
