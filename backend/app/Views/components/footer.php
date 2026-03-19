@@ -7,7 +7,7 @@
             <div class="space-y-4">
                 <div class="flex items-center gap-2">
                     <span class="font-display font-black text-coco-cream text-2xl">COCOIR</span>
-                    <span class="text-coco-tan text-xs uppercase tracking-widest">Co.</span>
+                    <span class="text-coco-tan text-xs uppercase tracking-widest">by UXPlorers</span>
                 </div>
                 <p class="font-light text-coco-tan text-sm leading-relaxed">Transforming coconut husks into premium eco-products. Proudly made in the Philippines.</p>
                 <div class="flex gap-3 pt-2">
