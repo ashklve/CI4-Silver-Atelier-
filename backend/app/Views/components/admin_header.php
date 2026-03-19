@@ -1,4 +1,4 @@
-<!-- ══════════════════════════ ADMIN HEADER ══════════════════════════ -->
+<!--admin header -->
 <?php
 $adminUser   = session()->get('user');
 $currentUri  = uri_string();
@@ -6,7 +6,7 @@ $currentUri  = uri_string();
 $navItems = [
     ['href' => 'admin/dashboard',  'icon' => 'fa-tachometer-alt', 'label' => 'Dashboard'],
     ['href' => 'admin/storefront', 'icon' => 'fa-store',          'label' => 'Storefront'],
-    ['href' => 'admin/products',   'icon' => 'fa-box-open',       'label' => 'Inventory'],
+    ['href' => 'admin/products',   'icon' => 'fa-box-open',       'label' => 'Product Inventory'],
     ['href' => 'admin/orders',     'icon' => 'fa-shopping-cart',  'label' => 'Orders'],
     ['href' => 'admin/reports',    'icon' => 'fa-chart-bar',      'label' => 'Reports'],
     ['href' => 'admin/accounts',   'icon' => 'fa-users',          'label' => 'Accounts'],
