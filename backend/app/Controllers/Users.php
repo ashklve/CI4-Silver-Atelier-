@@ -15,6 +15,11 @@ class Users extends BaseController
         return view('user/landing');
     }
 
+    public function about(): string
+    {
+        return view('user/about');
+    }
+
     public function products(): string
     {
         $productModel = new ProductModel();
