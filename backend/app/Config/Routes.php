@@ -40,8 +40,25 @@ $routes->get('/forgot-password', 'Auth::forgotPassword');
 
 // ── Admin ──────────────────────────────────────────────────────────────────
 $routes->group('admin', function ($routes) {
-    $routes->get('dashboard', 'Admin::dashboard');
-    $routes->get('products',  'Admin::products');
-    $routes->get('orders',    'Admin::orders');
-    $routes->get('accounts',  'Admin::accounts');
+    $routes->get('dashboard',          'Admin::dashboard');
+
+    // Storefront
+    $routes->get('storefront',         'Admin::storefront');
+    $routes->post('storefront/save',   'Admin::saveStorefront');
+
+    // Inventory
+    $routes->get('products',           'Admin::products');
+    $routes->post('products/save',     'Admin::saveProduct');
+    $routes->post('products/toggle',   'Admin::toggleProduct');
+    $routes->post('products/delete',   'Admin::deleteProduct');
+
+    // Orders
+    $routes->get('orders',             'Admin::orders');
+    $routes->post('orders/status',     'Admin::updateOrderStatus');
+
+    // Reports
+    $routes->get('reports',            'Admin::reports');
+
+    // Accounts
+    $routes->get('accounts',           'Admin::accounts');
 });
