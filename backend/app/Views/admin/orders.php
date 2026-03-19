@@ -306,17 +306,31 @@ function showOrderDetail(orderId) {
             <span class="text-xs text-coco-mid">${new Date(order.created_at).toLocaleString('en-PH',{dateStyle:'medium',timeStyle:'short'})}</span>
         </div>
 
-        <!-- Customer info -->
-        <div class="bg-gray-50 rounded-2xl p-4 space-y-2 text-sm">
-            <div class="font-bold text-coco-brown mb-2 text-xs uppercase tracking-wide">Customer</div>
-            <div class="flex items-center gap-2 text-coco-dark"><i class="fas fa-user w-4 text-coco-tan text-xs"></i>${order.recipient_name || '—'}</div>
-            <div class="flex items-center gap-2 text-coco-mid"><i class="fas fa-envelope w-4 text-coco-tan text-xs"></i>${order.recipient_email || '—'}</div>
-            <div class="flex items-center gap-2 text-coco-mid"><i class="fas fa-phone w-4 text-coco-tan text-xs"></i>${order.recipient_phone || '—'}</div>
-            ${order.receive_method === 'delivery' 
-                ? `<div class="flex items-start gap-2 text-coco-mid"><i class="fas fa-map-marker-alt w-4 text-coco-tan text-xs mt-0.5"></i><span>${[order.address, order.city, order.postal_code].filter(Boolean).join(', ')}</span></div>` 
-                : '<div class="flex items-center gap-1.5 text-coco-green font-semibold text-xs"><i class="fas fa-store text-xs"></i> Store Pickup</div>'}
-            ${order.order_notes ? `<div class="flex items-start gap-2 text-coco-mid"><i class="fas fa-sticky-note w-4 text-coco-tan text-xs mt-0.5"></i><span>${order.order_notes}</span></div>` : ''}
+<!-- Customer info -->
+<div class="bg-gray-50 rounded-2xl p-4 space-y-2 text-sm">
+    <div class="font-bold text-coco-brown mb-2 text-xs uppercase tracking-wide">Customer</div>
+    
+    <!-- Account info (from users table) -->
+    ${order.username ? `
+    <div class="flex items-center gap-2 mb-3 pb-3 border-b border-gray-200">
+        <div class="w-9 h-9 bg-coco-orange rounded-full flex items-center justify-center text-white font-black text-sm flex-shrink-0">
+            ${(order.first_name || order.username || '?')[0].toUpperCase()}
         </div>
+        <div>
+            <div class="font-bold text-coco-brown text-sm">${order.first_name || ''} ${order.last_name || ''}</div>
+            <div class="text-xs text-coco-mid">@${order.username} · ${order.user_email || ''}</div>
+        </div>
+    </div>` : ''}
+
+    <!-- Delivery details -->
+    <div class="flex items-center gap-2 text-coco-dark"><i class="fas fa-user w-4 text-coco-tan text-xs"></i>${order.recipient_name || '—'}</div>
+    <div class="flex items-center gap-2 text-coco-mid"><i class="fas fa-envelope w-4 text-coco-tan text-xs"></i>${order.recipient_email || '—'}</div>
+    <div class="flex items-center gap-2 text-coco-mid"><i class="fas fa-phone w-4 text-coco-tan text-xs"></i>${order.recipient_phone || '—'}</div>
+    ${order.receive_method === 'delivery' 
+        ? `<div class="flex items-start gap-2 text-coco-mid"><i class="fas fa-map-marker-alt w-4 text-coco-tan text-xs mt-0.5"></i><span>${[order.address, order.city, order.postal_code].filter(Boolean).join(', ')}</span></div>` 
+        : '<div class="flex items-center gap-1.5 text-coco-green font-semibold text-xs"><i class="fas fa-store text-xs"></i> Store Pickup</div>'}
+    ${order.order_notes ? `<div class="flex items-start gap-2 text-coco-mid"><i class="fas fa-sticky-note w-4 text-coco-tan text-xs mt-0.5"></i><span>${order.order_notes}</span></div>` : ''}
+</div>
 
         <!-- Items -->
         <div>
