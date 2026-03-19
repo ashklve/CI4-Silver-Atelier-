@@ -8,6 +8,7 @@ use CodeIgniter\Router\RouteCollection;
 
 // ── Public ─────────────────────────────────────────────────────────────────
 $routes->get('/',        'Users::index');
+$routes->get('about',    'Users::about');
 $routes->get('products', 'Users::products');
 
 // ── Cart ───────────────────────────────────────────────────────────────────
