@@ -9,5 +9,6 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call('App\\Database\\Seeds\\UsersSeeder');
+        $this->call('ProductSeeder');
     }
 }
