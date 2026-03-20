@@ -11,7 +11,17 @@ class CartItemModel extends Model
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
-    protected $allowedFields    = ['user_id', 'session_id', 'product_id', 'name', 'price', 'image', 'quantity'];
+
+    // Ensure all these fields are present
+    protected $allowedFields    = [
+        'user_id',
+        'session_id',
+        'product_id',
+        'name',
+        'price',
+        'image',
+        'quantity'
+    ];
 
     // Dates
     protected $useTimestamps = true;

@@ -308,15 +308,25 @@ class Users extends BaseController
         $cond     = $this->getCartConditions();
         $existing = $model->where($cond)->where('product_id', $id)->first();
 
+        $success = false;
+
         if ($existing) {
-            $model->update($existing['id'], ['quantity' => $existing['quantity'] + 1]);
+            $success = $model->update($existing['id'], ['quantity' => $existing['quantity'] + 1]);
         } else {
-            $model->insert(array_merge($cond, [
+            $success = $model->insert(array_merge($cond, [
                 'product_id' => $id,
                 'name'       => $name,
                 'price'      => (float) $price,
-                'image'      => $image ?? 'default.png',
+                'image'      => !empty($image) ? $image : 'default.png',
                 'quantity'   => 1,
+            ]));
+        }
+
+        if (!$success) {
+            return $this->response->setStatusCode(500)->setBody(json_encode([
+                'success'   => false,
+                'message'   => 'Failed to save item to cart. Please try again.',
+                'csrf_hash' => csrf_hash(),
             ]));
         }
 
@@ -360,16 +370,39 @@ class Users extends BaseController
     }
 
     // ── Auth views ────────────────────────────────────────────────────
-    public function login(): string   { return view('user/login'); }
-    public function signup(): string  { return view('user/signup'); }
-    public function moodBoard(): string   { return view('user/moodBoard'); }
-    public function roadMapPage(): string { return view('user/roadMapPage'); }
+    public function login(): string
+    {
+        return view('user/login');
+    }
+    public function signup(): string
+    {
+        return view('user/signup');
+    }
+    public function moodBoard(): string
+    {
+        return view('user/moodBoard');
+    }
+    public function roadMapPage(): string
+    {
+        return view('user/roadMapPage');
+    }
 
     // ── Helpers ───────────────────────────────────────────────────────
     private function getCartConditions(): array
     {
-        $userId = session()->get('user')['id'] ?? null;
-        return $userId ? ['user_id' => $userId] : ['session_id' => session_id()];
+        $user   = session()->get('user');
+        $userId = $user['id'] ?? null;
+
+        if ($userId) {
+            return ['user_id' => $userId];
+        }
+
+        // Use a stable, self-managed session key instead of session_id()
+        if (!session()->has('cart_session_id')) {
+            session()->set('cart_session_id', bin2hex(random_bytes(16)));
+        }
+
+        return ['session_id' => session()->get('cart_session_id')];
     }
 
     private function getCartTotal($model): int

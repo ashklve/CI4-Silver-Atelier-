@@ -19,16 +19,17 @@ class CreateCartItemsTable extends Migration
                 'type'       => 'INT',
                 'constraint' => 11,
                 'unsigned'   => true,
-                'null'       => true,
+                'null'       => true, // Must be nullable for guests
             ],
             'session_id' => [
                 'type'       => 'VARCHAR',
                 'constraint' => 255,
-                'null'       => true,
+                'null'       => true, // Must be nullable for logged-in users
             ],
             'product_id' => [
                 'type'       => 'INT',
                 'constraint' => 11,
+                'unsigned'   => true,
             ],
             'name' => [
                 'type'       => 'VARCHAR',
@@ -57,13 +58,13 @@ class CreateCartItemsTable extends Migration
                 'null' => true,
             ],
         ]);
+
         $this->forge->addKey('id', true);
-        $this->forge->addKey(['user_id', 'session_id']);
-        $this->forge->createTable('cart_items');
+        $this->forge->createTable('cart_items', true);
     }
 
     public function down()
     {
-        $this->forge->dropTable('cart_items');
+        $this->forge->dropTable('cart_items', true);
     }
 }

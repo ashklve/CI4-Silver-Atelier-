@@ -8,6 +8,7 @@ use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
+use App\Models\CartItemModel;
 
 /**
  * Class BaseController
@@ -21,38 +22,31 @@ use Psr\Log\LoggerInterface;
  */
 abstract class BaseController extends Controller
 {
-    /**
-     * Instance of the main Request object.
-     *
-     * @var CLIRequest|IncomingRequest
-     */
     protected $request;
-
-    /**
-     * An array of helpers to be loaded automatically upon
-     * class instantiation. These helpers will be available
-     * to all other controllers that extend BaseController.
-     *
-     * @var list<string>
-     */
     protected $helpers = [];
 
-    /**
-     * Be sure to declare properties for any property fetch you initialized.
-     * The creation of dynamic property is deprecated in PHP 8.2.
-     */
-    // protected $session;
-
-    /**
-     * @return void
-     */
     public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
     {
-        // Do Not Edit This Line
         parent::initController($request, $response, $logger);
 
-        // Preload any models, libraries, etc, here.
+        // ── Global cart total for header badge ──
+        $this->shareCartTotal();
+    }
 
-        // E.g.: $this->session = service('session');
+    private function shareCartTotal(): void
+    {
+        $user   = session()->get('user');
+        $userId = $user['id'] ?? null;
+
+        $cond = $userId
+            ? ['user_id' => $userId]
+            : ['session_id' => session()->get('cart_session_id') ?? ''];
+
+        $model  = new CartItemModel();
+        $result = $model->selectSum('quantity')->where($cond)->first();
+
+        service('renderer')->setData([
+            'cartTotal' => (int)($result['quantity'] ?? 0),
+        ]);
     }
 }
