@@ -59,6 +59,9 @@ $routes->group('admin', function ($routes) {
     // Reports
     $routes->get('reports',            'Admin::reports');
 
-    // Accounts
-    $routes->get('accounts',           'Admin::accounts');
+    // Accounts Management Routes
+    $routes->get('accounts', 'Admin::accounts');
+    $routes->post('accounts/save', 'Admin::saveAccount');
+    $routes->post('accounts/delete', 'Admin::deleteAccount');
+    $routes->post('accounts/toggle', 'Admin::toggleAccountStatus');
 });
