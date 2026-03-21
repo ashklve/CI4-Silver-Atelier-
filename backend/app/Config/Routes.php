@@ -23,6 +23,7 @@ $routes->post('checkout/place', 'Users::placeOrder');
 
 // ── Orders ─────────────────────────────────────────────────────────────────
 $routes->get('orders', 'Users::orders');
+$routes->post('orders/pay', 'Users::submitPaymentProof');
 
 // ── Profile ────────────────────────────────────────────────────────────────
 $routes->get('profile',          'Users::profile');

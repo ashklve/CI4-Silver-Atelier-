@@ -265,6 +265,38 @@ class Users extends BaseController
         return redirect()->to('/orders?tab=to_pay');
     }
 
+    // ── Submit Payment Proof ──────────────────────────────────────────
+    public function submitPaymentProof()
+    {
+        if (!session()->has('user')) {
+            return redirect()->to('/login');
+        }
+
+        $orderId = $this->request->getPost('order_id');
+        $file    = $this->request->getFile('payment_proof');
+
+        if ($file && $file->isValid() && !$file->hasMoved()) {
+            $newName = $file->getRandomName();
+            $file->move(FCPATH . 'images/payments', $newName);
+
+            $orderModel = new OrderModel();
+            // Verify order belongs to user for security
+            $userId = session()->get('user')['id'];
+            $order  = $orderModel->where('user_id', $userId)->find($orderId);
+
+            if ($order) {
+                $orderModel->update($orderId, ['payment_proof' => $newName]);
+                session()->setFlashdata('success', 'Payment proof uploaded! We will verify it shortly.');
+            } else {
+                session()->setFlashdata('error', 'Order not found.');
+            }
+        } else {
+            session()->setFlashdata('error', 'Invalid file upload. Please try again.');
+        }
+
+        return redirect()->to('/orders?tab=to_pay');
+    }
+
     // ── My Orders ─────────────────────────────────────────────────────
     public function orders()
     {

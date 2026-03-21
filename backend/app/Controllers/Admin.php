@@ -175,12 +175,42 @@ class Admin extends BaseController
         $status = $this->request->getPost('status');
         $allowed = ['to_pay', 'to_ship', 'to_receive', 'completed', 'cancelled', 'refund'];
 
-        if (in_array($status, $allowed)) {
-            $data = ['status' => $status];
-            if ($status === 'completed') $data['paid_at'] = date('Y-m-d H:i:s');
-            (new OrderModel())->update($id, $data);
-            session()->setFlashdata('success', 'Order status updated.');
+        if (!in_array($status, $allowed)) {
+            session()->setFlashdata('error', 'Invalid status.');
+            return redirect()->back();
         }
+
+        // Map order status → payment_status automatically
+        $paymentStatusMap = [
+            'to_pay'      => 'pending',
+            'to_ship'     => 'paid',      // admin confirmed payment → mark paid
+            'to_receive'  => 'paid',
+            'completed'   => 'paid',
+            'cancelled'   => 'cancelled',
+            'refund'      => 'refunded',
+        ];
+
+        $data = [
+            'status'         => $status,
+            'payment_status' => $paymentStatusMap[$status],
+        ];
+
+        // Set paid_at timestamp when moving to paid for the first time
+        if (in_array($status, ['to_ship', 'to_receive', 'completed'])) {
+            // Only set if not already set
+            $order = (new OrderModel())->find($id);
+            if (empty($order['paid_at'])) {
+                $data['paid_at'] = date('Y-m-d H:i:s');
+            }
+        }
+
+        // Clear paid_at if cancelled or refunded
+        if (in_array($status, ['cancelled', 'refund'])) {
+            $data['paid_at'] = null;
+        }
+
+        (new OrderModel())->update($id, $data);
+        session()->setFlashdata('success', 'Order status updated.');
 
         return redirect()->back();
     }

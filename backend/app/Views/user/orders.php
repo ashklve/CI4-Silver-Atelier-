@@ -98,29 +98,29 @@ $statusBadge = [
         }
     </style>
 
-    <main class="flex-grow pt-28 pb-16 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <main class="flex-grow mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16 w-full max-w-5xl">
 
         <!-- Header -->
         <div class="mb-8">
-            <nav class="flex items-center gap-2 text-xs text-coco-mid mb-3">
+            <nav class="flex items-center gap-2 mb-3 text-coco-mid text-xs">
                 <a href="<?= site_url('/') ?>" class="hover:text-coco-orange transition-colors">Home</a>
-                <i class="fas fa-chevron-right text-[9px]"></i>
-                <span class="text-coco-orange font-semibold">My Orders</span>
+                <i class="fa-chevron-right text-[9px] fas"></i>
+                <span class="font-semibold text-coco-orange">My Orders</span>
             </nav>
-            <div class="flex items-end justify-between">
+            <div class="flex justify-between items-end">
                 <div>
-                    <h1 class="font-display font-black text-4xl sm:text-5xl text-coco-brown">My Orders</h1>
-                    <p class="text-coco-mid mt-1 text-sm">Track and manage your COCOIR purchases</p>
+                    <h1 class="font-display font-black text-coco-brown text-4xl sm:text-5xl">My Orders</h1>
+                    <p class="mt-1 text-coco-mid text-sm">Track and manage your COCOIR purchases</p>
                 </div>
-                <a href="<?= site_url('products') ?>" class="hidden sm:inline-flex items-center gap-2 text-sm font-semibold text-coco-orange hover:text-coco-dark transition-colors">
-                    <i class="fas fa-leaf text-xs"></i> Shop More
+                <a href="<?= site_url('products') ?>" class="hidden sm:inline-flex items-center gap-2 font-semibold text-coco-orange hover:text-coco-dark text-sm transition-colors">
+                    <i class="text-xs fas fa-leaf"></i> Shop More
                 </a>
             </div>
         </div>
 
         <!-- Tab bar -->
-        <div class="bg-white rounded-2xl border border-coco-sand/60 shadow-sm mb-8 overflow-x-auto">
-            <div class="flex min-w-max px-2">
+        <div class="bg-white shadow-sm mb-8 border border-coco-sand/60 rounded-2xl overflow-x-auto">
+            <div class="flex px-2 min-w-max">
                 <?php foreach ($tabs as $key => $tab): ?>
                     <a href="?tab=<?= $key ?>"
                         class="tab-btn <?= $activeTab === $key ? 'active' : 'text-coco-mid' ?> flex items-center gap-2 px-4 py-4 font-semibold text-sm whitespace-nowrap hover:text-coco-orange">
@@ -142,11 +142,11 @@ $statusBadge = [
 
             <?php if (empty($activeOrders)): ?>
                 <!-- Empty state -->
-                <div class="flex flex-col items-center justify-center py-20 text-center">
-                    <div class="text-5xl mb-4">📦</div>
-                    <h3 class="font-display font-bold text-xl text-coco-brown mb-2">No <?= $tabs[$activeTab]['label'] ?> orders</h3>
-                    <p class="text-coco-mid text-sm mb-6">You don't have any orders here yet.</p>
-                    <a href="<?= site_url('products') ?>" class="bg-coco-orange text-white px-8 py-3 rounded-full font-bold text-sm hover:bg-coco-dark transition-colors">
+                <div class="flex flex-col justify-center items-center py-20 text-center">
+                    <div class="mb-4 text-5xl">📦</div>
+                    <h3 class="mb-2 font-display font-bold text-coco-brown text-xl">No <?= $tabs[$activeTab]['label'] ?> orders</h3>
+                    <p class="mb-6 text-coco-mid text-sm">You don't have any orders here yet.</p>
+                    <a href="<?= site_url('products') ?>" class="bg-coco-orange hover:bg-coco-dark px-8 py-3 rounded-full font-bold text-white text-sm transition-colors">
                         Start Shopping
                     </a>
                 </div>
@@ -162,10 +162,10 @@ $statusBadge = [
                     $statusOrder = ['to_pay', 'to_ship', 'to_receive', 'completed'];
                     $currentIdx  = array_search($order['status'], $statusOrder);
                 ?>
-                    <div class="order-card bg-white rounded-3xl border border-coco-sand/60 shadow-sm overflow-hidden">
+                    <div class="order-card bg-white shadow-sm border border-coco-sand/60 rounded-3xl overflow-hidden">
 
                         <!-- Order header -->
-                        <div class="px-5 py-4 border-b border-coco-sand/40 flex flex-wrap items-center justify-between gap-3 fiber-bg">
+                        <div class="flex flex-wrap justify-between items-center gap-3 px-5 py-4 border-coco-sand/40 border-b fiber-bg">
                             <div class="flex items-center gap-3">
                                 <div>
                                     <div class="font-bold text-coco-brown text-sm"><?= esc($order['order_number'] ?? '#' . $order['id']) ?></div>
@@ -184,10 +184,10 @@ $statusBadge = [
                         </div>
 
                         <!-- Order items -->
-                        <div class="px-5 py-4 space-y-3">
+                        <div class="space-y-3 px-5 py-4">
                             <?php foreach (($order['items'] ?? []) as $item): ?>
                                 <div class="flex items-center gap-4">
-                                    <div class="w-14 h-14 rounded-xl overflow-hidden bg-coco-sand/30 flex-shrink-0">
+                                    <div class="flex-shrink-0 bg-coco-sand/30 rounded-xl w-14 h-14 overflow-hidden">
                                         <img src="/images/<?= esc($item['product_image']) ?>" alt="<?= esc($item['product_name']) ?>" class="w-full h-full object-cover">
                                     </div>
                                     <div class="flex-1">
@@ -201,8 +201,8 @@ $statusBadge = [
 
                         <!-- Progress timeline (only for active orders, not refund) -->
                         <?php if ($order['status'] !== 'refund'): ?>
-                            <div class="px-5 py-4 border-t border-coco-sand/30">
-                                <div class="flex items-center justify-between max-w-sm">
+                            <div class="px-5 py-4 border-coco-sand/30 border-t">
+                                <div class="flex justify-between items-center max-w-sm">
                                     <?php
                                     $steps = [
                                         ['key' => 'to_pay',     'label' => 'Order Placed', 'icon' => 'fa-shopping-bag'],
@@ -231,7 +231,7 @@ $statusBadge = [
                         <?php endif; ?>
 
                         <!-- Order footer -->
-                        <div class="px-5 py-4 border-t border-coco-sand/30 flex flex-wrap items-center justify-between gap-3 bg-coco-cream/30">
+                        <div class="flex flex-wrap justify-between items-center gap-3 bg-coco-cream/30 px-5 py-4 border-coco-sand/30 border-t">
                             <div class="text-sm">
                                 <span class="text-coco-mid"><?= $itemCount ?> item(s) · </span>
                                 <span class="font-black text-coco-brown">Total: </span>
@@ -240,19 +240,19 @@ $statusBadge = [
                             <div class="flex gap-2">
                                 <!-- View Details -->
                                 <button onclick="showOrderDetail('<?= esc($order['order_number'] ?? '#' . $order['id']) ?>')"
-                                    class="border-2 border-coco-sand text-coco-mid text-xs font-bold px-4 py-2 rounded-full hover:border-coco-orange hover:text-coco-orange transition-all">
+                                    class="px-4 py-2 border-2 border-coco-sand hover:border-coco-orange rounded-full font-bold text-coco-mid hover:text-coco-orange text-xs transition-all">
                                     View Details
                                 </button>
                                 <?php if ($order['status'] === 'to_pay'): ?>
-                                    <a href="<?= site_url('checkout') ?>" class="bg-coco-orange text-white text-xs font-bold px-4 py-2 rounded-full hover:bg-coco-dark transition-colors">
+                                    <button onclick="openPayModal(<?= $order['id'] ?>)" class="bg-coco-orange hover:bg-coco-dark px-4 py-2 rounded-full font-bold text-white text-xs transition-colors">
                                         Pay Now
-                                    </a>
+                                    </button>
                                 <?php elseif ($order['status'] === 'to_receive'): ?>
-                                    <button class="bg-coco-green text-white text-xs font-bold px-4 py-2 rounded-full hover:bg-coco-dark transition-colors">
+                                    <button class="bg-coco-green hover:bg-coco-dark px-4 py-2 rounded-full font-bold text-white text-xs transition-colors">
                                         Order Received
                                     </button>
                                 <?php elseif ($order['status'] === 'completed'): ?>
-                                    <a href="<?= site_url('products') ?>" class="bg-coco-brown text-white text-xs font-bold px-4 py-2 rounded-full hover:bg-coco-orange transition-colors">
+                                    <a href="<?= site_url('products') ?>" class="bg-coco-brown hover:bg-coco-orange px-4 py-2 rounded-full font-bold text-white text-xs transition-colors">
                                         Buy Again
                                     </a>
                                 <?php endif; ?>
@@ -265,17 +265,91 @@ $statusBadge = [
     </main>
 
     <!-- ── Order Detail Modal ── -->
-    <div id="order-modal" class="fixed inset-0 z-[9997] hidden items-center justify-center p-4" onclick="if(event.target===this)closeModal()">
+    <div id="order-modal" class="hidden z-[9997] fixed inset-0 justify-center items-center p-4" onclick="if(event.target===this)closeModal()">
         <div class="absolute inset-0 bg-coco-brown/40 backdrop-blur-sm" onclick="closeModal()"></div>
-        <div class="relative bg-white rounded-3xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
-            <div class="flex items-center justify-between px-6 py-4 border-b border-coco-sand/40">
-                <h3 class="font-display font-bold text-xl text-coco-brown" id="modal-order-id">Order Details</h3>
-                <button onclick="closeModal()" class="w-8 h-8 rounded-full bg-coco-sand/40 flex items-center justify-center hover:bg-coco-sand transition-colors">
-                    <i class="fas fa-times text-coco-mid text-xs"></i>
+        <div class="relative bg-white shadow-2xl rounded-3xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center px-6 py-4 border-coco-sand/40 border-b">
+                <h3 class="font-display font-bold text-coco-brown text-xl" id="modal-order-id">Order Details</h3>
+                <button onclick="closeModal()" class="flex justify-center items-center bg-coco-sand/40 hover:bg-coco-sand rounded-full w-8 h-8 transition-colors">
+                    <i class="text-coco-mid text-xs fas fa-times"></i>
                 </button>
             </div>
-            <div id="modal-body" class="p-6 space-y-4">
+            <div id="modal-body" class="space-y-4 p-6">
                 <!-- filled by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Pay Now Modal ── -->
+    <div id="pay-modal" class="hidden z-[9998] fixed inset-0 justify-center items-center p-4" onclick="if(event.target===this)closePayModal()">
+        <div class="absolute inset-0 bg-coco-brown/60 backdrop-blur-sm" onclick="closePayModal()"></div>
+        <div class="relative bg-white shadow-2xl rounded-3xl w-full max-w-md max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="font-display font-bold text-coco-brown text-xl">Complete Payment</h3>
+                    <button onclick="closePayModal()" class="flex justify-center items-center bg-gray-100 hover:bg-gray-200 rounded-full w-8 h-8 transition-colors">
+                        <i class="text-coco-mid text-xs fas fa-times"></i>
+                    </button>
+                </div>
+
+                <form action="<?= site_url('orders/pay') ?>" method="POST" enctype="multipart/form-data" class="space-y-5">
+                    <?= csrf_field() ?>
+                    <input type="hidden" name="order_id" id="pay-order-id">
+
+                    <!-- Amount Display -->
+                    <div class="bg-coco-cream p-4 border border-coco-sand rounded-2xl text-center">
+                        <p class="mb-1 font-bold text-coco-mid text-xs uppercase tracking-wide">Total Amount Due</p>
+                        <p class="font-display font-black text-coco-orange text-3xl" id="pay-amount">₱0.00</p>
+                    </div>
+
+                    <!-- QR Code -->
+                    <div class="space-y-3 pt-2 text-center">
+                        <p class="font-bold text-coco-brown text-sm">Scan to Pay via InstaPay / GCash / Maya</p>
+                        <div class="flex justify-center">
+                            <div class="inline-block bg-white shadow-sm p-2 border-2 border-coco-orange rounded-xl">
+                                <svg viewBox="0 0 100 100" class="w-40 h-40" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="100" height="100" fill="white" />
+                                    <rect x="10" y="10" width="30" height="30" fill="none" stroke="#3B2314" stroke-width="3" />
+                                    <rect x="15" y="15" width="20" height="20" fill="#3B2314" />
+                                    <rect x="60" y="10" width="30" height="30" fill="none" stroke="#3B2314" stroke-width="3" />
+                                    <rect x="65" y="15" width="20" height="20" fill="#3B2314" />
+                                    <rect x="10" y="60" width="30" height="30" fill="none" stroke="#3B2314" stroke-width="3" />
+                                    <rect x="15" y="65" width="20" height="20" fill="#3B2314" />
+                                    <rect x="60" y="55" width="5" height="5" fill="#3B2314" />
+                                    <rect x="70" y="55" width="5" height="5" fill="#3B2314" />
+                                    <rect x="65" y="60" width="5" height="5" fill="#3B2314" />
+                                    <rect x="80" y="60" width="5" height="5" fill="#3B2314" />
+                                    <rect x="60" y="65" width="5" height="5" fill="#3B2314" />
+                                    <rect x="75" y="65" width="10" height="5" fill="#3B2314" />
+                                    <rect x="60" y="75" width="10" height="5" fill="#3B2314" />
+                                    <rect x="75" y="70" width="5" height="10" fill="#3B2314" />
+                                    <rect x="85" y="75" width="5" height="10" fill="#3B2314" />
+                                    <text x="50" y="54" text-anchor="middle" font-size="5" fill="#E87722" font-family="sans-serif" font-weight="bold">COCOIR</text>
+                                </svg>
+                            </div>
+                        </div>
+                        <p class="text-coco-mid text-xs">Account: <strong class="text-coco-brown">COCOIR Co. / 09XX-XXX-XXXX</strong></p>
+                    </div>
+
+                    <!-- Upload Proof -->
+                    <div class="pt-2">
+                        <label class="block mb-2 font-bold text-coco-mid text-xs uppercase tracking-wide">Upload Payment Screenshot</label>
+                        <label class="group flex flex-col items-center gap-2 hover:bg-coco-orange/5 p-6 border-2 border-coco-sand hover:border-coco-orange border-dashed rounded-xl transition-all cursor-pointer">
+                            <div class="flex justify-center items-center bg-coco-cream group-hover:bg-white rounded-full w-10 h-10 transition-colors">
+                                <i class="text-coco-tan group-hover:text-coco-orange fas fa-cloud-upload-alt"></i>
+                            </div>
+                            <span class="text-coco-mid text-xs" id="pay-file-label">Click to select image</span>
+                            <input type="file" name="payment_proof" accept="image/*" class="sr-only" required onchange="previewPayProof(this)">
+                        </label>
+                        <div id="pay-preview-area" class="hidden mt-3">
+                            <img id="pay-preview-img" class="bg-coco-cream/30 border border-coco-sand rounded-xl w-full h-32 object-contain">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="bg-coco-orange hover:bg-coco-dark shadow-lg hover:shadow-xl py-3.5 rounded-xl w-full font-bold text-white transition-colors hover:-translate-y-0.5 transform">
+                        Submit Payment Proof
+                    </button>
+                </form>
             </div>
         </div>
     </div>
@@ -329,38 +403,38 @@ $statusBadge = [
 
             // Map items to HTML
             let itemsHtml = (order.items || []).map(item => `
-        <div class="flex items-center gap-4 py-3 border-b border-coco-sand/30 last:border-0">
-            <img src="/images/${item.product_image || 'default.png'}" class="w-14 h-14 rounded-xl object-cover bg-gray-100 flex-shrink-0">
+        <div class="flex items-center gap-4 py-3 border-coco-sand/30 last:border-0 border-b">
+            <img src="/images/${item.product_image || 'default.png'}" class="flex-shrink-0 bg-gray-100 rounded-xl w-14 h-14 object-cover">
             <div class="flex-1 min-w-0">
-                <div class="font-bold text-sm text-coco-brown truncate">${item.product_name}</div>
-                <div class="text-xs text-coco-mid">Qty: ${item.quantity} &times; ₱${Number(item.unit_price).toLocaleString('en-PH',{minimumFractionDigits:2})}</div>
+                <div class="font-bold text-coco-brown text-sm truncate">${item.product_name}</div>
+                <div class="text-coco-mid text-xs">Qty: ${item.quantity} &times; ₱${Number(item.unit_price).toLocaleString('en-PH',{minimumFractionDigits:2})}</div>
             </div>
             <div class="font-black text-coco-orange text-sm">₱${(item.quantity * item.unit_price).toLocaleString('en-PH',{minimumFractionDigits:2})}</div>
         </div>`).join('');
             if (!itemsHtml) {
-                itemsHtml = '<p class="text-center text-coco-mid text-sm py-4">No items in this order.</p>';
+                itemsHtml = '<p class="py-4 text-coco-mid text-sm text-center">No items in this order.</p>';
             }
 
             // Action buttons at the bottom
             let actionButton = '';
             if (order.status === 'to_receive') {
-                actionButton = `<button class="w-full bg-coco-green text-white font-bold py-3 rounded-full hover:bg-coco-dark transition-colors" onclick="closeModal()">✓ Confirm Order Received</button>`;
+                actionButton = `<button class="bg-coco-green hover:bg-coco-dark py-3 rounded-full w-full font-bold text-white transition-colors" onclick="closeModal()">✓ Confirm Order Received</button>`;
             } else if (order.status === 'completed') {
-                actionButton = `<button class="w-full border-2 border-red-200 text-red-500 font-bold py-3 rounded-full hover:bg-red-50 transition-colors text-sm" onclick="closeModal()">Request Refund / Return</button>`;
+                actionButton = `<button class="hover:bg-red-50 py-3 border-2 border-red-200 rounded-full w-full font-bold text-red-500 text-sm transition-colors" onclick="closeModal()">Request Refund / Return</button>`;
             }
 
             // Inject everything into the modal body
             const modalBody = document.getElementById('modal-body');
             modalBody.innerHTML = `
-        <div class="flex items-center justify-between gap-2 mb-4">
+        <div class="flex justify-between items-center gap-2 mb-4">
             <span class="text-xs ${badge.bg} ${badge.text} font-bold rounded-full px-3 py-1">${badge.label}</span>
-            <span class="text-xs text-coco-mid">${order.created_at ? new Date(order.created_at).toLocaleDateString('en-PH',{year:'numeric',month:'short',day:'numeric'}) : ''}</span>
+            <span class="text-coco-mid text-xs">${order.created_at ? new Date(order.created_at).toLocaleDateString('en-PH',{year:'numeric',month:'short',day:'numeric'}) : ''}</span>
         </div>
 
         <!-- Delivery Address -->
         <div>
-            <h4 class="font-bold text-coco-brown mb-2 flex items-center gap-2"><i class="fas fa-map-marker-alt text-coco-orange text-xs"></i> Delivery Address</h4>
-            <div class="bg-coco-sand/30 p-4 rounded-xl text-sm space-y-1">
+            <h4 class="flex items-center gap-2 mb-2 font-bold text-coco-brown"><i class="text-coco-orange text-xs fas fa-map-marker-alt"></i> Delivery Address</h4>
+            <div class="space-y-1 bg-coco-sand/30 p-4 rounded-xl text-sm">
                 <p class="font-semibold text-coco-dark">${order.recipient_name || 'N/A'}</p>
                 <p class="text-coco-mid">${order.recipient_phone || ''}</p>
                 <p class="text-coco-mid">${receiveLabel === '🏪 Store Pickup' ? 'For Store Pickup' : (fullAddress || 'No address provided')}</p>
@@ -369,14 +443,14 @@ $statusBadge = [
 
         <!-- Products -->
         <div>
-            <h4 class="font-bold text-coco-brown mb-2 flex items-center gap-2"><i class="fas fa-box-open text-coco-orange text-xs"></i> Products Ordered</h4>
-            <div class="border-y border-coco-sand/40">${itemsHtml}</div>
+            <h4 class="flex items-center gap-2 mb-2 font-bold text-coco-brown"><i class="text-coco-orange text-xs fas fa-box-open"></i> Products Ordered</h4>
+            <div class="border-coco-sand/40 border-y">${itemsHtml}</div>
         </div>
 
         <!-- Payment Details -->
         <div>
-            <h4 class="font-bold text-coco-brown mb-2 flex items-center gap-2"><i class="fas fa-receipt text-coco-orange text-xs"></i> Payment Details</h4>
-            <div class="bg-coco-sand/30 p-4 rounded-xl text-sm space-y-2">
+            <h4 class="flex items-center gap-2 mb-2 font-bold text-coco-brown"><i class="text-coco-orange text-xs fas fa-receipt"></i> Payment Details</h4>
+            <div class="space-y-2 bg-coco-sand/30 p-4 rounded-xl text-sm">
                 <div class="flex justify-between">
                     <span class="text-coco-mid">Payment Method:</span>
                     <span class="font-semibold text-coco-dark">${payLabel}</span>
@@ -389,7 +463,7 @@ $statusBadge = [
                     <span class="text-coco-mid">Shipping Fee:</span>
                     <span class="font-semibold text-coco-dark">${Number(order.shipping_amount||0) > 0 ? '₱'+Number(order.shipping_amount).toLocaleString('en-PH',{minimumFractionDigits:2}) : 'FREE'}</span>
                 </div>
-                <div class="flex justify-between font-bold text-base border-t border-coco-sand pt-2 mt-2">
+                <div class="flex justify-between mt-2 pt-2 border-coco-sand border-t font-bold text-base">
                     <span class="text-coco-brown">Order Total:</span>
                     <span class="text-coco-orange">₱${Number(order.total_amount||0).toLocaleString('en-PH',{minimumFractionDigits:2})}</span>
                 </div>
@@ -397,7 +471,7 @@ $statusBadge = [
         </div>
 
         <!-- Order Info -->
-        <div class="text-xs text-coco-mid space-y-1 border-t border-coco-sand/40 pt-4">
+        <div class="space-y-1 pt-4 border-coco-sand/40 border-t text-coco-mid text-xs">
             <div class="flex justify-between"><span>Order ID:</span> <span class="font-mono">${order.order_number || '#' + order.id}</span></div>
             <div class="flex justify-between"><span>Order Time:</span> <span>${order.created_at ? new Date(order.created_at).toLocaleString('en-PH', {dateStyle: 'medium', timeStyle: 'short'}) : ''}</span></div>
         </div>
@@ -418,9 +492,48 @@ $statusBadge = [
             modal.classList.remove('flex');
         }
 
+        function openPayModal(orderId) {
+            const order = ordersData.find(o => o.id == orderId);
+            if (!order) return;
+
+            document.getElementById('pay-order-id').value = order.id;
+            document.getElementById('pay-amount').textContent = '₱' + Number(order.total_amount).toLocaleString('en-PH', {
+                minimumFractionDigits: 2
+            });
+
+            // Reset form
+            document.getElementById('pay-preview-area').classList.add('hidden');
+            document.getElementById('pay-file-label').textContent = 'Click to select image';
+
+            const modal = document.getElementById('pay-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closePayModal() {
+            const modal = document.getElementById('pay-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
         document.addEventListener('keydown', e => {
-            if (e.key === 'Escape') closeModal();
+            if (e.key === 'Escape') {
+                closeModal();
+                closePayModal();
+            }
         });
+
+        function previewPayProof(input) {
+            if (input.files && input.files[0]) {
+                document.getElementById('pay-file-label').textContent = input.files[0].name;
+                const reader = new FileReader();
+                reader.onload = e => {
+                    document.getElementById('pay-preview-img').src = e.target.result;
+                    document.getElementById('pay-preview-area').classList.remove('hidden');
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
     </script>
 </body>
 
