@@ -38,8 +38,8 @@ class OrderModel extends Model
     public function getByUser(int $userId): array
     {
         $orders = $this->where('user_id', $userId)
-                       ->orderBy('created_at', 'DESC')
-                       ->findAll();
+            ->orderBy('created_at', 'DESC')
+            ->findAll();
 
         if (empty($orders)) return [];
 
@@ -56,8 +56,8 @@ class OrderModel extends Model
     public function getOrderForUser(int $orderId, int $userId): ?array
     {
         $order = $this->where('id', $orderId)
-                      ->where('user_id', $userId)
-                      ->first();
+            ->where('user_id', $userId)
+            ->first();
 
         if (!$order) return null;
 
@@ -70,19 +70,24 @@ class OrderModel extends Model
     // ── Generate unique order number e.g. ORD-20250001 ────────────────
     public function generateOrderNumber(): string
     {
-        $year  = date('Y');
-        $last  = $this->like('order_number', "ORD-$year", 'after')
-                      ->orderBy('id', 'DESC')
-                      ->first();
+        $year = date('Y');
+
+        // Find the last order from this year only
+        $last = $this->where('order_number LIKE', "ORD-{$year}-%")
+            ->orderBy('id', 'DESC')
+            ->first();
 
         $seq = 1;
         if ($last) {
+            // order_number format: ORD-2026-0001
+            // explode gives: ['ORD', '2026', '0001']
             $parts = explode('-', $last['order_number']);
             $seq   = (int) end($parts) + 1;
         }
 
-        return 'ORD-' . $year . str_pad($seq, 4, '0', STR_PAD_LEFT);
+        return 'ORD-' . $year . '-' . str_pad($seq, 4, '0', STR_PAD_LEFT);
     }
+
 
     // ── Place a new order from cart items ─────────────────────────────
     public function placeOrder(array $data, array $cartItems): int|false

@@ -42,11 +42,14 @@ abstract class BaseController extends Controller
             ? ['user_id' => $userId]
             : ['session_id' => session()->get('cart_session_id') ?? ''];
 
-        $model  = new CartItemModel();
-        $result = $model->selectSum('quantity')->where($cond)->first();
+        try {
+            $model  = new CartItemModel();
+            $result = $model->where($cond)->selectSum('quantity')->get()->getRow();
+            $total  = (int)($result->quantity ?? 0);
+        } catch (\Throwable $e) {
+            $total = 0;
+        }
 
-        service('renderer')->setData([
-            'cartTotal' => (int)($result['quantity'] ?? 0),
-        ]);
+        service('renderer')->setData(['cartTotal' => $total]);
     }
 }
