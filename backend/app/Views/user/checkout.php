@@ -253,7 +253,7 @@ $total    = $subtotal + $shipping;
                     <!-- GCash / InstaPay QR -->
                     <label class="method-card cursor-pointer block">
                         <input type="radio" name="payment_method" value="instapay" class="sr-only" checked onchange="switchPayment('instapay')">
-                        <div class="card-body border-2 border-coco-orange bg-coco-orange/5 rounded-2xl p-4 flex items-center gap-4">
+                        <div class="card-body border-2 border-coco-orange bg-coco-orange/5 rounded-2xl p-4 flex items-center gap-4" id="card-instapay">
                             <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-sm flex-shrink-0">
                                 <i class="fas fa-qrcode text-coco-orange text-lg"></i>
                             </div>
@@ -271,7 +271,7 @@ $total    = $subtotal + $shipping;
                     <!-- COD -->
                     <label class="method-card cursor-pointer block">
                         <input type="radio" name="payment_method" value="cod" class="sr-only" onchange="switchPayment('cod')">
-                        <div class="card-body border-2 border-coco-sand rounded-2xl p-4 flex items-center gap-4">
+                        <div class="card-body border-2 border-coco-sand rounded-2xl p-4 flex items-center gap-4" id="card-cod">
                             <div class="w-10 h-10 bg-coco-green/10 rounded-xl flex items-center justify-center flex-shrink-0">
                                 <i class="fas fa-money-bill-wave text-coco-green text-lg"></i>
                             </div>
@@ -463,6 +463,17 @@ function switchPayment(method) {
     document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
     document.getElementById('panel-' + method).classList.add('active');
     document.getElementById('hidden-payment').value = method;
+
+    const instapay = document.getElementById('card-instapay');
+    const cod      = document.getElementById('card-cod');
+
+    instapay.classList.toggle('border-coco-orange', method === 'instapay');
+    instapay.classList.toggle('bg-coco-orange/5',   method === 'instapay');
+    instapay.classList.toggle('border-coco-sand',   method !== 'instapay');
+
+    cod.classList.toggle('border-coco-orange', method === 'cod');
+    cod.classList.toggle('bg-coco-orange/5',   method === 'cod');
+    cod.classList.toggle('border-coco-sand',   method !== 'cod');
 }
 
 function previewScreenshot(input) {
