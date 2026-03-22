@@ -15,6 +15,7 @@ $grouped = [
     'to_ship'    => [],
     'to_receive' => [],
     'completed'  => [],
+    'cancelled'  => [],
     'refund'     => [],
 ];
 foreach ($orders as $o) {
@@ -27,6 +28,7 @@ $tabs = [
     'to_ship'    => ['label' => 'To Ship',    'icon' => 'fa-box',            'color' => 'text-coco-orange'],
     'to_receive' => ['label' => 'To Receive', 'icon' => 'fa-truck',          'color' => 'text-coco-green'],
     'completed'  => ['label' => 'Completed',  'icon' => 'fa-check-circle',   'color' => 'text-coco-green'],
+    'cancelled'  => ['label' => 'Cancelled',  'icon' => 'fa-times-circle',   'color' => 'text-gray-500'],
     'refund'     => ['label' => 'Refund',     'icon' => 'fa-undo',           'color' => 'text-red-400'],
 ];
 
@@ -40,6 +42,7 @@ $statusBadge = [
     'to_ship'    => ['bg' => 'bg-orange-100',  'text' => 'text-orange-700',  'label' => 'Preparing Order'],
     'to_receive' => ['bg' => 'bg-blue-100',    'text' => 'text-blue-700',    'label' => 'Out for Delivery'],
     'completed'  => ['bg' => 'bg-green-100',   'text' => 'text-green-700',   'label' => 'Completed'],
+    'cancelled'  => ['bg' => 'bg-gray-100',    'text' => 'text-gray-600',    'label' => 'Cancelled'],
     'refund'     => ['bg' => 'bg-red-100',     'text' => 'text-red-700',     'label' => 'Refund / Return'],
 ];
 ?>
@@ -199,8 +202,8 @@ $statusBadge = [
                             <?php endforeach; ?>
                         </div>
 
-                        <!-- Progress timeline (only for active orders, not refund) -->
-                        <?php if ($order['status'] !== 'refund'): ?>
+                        <!-- Progress timeline (only for active orders, not refund/cancelled) -->
+                        <?php if (!in_array($order['status'], ['refund', 'cancelled'])): ?>
                             <div class="px-5 py-4 border-coco-sand/30 border-t">
                                 <div class="flex justify-between items-center max-w-sm">
                                     <?php
@@ -255,6 +258,25 @@ $statusBadge = [
                                     <a href="<?= site_url('products') ?>" class="bg-coco-brown hover:bg-coco-orange px-4 py-2 rounded-full font-bold text-white text-xs transition-colors">
                                         Buy Again
                                     </a>
+                                    <button onclick="openRefundModal(<?= $order['id'] ?>)" class="hover:bg-red-50 px-4 py-2 border-2 border-red-200 rounded-full font-bold text-red-500 text-xs transition-colors">
+                                        Request Refund
+                                    </button>
+                                <?php endif; ?>
+
+                                <?php if ($order['status'] === 'refund'): ?>
+                                    <button onclick="openRefundDetailsModal(<?= $order['id'] ?>)" class="bg-red-50 hover:bg-red-100 px-4 py-2 border border-red-200 rounded-full font-bold text-red-600 text-xs transition-colors">
+                                        Refund Details
+                                    </button>
+                                <?php endif; ?>
+
+                                <?php if (in_array($order['status'], ['to_pay', 'to_ship'])): ?>
+                                    <form action="<?= site_url('orders/cancel') ?>" method="POST" onsubmit="return confirm('Are you sure you want to cancel this order?')" class="contents">
+                                        <?= csrf_field() ?>
+                                        <input type="hidden" name="order_id" value="<?= $order['id'] ?>">
+                                        <button type="submit" class="hover:bg-red-50 px-4 py-2 border-2 border-red-200 rounded-full font-bold text-red-500 text-xs transition-colors">
+                                            Cancel
+                                        </button>
+                                    </form>
                                 <?php endif; ?>
                             </div>
                         </div>
@@ -354,6 +376,83 @@ $statusBadge = [
         </div>
     </div>
 
+    <!-- ── Request Refund Modal ── -->
+    <div id="refund-modal" class="hidden z-[9998] fixed inset-0 justify-center items-center p-4" onclick="if(event.target===this)closeRefundModal()">
+        <div class="absolute inset-0 bg-coco-brown/60 backdrop-blur-sm" onclick="closeRefundModal()"></div>
+        <div class="relative bg-white shadow-2xl rounded-3xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="font-display font-bold text-coco-brown text-xl">Request Return / Refund</h3>
+                    <button onclick="closeRefundModal()" class="flex justify-center items-center bg-gray-100 hover:bg-gray-200 rounded-full w-8 h-8 transition-colors">
+                        <i class="text-coco-mid text-xs fas fa-times"></i>
+                    </button>
+                </div>
+
+                <form action="<?= site_url('orders/refund') ?>" method="POST" enctype="multipart/form-data" class="space-y-5">
+                    <?= csrf_field() ?>
+                    <input type="hidden" name="order_id" id="refund-order-id">
+
+                    <div>
+                        <label class="block mb-2 font-bold text-coco-mid text-xs uppercase tracking-wide">Reason for Refund</label>
+                        <textarea name="reason" rows="3" required placeholder="Please describe why you are returning this item..." class="bg-coco-cream/50 px-4 py-3 border-2 border-coco-sand focus:border-coco-orange rounded-xl focus:outline-none w-full text-sm transition-colors resize-none"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block mb-2 font-bold text-coco-mid text-xs uppercase tracking-wide">Upload Proof (Photo/Video)</label>
+                        <input type="file" name="refund_proof" accept="image/*,video/*" required class="hover:file:bg-coco-orange file:bg-coco-sand file:mr-4 file:px-4 file:py-2 file:border-0 file:rounded-full w-full file:font-bold text-coco-mid hover:file:text-white file:text-coco-brown file:text-xs text-sm transition-all">
+                    </div>
+
+                    <div>
+                        <label class="block mb-2 font-bold text-coco-mid text-xs uppercase tracking-wide">Your GCash / Bank QR (For Repayment)</label>
+                        <input type="file" name="refund_qr" accept="image/*" required class="hover:file:bg-coco-orange file:bg-coco-sand file:mr-4 file:px-4 file:py-2 file:border-0 file:rounded-full w-full file:font-bold text-coco-mid hover:file:text-white file:text-coco-brown file:text-xs text-sm transition-all">
+                        <p class="mt-1 text-[10px] text-coco-mid">Upload your QR code or account details where we should send the refund.</p>
+                    </div>
+
+                    <button type="submit" class="bg-coco-orange hover:bg-coco-dark shadow-lg hover:shadow-xl py-3.5 rounded-xl w-full font-bold text-white transition-colors hover:-translate-y-0.5 transform">
+                        Submit Request
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Refund Details Modal ── -->
+    <div id="refund-details-modal" class="hidden z-[9998] fixed inset-0 justify-center items-center p-4" onclick="if(event.target===this)closeRefundDetailsModal()">
+        <div class="absolute inset-0 bg-coco-brown/60 backdrop-blur-sm" onclick="closeRefundDetailsModal()"></div>
+        <div class="relative bg-white shadow-2xl rounded-3xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-6 pb-4 border-coco-sand/30 border-b">
+                    <h3 class="font-display font-bold text-coco-brown text-xl">Refund Details</h3>
+                    <button onclick="closeRefundDetailsModal()" class="flex justify-center items-center bg-gray-100 hover:bg-gray-200 rounded-full w-8 h-8 transition-colors">
+                        <i class="text-coco-mid text-xs fas fa-times"></i>
+                    </button>
+                </div>
+
+                <div class="space-y-6">
+                    <div>
+                        <span class="block mb-1 font-bold text-coco-mid text-xs uppercase tracking-wide">Status</span>
+                        <span class="inline-block bg-red-100 px-3 py-1 rounded-full font-bold text-red-600 text-xs">Refund Requested</span>
+                    </div>
+
+                    <div>
+                        <span class="block mb-2 font-bold text-coco-mid text-xs uppercase tracking-wide">Reason</span>
+                        <div class="bg-coco-cream/50 p-4 rounded-xl text-coco-brown text-sm" id="rd-reason"></div>
+                    </div>
+
+                    <div>
+                        <span class="block mb-2 font-bold text-coco-mid text-xs uppercase tracking-wide">Proof of Issue</span>
+                        <img id="rd-proof-img" class="bg-gray-50 border border-gray-100 rounded-xl w-full h-48 object-contain">
+                    </div>
+
+                    <div>
+                        <span class="block mb-2 font-bold text-coco-mid text-xs uppercase tracking-wide">Your Refund Account (QR)</span>
+                        <img id="rd-qr-img" class="bg-gray-50 border border-gray-100 rounded-xl w-full h-48 object-contain">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <?= $this->include('components/footer') ?>
 
     <script>
@@ -392,6 +491,11 @@ $statusBadge = [
                     bg: 'bg-green-100',
                     text: 'text-green-700',
                     label: 'Completed'
+                },
+                cancelled: {
+                    bg: 'bg-gray-100',
+                    text: 'text-gray-600',
+                    label: 'Cancelled'
                 },
                 refund: {
                     bg: 'bg-red-100',
@@ -516,10 +620,50 @@ $statusBadge = [
             modal.classList.remove('flex');
         }
 
+        function openRefundModal(orderId) {
+            document.getElementById('refund-order-id').value = orderId;
+            const modal = document.getElementById('refund-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeRefundModal() {
+            const modal = document.getElementById('refund-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function openRefundDetailsModal(orderId) {
+            const order = ordersData.find(o => o.id == orderId);
+            if (!order) return;
+
+            document.getElementById('rd-reason').textContent = order.refund_reason || 'No reason provided.';
+
+            const proofImg = document.getElementById('rd-proof-img');
+            proofImg.src = order.refund_proof ? '/images/refunds/' + order.refund_proof : '';
+            proofImg.style.display = order.refund_proof ? 'block' : 'none';
+
+            const qrImg = document.getElementById('rd-qr-img');
+            qrImg.src = order.refund_qr ? '/images/refunds/' + order.refund_qr : '';
+            qrImg.style.display = order.refund_qr ? 'block' : 'none';
+
+            const modal = document.getElementById('refund-details-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeRefundDetailsModal() {
+            const modal = document.getElementById('refund-details-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
         document.addEventListener('keydown', e => {
             if (e.key === 'Escape') {
                 closeModal();
                 closePayModal();
+                closeRefundModal();
+                closeRefundDetailsModal();
             }
         });
 
