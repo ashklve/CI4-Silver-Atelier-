@@ -59,6 +59,7 @@ $routes->group('admin', function ($routes) {
     // Orders
     $routes->get('orders',             'Admin::orders');
     $routes->post('orders/status',     'Admin::updateOrderStatus');
+    $routes->post('orders/verify-payment', 'Admin::verifyPayment');
 
     // Reports
     $routes->get('reports',            'Admin::reports');
