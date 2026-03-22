@@ -24,6 +24,8 @@ $routes->post('checkout/place', 'Users::placeOrder');
 // ── Orders ─────────────────────────────────────────────────────────────────
 $routes->get('orders', 'Users::orders');
 $routes->post('orders/pay', 'Users::submitPaymentProof');
+$routes->post('orders/cancel', 'Users::cancelOrder');
+$routes->post('orders/refund', 'Users::requestRefund');
 
 // ── Profile ────────────────────────────────────────────────────────────────
 $routes->get('profile',          'Users::profile');

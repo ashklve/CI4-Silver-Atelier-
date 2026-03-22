@@ -297,6 +297,73 @@ class Users extends BaseController
         return redirect()->to('/orders?tab=to_pay');
     }
 
+    // ── Cancel Order ──────────────────────────────────────────────────
+    public function cancelOrder()
+    {
+        if (!session()->has('user')) {
+            return redirect()->to('/login');
+        }
+
+        $orderId    = $this->request->getPost('order_id');
+        $userId     = session()->get('user')['id'];
+        $orderModel = new OrderModel();
+
+        $order = $orderModel->where('user_id', $userId)->find($orderId);
+
+        if ($order && in_array($order['status'], ['to_pay', 'to_ship'])) {
+            $orderModel->update($orderId, ['status' => 'cancelled', 'payment_status' => 'cancelled']);
+            session()->setFlashdata('success', 'Order cancelled successfully.');
+        } else {
+            session()->setFlashdata('error', 'Unable to cancel this order.');
+        }
+
+        return redirect()->to('/orders');
+    }
+
+    // ── Request Refund ────────────────────────────────────────────────
+    public function requestRefund()
+    {
+        if (!session()->has('user')) {
+            return redirect()->to('/login');
+        }
+
+        $orderId = $this->request->getPost('order_id');
+        $reason  = $this->request->getPost('reason');
+        $userId  = session()->get('user')['id'];
+
+        $proofFile = $this->request->getFile('refund_proof');
+        $qrFile    = $this->request->getFile('refund_qr');
+
+        $orderModel = new OrderModel();
+        $order = $orderModel->where('user_id', $userId)->find($orderId);
+
+        if ($order && $order['status'] === 'completed') {
+            $data = [
+                'status'        => 'refund',
+                'refund_reason' => $reason,
+            ];
+
+            if ($proofFile && $proofFile->isValid() && !$proofFile->hasMoved()) {
+                $newName = $proofFile->getRandomName();
+                $proofFile->move(FCPATH . 'images/refunds', $newName);
+                $data['refund_proof'] = $newName;
+            }
+
+            if ($qrFile && $qrFile->isValid() && !$qrFile->hasMoved()) {
+                $newName = $qrFile->getRandomName();
+                $qrFile->move(FCPATH . 'images/refunds', $newName);
+                $data['refund_qr'] = $newName;
+            }
+
+            $orderModel->update($orderId, $data);
+            session()->setFlashdata('success', 'Refund request submitted. We will review it shortly.');
+        } else {
+            session()->setFlashdata('error', 'Order not found or not eligible for refund.');
+        }
+
+        return redirect()->to('/orders?tab=refund');
+    }
+
     // ── My Orders ─────────────────────────────────────────────────────
     public function orders()
     {
