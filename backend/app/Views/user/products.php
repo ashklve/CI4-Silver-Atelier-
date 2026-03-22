@@ -170,8 +170,20 @@ $products = $products ?? [];
             <?php foreach ($products as $idx => $p):
                 $catDisplay = $categoryLabels[$p['category']] ?? ucfirst(str_replace('_', ' ', $p['category'] ?? ''));
                 $badge      = $p['badge'] ?? '';
-                $delay      = ($idx % 4) * 80;
-                $desc       = $p['description'] ?? $p['desc'] ?? '';
+                // Auto-assign badge if DB has none
+                if (empty($badge)) {
+                    if (isset($p['stock']) && $p['stock'] <= 5 && $p['stock'] > 0) {
+                        $badge = 'Sale';
+                    } elseif ($p['id'] % 4 === 0) {
+                        $badge = 'Best Seller';
+                    } elseif ($p['id'] % 4 === 1) {
+                        $badge = 'New';
+                    } elseif ($p['id'] % 4 === 2) {
+                        $badge = 'Trending';
+                    }
+                }
+                $delay = ($idx % 4) * 80;
+                $desc  = $p['description'] ?? $p['desc'] ?? '';
             ?>
             <div class="flex flex-col bg-white shadow-sm border border-coco-sand/60 rounded-3xl overflow-hidden product-card fade-card"
                 data-category="<?= esc($catDisplay) ?>"
