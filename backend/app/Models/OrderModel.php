@@ -32,6 +32,9 @@ class OrderModel extends Model
         'subtotal',
         'shipping_amount',
         'total_amount',
+        'refund_reason',
+        'refund_proof',
+        'refund_qr',
     ];
 
     // ── Get all orders for a user with their items ────────────────────

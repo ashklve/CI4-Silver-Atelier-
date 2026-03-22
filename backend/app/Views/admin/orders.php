@@ -461,6 +461,36 @@ function openOrderModal(orderId, defaultTab = 'overview') {
         ? `<span class="flex items-center gap-1.5 text-coco-green font-semibold"><i class="fas fa-store text-xs"></i> Store Pickup</span>`
         : `<span class="flex items-center gap-1.5"><i class="fas fa-truck text-coco-orange text-xs"></i> ${[order.address, order.city, order.postal_code].filter(Boolean).join(', ')}</span>`;
 
+    let refundSection = '';
+    if (order.status === 'refund') {
+        refundSection = `
+        <div class="bg-red-50 border border-red-200 rounded-2xl p-5 mt-4">
+            <h4 class="text-sm font-bold text-red-800 mb-4 flex items-center gap-2">
+                <i class="fas fa-undo"></i> Refund Request Details
+            </h4>
+            <div class="space-y-4">
+                <div>
+                    <div class="text-[10px] font-bold text-red-400 uppercase tracking-wide mb-1">Reason for Refund</div>
+                    <div class="text-sm text-coco-brown bg-white p-3 rounded-xl border border-red-100">${order.refund_reason || 'No reason provided.'}</div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-[10px] font-bold text-red-400 uppercase tracking-wide mb-2">Proof of Defect</div>
+                        ${order.refund_proof 
+                            ? `<a href="/images/refunds/${order.refund_proof}" target="_blank"><img src="/images/refunds/${order.refund_proof}" class="w-full h-32 object-cover rounded-xl bg-white border border-red-100 hover:opacity-90 transition-opacity"></a>` 
+                            : '<div class="h-32 bg-white rounded-xl border border-red-100 flex items-center justify-center text-xs text-red-300">No proof uploaded</div>'}
+                    </div>
+                    <div>
+                        <div class="text-[10px] font-bold text-red-400 uppercase tracking-wide mb-2">Repayment QR (GCash/Bank)</div>
+                        ${order.refund_qr 
+                            ? `<a href="/images/refunds/${order.refund_qr}" target="_blank"><img src="/images/refunds/${order.refund_qr}" class="w-full h-32 object-cover rounded-xl bg-white border border-red-100 hover:opacity-90 transition-opacity"></a>` 
+                            : '<div class="h-32 bg-white rounded-xl border border-red-100 flex items-center justify-center text-xs text-red-300">No QR uploaded</div>'}
+                    </div>
+                </div>
+            </div>
+        </div>`;
+    }
+
     document.getElementById('overview-content').innerHTML = `
         <div class="grid grid-cols-2 gap-3">
             <div class="bg-gray-50 rounded-2xl p-4">
@@ -487,7 +517,8 @@ function openOrderModal(orderId, defaultTab = 'overview') {
                 <div class="text-sm text-coco-dark">${deliveryInfo}</div>
             </div>
         </div>
-        ${order.order_notes ? `<div class="bg-yellow-50 border border-yellow-200 rounded-2xl p-4 flex gap-3"><i class="fas fa-sticky-note text-yellow-500 mt-0.5 flex-shrink-0"></i><div><div class="text-xs font-bold text-yellow-800 mb-1">Order Notes</div><div class="text-sm text-yellow-700">${order.order_notes}</div></div></div>` : ''}
+        ${refundSection}
+        ${order.order_notes ? `<div class="bg-yellow-50 border border-yellow-200 rounded-2xl p-4 flex gap-3 mt-3"><i class="fas fa-sticky-note text-yellow-500 mt-0.5 flex-shrink-0"></i><div><div class="text-xs font-bold text-yellow-800 mb-1">Order Notes</div><div class="text-sm text-yellow-700">${order.order_notes}</div></div></div>` : ''}
     `;
 
     // ── Customer tab ──
