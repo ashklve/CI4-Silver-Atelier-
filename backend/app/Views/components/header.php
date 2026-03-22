@@ -305,11 +305,14 @@
 
             // ── Cart badge live update (fired by addToCart JS) ──
             window.addEventListener('cartUpdated', (event) => {
-                const badge = document.getElementById('global-cart-count');
+                const badge = document.getElementById('cart-count');
                 if (badge) {
                     const count = event.detail.count;
                     badge.textContent = count;
-                    badge.classList.toggle('opacity-0', count === 0);
+                    if (count > 0) 
+                        badge.classList.remove('hidden');
+                    else 
+                        badge.classList.add('hidden');
                 }
             });
         });
