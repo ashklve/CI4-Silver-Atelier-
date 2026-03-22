@@ -251,9 +251,13 @@ $statusBadge = [
                                         Pay Now
                                     </button>
                                 <?php elseif ($order['status'] === 'to_receive'): ?>
-                                    <button class="bg-coco-green hover:bg-coco-dark px-4 py-2 rounded-full font-bold text-white text-xs transition-colors">
-                                        Order Received
-                                    </button>
+                                    <form action="<?= site_url('orders/confirm') ?>" method="POST" onsubmit="return confirm('Have you received all items in this order?')" class="contents">
+                                        <?= csrf_field() ?>
+                                        <input type="hidden" name="order_id" value="<?= $order['id'] ?>">
+                                        <button type="submit" class="bg-coco-green hover:bg-coco-dark px-4 py-2 rounded-full font-bold text-white text-xs transition-colors">
+                                            Order Received
+                                        </button>
+                                    </form>
                                 <?php elseif ($order['status'] === 'completed'): ?>
                                     <a href="<?= site_url('products') ?>" class="bg-coco-brown hover:bg-coco-orange px-4 py-2 rounded-full font-bold text-white text-xs transition-colors">
                                         Buy Again

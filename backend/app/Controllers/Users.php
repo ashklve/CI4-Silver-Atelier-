@@ -364,6 +364,30 @@ class Users extends BaseController
         return redirect()->to('/orders?tab=refund');
     }
 
+    // ── Confirm Order Received ────────────────────────────────────────
+    public function confirmOrderReceived()
+    {
+        if (!session()->has('user')) {
+            return redirect()->to('/login');
+        }
+
+        $orderId    = $this->request->getPost('order_id');
+        $userId     = session()->get('user')['id'];
+        $orderModel = new OrderModel();
+
+        // Verify the order belongs to the current user and has the correct status
+        $order = $orderModel->where('user_id', $userId)->find($orderId);
+
+        if ($order && $order['status'] === 'to_receive') {
+            $orderModel->update($orderId, ['status' => 'completed']);
+            session()->setFlashdata('success', 'Order marked as completed. Thank you for your purchase!');
+        } else {
+            session()->setFlashdata('error', 'Unable to update order status.');
+        }
+
+        return redirect()->to('/orders?tab=completed');
+    }
+
     // ── My Orders ─────────────────────────────────────────────────────
     public function orders()
     {

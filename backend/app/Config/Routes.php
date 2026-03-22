@@ -26,6 +26,7 @@ $routes->get('orders', 'Users::orders');
 $routes->post('orders/pay', 'Users::submitPaymentProof');
 $routes->post('orders/cancel', 'Users::cancelOrder');
 $routes->post('orders/refund', 'Users::requestRefund');
+$routes->post('orders/confirm', 'Users::confirmOrderReceived');
 
 // ── Profile ────────────────────────────────────────────────────────────────
 $routes->get('profile',          'Users::profile');
