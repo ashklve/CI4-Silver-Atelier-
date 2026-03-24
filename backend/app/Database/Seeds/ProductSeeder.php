@@ -1,0 +1,148 @@
+<?php
+
+namespace App\Database\Seeds;
+
+use CodeIgniter\Database\Seeder;
+
+class ProductSeeder extends Seeder
+{
+    public function run()
+    {
+        $products = [
+            [
+                'name'        => 'Coir Door Mat',
+                'description' => 'Natural, durable, fully biodegradable entrance mat. Made from premium coconut coir fiber, perfect for any home or office entrance.',
+                'price'       => 350.00,
+                'category'    => 'home_living',
+                'stock'       => 100,
+                'image'       => 'coirdoormat.png',
+                'status'      => 1,
+                'created_at'  => date('Y-m-d H:i:s'),
+                'updated_at'  => date('Y-m-d H:i:s'),
+            ],
+            [
+                'name'        => 'Coco Grow Bag',
+                'description' => 'Perfect moisture retention for vegetables and herbs. Biodegradable grow bag made from compressed coconut coir.',
+                'price'       => 180.00,
+                'category'    => 'gardening',
+                'stock'       => 200,
+                'image'       => 'growbag.png',
+                'status'      => 1,
+                'created_at'  => date('Y-m-d H:i:s'),
+                'updated_at'  => date('Y-m-d H:i:s'),
+            ],
+            [
+                'name'        => 'Geotextile Mat',
+                'description' => 'Slope stabilization and erosion control, project-grade. Woven coir geotextile for civil and environmental engineering applications.',
+                'price'       => 1200.00,
+                'category'    => 'construction',
+                'stock'       => 50,
+                'image'       => 'geotextitle.png',
+                'status'      => 1,
+                'created_at'  => date('Y-m-d H:i:s'),
+                'updated_at'  => date('Y-m-d H:i:s'),
+            ],
+            [
+                'name'        => 'Twisted Coir Rope',
+                'description' => 'Strong, salt-resistant rope for marine and garden use. Naturally twisted from long coir fibers for maximum durability.',
+                'price'       => 220.00,
+                'category'    => 'craft_utility',
+                'stock'       => 150,
+                'image'       => 'coirrope.jpg',
+                'status'      => 1,
+                'created_at'  => date('Y-m-d H:i:s'),
+                'updated_at'  => date('Y-m-d H:i:s'),
+            ],
+            [
+                'name'        => 'Coir Mulch Mat',
+                'description' => 'Suppress weeds and retain soil moisture naturally. Biodegradable mulch mat that enriches soil as it decomposes.',
+                'price'       => 295.00,
+                'category'    => 'gardening',
+                'stock'       => 120,
+                'image'       => 'coirmulch.jpg',
+                'status'      => 1,
+                'created_at'  => date('Y-m-d H:i:s'),
+                'updated_at'  => date('Y-m-d H:i:s'),
+            ],
+            [
+                'name'        => 'Erosion Control Net',
+                'description' => 'Biodegradable netting for slopes and waterway banks. Provides immediate protection while vegetation establishes.',
+                'price'       => 890.00,
+                'category'    => 'construction',
+                'stock'       => 40,
+                'image'       => 'coir-erosion.jpg',
+                'status'      => 1,
+                'created_at'  => date('Y-m-d H:i:s'),
+                'updated_at'  => date('Y-m-d H:i:s'),
+            ],
+            [
+                'name'        => 'Coco Peat Block',
+                'description' => 'Compressed coco peat — expands 5–6x with water. Excellent growing medium for hydroponics and soil amendment.',
+                'price'       => 150.00,
+                'category'    => 'agriculture',
+                'stock'       => 300,
+                'image'       => 'coir-peat.jpg',
+                'status'      => 1,
+                'created_at'  => date('Y-m-d H:i:s'),
+                'updated_at'  => date('Y-m-d H:i:s'),
+            ],
+            [
+                'name'        => 'Coir Hanging Basket',
+                'description' => 'Rustic lined hanging baskets for indoor and outdoor plants. Natural coir liner retains moisture while allowing drainage.',
+                'price'       => 420.00,
+                'category'    => 'home_living',
+                'stock'       => 80,
+                'image'       => 'coir-basket.png',
+                'status'      => 1,
+                'created_at'  => date('Y-m-d H:i:s'),
+                'updated_at'  => date('Y-m-d H:i:s'),
+            ],
+            [
+                'name'        => 'Coir Fibre Bale',
+                'description' => 'Bulk coir fibre for soil amendment and composting. High-quality long fiber for horticultural and industrial use.',
+                'price'       => 550.00,
+                'category'    => 'agriculture',
+                'stock'       => 60,
+                'image'       => 'coir-bale.jpg',
+                'status'      => 1,
+                'created_at'  => date('Y-m-d H:i:s'),
+                'updated_at'  => date('Y-m-d H:i:s'),
+            ],
+            [
+                'name'        => 'Coir Log',
+                'description' => 'Cylindrical rolls for streambank and shoreline erosion control. Filled with coir fiber and wrapped in coir netting.',
+                'price'       => 1800.00,
+                'category'    => 'construction',
+                'stock'       => 25,
+                'image'       => 'coir_logs.jpg',
+                'status'      => 1,
+                'created_at'  => date('Y-m-d H:i:s'),
+                'updated_at'  => date('Y-m-d H:i:s'),
+            ],
+            [
+                'name'        => 'Seedling Tray Liner',
+                'description' => 'Natural coir liners for nursery trays and planters. Promotes healthy root development and excellent water retention.',
+                'price'       => 95.00,
+                'category'    => 'gardening',
+                'stock'       => 250,
+                'image'       => 'coir-liner.png',
+                'status'      => 1,
+                'created_at'  => date('Y-m-d H:i:s'),
+                'updated_at'  => date('Y-m-d H:i:s'),
+            ],
+            [
+                'name'        => 'Coir Doormat Runner',
+                'description' => 'Long hallway runner, natural woven coir design. Durable and stylish, perfect for high-traffic areas.',
+                'price'       => 680.00,
+                'category'    => 'home_living',
+                'stock'       => 45,
+                'image'       => 'coir-runner.jpg',
+                'status'      => 1,
+                'created_at'  => date('Y-m-d H:i:s'),
+                'updated_at'  => date('Y-m-d H:i:s'),
+            ],
+        ];
+
+        $this->db->table('products')->insertBatch($products);
+    }
+}

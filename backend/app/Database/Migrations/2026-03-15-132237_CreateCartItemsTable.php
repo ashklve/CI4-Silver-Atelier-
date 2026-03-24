@@ -1,0 +1,70 @@
+<?php
+
+namespace App\Database\Migrations;
+
+use CodeIgniter\Database\Migration;
+
+class CreateCartItemsTable extends Migration
+{
+    public function up()
+    {
+        $this->forge->addField([
+            'id' => [
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => true,
+                'auto_increment' => true,
+            ],
+            'user_id' => [
+                'type'       => 'INT',
+                'constraint' => 11,
+                'unsigned'   => true,
+                'null'       => true, // Must be nullable for guests
+            ],
+            'session_id' => [
+                'type'       => 'VARCHAR',
+                'constraint' => 255,
+                'null'       => true, // Must be nullable for logged-in users
+            ],
+            'product_id' => [
+                'type'       => 'INT',
+                'constraint' => 11,
+                'unsigned'   => true,
+            ],
+            'name' => [
+                'type'       => 'VARCHAR',
+                'constraint' => 255,
+            ],
+            'price' => [
+                'type'       => 'DECIMAL',
+                'constraint' => '10,2',
+            ],
+            'image' => [
+                'type'       => 'VARCHAR',
+                'constraint' => 255,
+                'null'       => true,
+            ],
+            'quantity' => [
+                'type'       => 'INT',
+                'constraint' => 11,
+                'default'    => 1,
+            ],
+            'created_at' => [
+                'type' => 'DATETIME',
+                'null' => true,
+            ],
+            'updated_at' => [
+                'type' => 'DATETIME',
+                'null' => true,
+            ],
+        ]);
+
+        $this->forge->addKey('id', true);
+        $this->forge->createTable('cart_items', true);
+    }
+
+    public function down()
+    {
+        $this->forge->dropTable('cart_items', true);
+    }
+}
