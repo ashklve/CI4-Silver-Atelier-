@@ -13,6 +13,9 @@ RUN docker-php-ext-configure intl \
     && docker-php-ext-configure gd --with-jpeg \
     && docker-php-ext-install -j"$(nproc)" intl mbstring pdo pdo_mysql mysqli gd zip
 
+# Code coverage driver for PHPUnit
+RUN pecl install pcov && docker-php-ext-enable pcov
+
 # Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
